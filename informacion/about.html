@@ -1,0 +1,333 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="icon" href="./images/icono2.png" type="image/png">
+	<link rel="shortcut icon" href="./images/icono2.png" type="image/png">
+	<title>iOrder - Cónocenos</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
+	<meta name="keywords"
+		content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+	<meta name="author" content="freehtml5.co" />
+
+	<!-- 
+		//////////////////////////////////////////////////////
+	
+		FREE HTML5 TEMPLATE 
+		DESIGNED & DEVELOPED by FreeHTML5.co
+			
+		Website: 		#
+		Email: 			info@freehtml5.co
+		Twitter: 		http://twitter.com/fh5co
+		Facebook: 		https://www.facebook.com/fh5co
+	
+		//////////////////////////////////////////////////////
+		 -->
+
+	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content="" />
+	<meta property="og:image" content="" />
+	<meta property="og:url" content="" />
+	<meta property="og:site_name" content="" />
+	<meta property="og:description" content="" />
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,600i,700"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="css/flexslider.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+		<script src="js/respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body>
+
+	<div class="fh5co-loader"></div>
+
+	<div id="page">
+		<nav class="fh5co-nav" role="navigation">
+			<!-- <div class="top-menu"> -->
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 text-center logo-wrap"><!-- 
+						<div id="fh5co-logo"><a href="index.html">iOrder<span>.</span></a></div> -->
+
+						<div id="fh5co-logo"><a href="index.html"><img src="./images/logo2.svg" alt="logo"></a></div>
+					</div>
+					<div class="col-xs-12 text-center menu-1 menu-wrap">
+						<ul>
+							<li class="active"><a href="./index.html">Inicio</a></li>
+							<li><a href="./menu.html">Equipo</a></li>
+							<li><a href="./reservation.html">Servicios</a></li>
+							<li><a href="./about.html">Conócenos</a></li>
+							<li class="has-dropdown">
+								<a href="">Productos</a>
+								<ul class="dropdown">
+									<li><a href="../includes/login.php">iOrder</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+			<!-- </div> -->
+		</nav>
+
+		<header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<div class="display-t js-fullheight">
+							<div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
+								<h1>Acerca<em> de </em>Nosotros</h1>
+								<h2>Conoce más sobre <a href="#" target="_blank">iOrder.</a></h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<script>
+			const images = ["images/cafe.jpeg", "images/restaurante.jpg", "images/pubimagen.jpg"];
+			let currentImageIndex = 0;
+
+			const header = document.getElementById("fh5co-header");
+
+			// Establecer la imagen de fondo predeterminada al cargar la página
+			header.style.backgroundImage = `url(${images[currentImageIndex]})`;
+
+			function changeBackgroundImage() {
+				header.style.backgroundImage = `url(${images[currentImageIndex]})`;
+				currentImageIndex = (currentImageIndex + 1) % images.length;
+			}
+
+
+			// Cambiar la imagen cada 5 segundos (5000 ms)
+			setInterval(changeBackgroundImage, 4000);
+		</script>
+
+
+<div id="fh5co-about" class="fh5co-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 img-wrap animate-box" data-animate-effect="fadeInLeft">
+				<img src="images/reunion.png" alt="">
+			</div>
+			<div class="col-md-5 col-md-push-1 animate-box">
+				<div class="section-heading">
+					<h2>Misión</h2>
+					<p>Nuestra misión en iOrder. es revolucionar la experiencia de los clientes en la industria
+						de la hospitalidad mediante soluciones tecnológicas innovadoras. Estamos comprometidos
+						en ofrecer a los establecimientos de entretenimiento y gastronomía en La Paz, Bolivia,
+						una plataforma que simplifique y mejore la forma en que los clientes interactúan con sus
+						servicios. Nos esforzamos por brindar una experiencia excepcional y personalizada a cada
+						cliente, facilitando la realización de pedidos y reservas, sin comprometer la
+						autenticidad y el placer de estar en un establecimiento único y acogedor.</p>
+					<h2>Visión</h2>
+					<p>Nuestra visión en iOrder. es liderar el camino hacia una industria de la hospitalidad más
+						avanzada y eficiente en La Paz y más allá. Nos vemos como la plataforma preferida por
+						establecimientos de diferentes tipos que buscan integrar la tecnología de manera
+						armoniosa en su operación, mejorando la satisfacción del cliente y optimizando sus
+						procesos internos. Aspiramos a ser reconocidos como la opción confiable y vanguardista
+						que transforma la forma en que las personas disfrutan de experiencias culinarias y de
+						entretenimiento.</p>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+		<div id="fh5co-timeline">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-md-offset-0">
+						<ul class="timeline animate-box">
+							<li class="timeline-heading text-center animate-box">
+								<div>
+									<h3>Nuestros Valores.</h3>
+								</div>
+							</li>
+							<li class="animate-box timeline-unverted">
+								<div class="timeline-badge"><i class="icon-genius"></i></div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h3 class="timeline-title">Innovación Responsable</h3>
+
+									</div>
+									<div class="timeline-body">
+										<p>Creemos en la innovación con un propósito. Desarrollamos soluciones
+											tecnológicas que mejoran la vida de las personas y la operación de los
+											negocios sin comprometer los valores fundamentales de la autenticidad y el
+											servicio humano.</p>
+									</div>
+								</div>
+							</li>
+							<li class="timeline-inverted animate-box">
+								<div class="timeline-badge"><i class="icon-genius"></i></div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h3 class="timeline-title">Excelencia en la Experiencia</h3>
+									</div>
+									<div class="timeline-body">
+										<p>Nos esforzamos por ofrecer experiencias excepcionales en cada interacción.
+											Valoramos la atención a los detalles y la búsqueda constante de la
+											excelencia para superar las expectativas de nuestros clientes y socios
+											comerciales.</p>
+									</div>
+								</div>
+							</li>
+							<li class="animate-box timeline-unverted">
+								<div class="timeline-badge"><i class="icon-genius"></i></div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h3 class="timeline-title">Integridad y Ética</h3>
+									</div>
+									<div class="timeline-body">
+										<p>Guiamos nuestras acciones por los más altos estándares de ética y honestidad.
+											Mantenemos la integridad en todas nuestras relaciones y operaciones,
+											construyendo confianza y respeto con cada paso que damos.</p>
+									</div>
+								</div>
+							</li>
+							<li class="timeline-inverted animate-box">
+								<div class="timeline-badge"><i class="icon-genius"></i></div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h3 class="timeline-title">Colaboración y Empatía</h3>
+									</div>
+									<div class="timeline-body">
+										<p>Fomentamos una cultura de colaboración, donde el trabajo en equipo y el
+											respeto mutuo son fundamentales. Valoramos la empatía hacia las necesidades
+											y desafíos de nuestros clientes y socios, asegurando soluciones adaptadas y
+											comprensivas.</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+		<footer id="fh5co-footer" role="contentinfo" class="fh5co-section">
+			<div class="container">
+				<div class="row row-pb-md">
+					<div class="col-md-6 fh5co-widget">
+						<h4>IOrder</h4>
+						<p>¡Explora más contenido interesante!
+
+							Esta sección está repleta de enlaces útiles que te pueden llevar a información valiosa. Te
+							invitamos a explorar y descubrir todo lo que tenemos para ofrecerte.
+
+							¿Quieres mantenerte actualizado? Síguenos en nuestras redes sociales para conocer las
+							últimas novedades y consejos exclusivos.
+					</div>
+					<div class="col-md-2 col-md-push-1 fh5co-widget">
+						<h4>Links</h4>
+						<ul class="fh5co-footer-links">
+							<li><a href="index.html">Inicio</a></li>
+							<li><a href="menu.html">Equipo</a></li>
+							<li><a href="reservation.html">Servicios</a></li>
+							<li><a href="about.html">Conócenos</a></li>
+							<li><a href="contact.html">Contacto</a></li>
+						</ul>
+					</div>
+
+					<!-- <div class="col-md-2 col-md-push-1 fh5co-widget">
+					<h4>Categories</h4>
+					<ul class="fh5co-footer-links">
+						<li><a href="#">Landing Page</a></li>
+						<li><a href="#">Real Estate</a></li>
+						<li><a href="#">Personal</a></li>
+						<li><a href="#">Business</a></li>
+						<li><a href="#">e-Commerce</a></li>
+					</ul>
+				</div> -->
+
+					<div class="col-md-4 col-md-push-1 fh5co-widget">
+						<h4>Informacion de Contacto</h4>
+						<ul class="fh5co-footer-links">
+							<li>Edifico Bilbao,<br> Av. Monseñor Jose Quiroz, <br> N.100. Of.314</li>
+							<li><a href="tel://+59160503712">+591 60503712</a></li>
+							<li><a href="mailto:iorderbolivia@gmail.com">Iorder@gmail.com</a></li>
+						</ul>
+					</div>
+
+				</div>
+
+				<div class="row copyright">
+					<div class="col-md-12 text-center">
+						<p>
+							<small class="block">&copy; 2023 IOrder. Todos los derechos reservados.</small>
+							<small class="block">Diseñado por <a href="index.html" target="_blank">Iorder.com</a>
+						</p>
+						<p>
+						<ul class="fh5co-social-icons">
+							<li><a href="https://twitter.com/iOrdersystem?t=Weci_FFgkkP3Qm7XOHr09w&s=09"><i
+										class="icon-twitter2"></i></a></li>
+							<li><a href="https://www.facebook.com/profile.php?id=61550248381503&mibextid=ZbWKwL"><i
+										class="icon-facebook2"></i></a></li>
+						</ul>
+						</p>
+					</div>
+				</div>
+
+			</div>
+		</footer>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up22"></i></a>
+	</div>
+
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.stellar.min.js"></script>
+	<!-- Flexslider -->
+	<script src="js/jquery.flexslider-min.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+
+</body>
+
+</html>

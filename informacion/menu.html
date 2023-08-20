@@ -1,0 +1,292 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="icon" href="./images/icono2.png" type="image/png">
+		<link rel="shortcut icon" href="./images/icono2.png" type="image/png">
+		<title>iOrder</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
+		<meta name="keywords"
+			content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+		<meta name="author" content="freehtml5.co" />
+	
+		<!-- 
+		//////////////////////////////////////////////////////
+	
+		FREE HTML5 TEMPLATE 
+		DESIGNED & DEVELOPED by FreeHTML5.co
+			
+		Website: 		#
+		Email: 			info@freehtml5.co
+		Twitter: 		http://twitter.com/fh5co
+		Facebook: 		https://www.facebook.com/fh5co
+	
+		//////////////////////////////////////////////////////
+		 -->
+	
+		<!-- Facebook and Twitter integration -->
+		<meta property="og:title" content="" />
+		<meta property="og:image" content="" />
+		<meta property="og:url" content="" />
+		<meta property="og:site_name" content="" />
+		<meta property="og:description" content="" />
+		<meta name="twitter:title" content="" />
+		<meta name="twitter:image" content="" />
+		<meta name="twitter:url" content="" />
+		<meta name="twitter:card" content="" />
+	
+		<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,600i,700"
+			rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+	
+		<!-- Animate.css -->
+		<link rel="stylesheet" href="css/animate.css">
+		<!-- Icomoon Icon Fonts-->
+		<link rel="stylesheet" href="css/icomoon.css">
+		<!-- Bootstrap  -->
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<!-- Flexslider  -->
+		<link rel="stylesheet" href="css/flexslider.css">
+	
+		<!-- Theme style  -->
+		<link rel="stylesheet" href="css/style.css">
+	
+		<!-- Modernizr JS -->
+		<script src="js/modernizr-2.6.2.min.js"></script>
+		<!-- FOR IE9 below -->
+		<!--[if lt IE 9]>
+		<script src="js/respond.min.js"></script>
+		<![endif]-->
+	
+	</head>
+	<body>
+		
+	<div class="fh5co-loader"></div>
+	
+	<div id="page">
+		<nav class="fh5co-nav" role="navigation">
+			<!-- <div class="top-menu"> -->
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 text-center logo-wrap"><!-- 
+						<div id="fh5co-logo"><a href="index.html">iOrder<span>.</span></a></div> -->
+
+						<div id="fh5co-logo"><a href="index.html"><img src="./images/logo2.svg" alt="logo"></a></div>
+					</div>
+					<div class="col-xs-12 text-center menu-1 menu-wrap">
+						<ul>
+							<li class="active"><a href="./index.html">Inicio</a></li>
+							<li><a href="./menu.html">Equipo</a></li>
+							<li><a href="./reservation.html">Servicios</a></li>
+							<li><a href="./about.html">Conócenos</a></li>
+							<li class="has-dropdown">
+								<a href="">Productos</a>
+								<ul class="dropdown">
+									<li><a href="../includes/login.php">iOrder</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+			<!-- </div> -->
+		</nav>
+
+		<header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner">
+			<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<div class="display-t js-fullheight">
+						<div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
+							<h1>Equipo <em>de</em> Trabajo</h1>
+							<h2>Desarrolladores de <a href="#" target="_blank">software</a></h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<script>
+		const images = ["images/cafe.jpeg", "images/restaurante.jpg", "images/pubimagen.jpg"];
+		let currentImageIndex = 0;
+
+		const header = document.getElementById("fh5co-header");
+
+		// Establecer la imagen de fondo predeterminada al cargar la página
+		header.style.backgroundImage = `url(${images[currentImageIndex]})`;
+
+		function changeBackgroundImage() {
+			header.style.backgroundImage = `url(${images[currentImageIndex]})`;
+			currentImageIndex = (currentImageIndex + 1) % images.length;
+		}
+
+
+		// Cambiar la imagen cada 5 segundos (5000 ms)
+		setInterval(changeBackgroundImage, 4000);
+	</script>
+
+	<div id="fh5co-featured-menu" class="fh5co-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 fh5co-heading animate-box">
+					<h2>Nuestro Equipo de Trabajo</h2>
+					<div class="row">
+						<div class="col-md-6">
+							<p>Somos un entusiasta equipo de estudiantes de Ingeniería de Sistemas, comprometidos en la creación de soluciones tecnológicas de vanguardia. Hemos desarrollado un sistema de pedidos y reservas diseñado especialmente para pubs, restaurantes y otros establecimientos de hospitalidad. Nuestra plataforma ofrece una experiencia de usuario fluida, permitiendo pedidos personalizados, reservas simplificadas, gestión eficiente y notificaciones en tiempo real. Estamos emocionados por aportar innovación a la industria y aplicar nuestras habilidades para mejorar la experiencia tanto para los clientes como para los propietarios de negocios.</p>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-2 col-sm-4 col-xs-4 col-xxs-8 fh5co-item-wrap">
+					<div class="fh5co-item animate-box">
+						<img src="images/avatar_1.png" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co">
+						<h3>Cesar Ali</h3>
+						<span class="fh5co-price">Desarrollador</span>
+						<p>Estudiante de 4to año de la carrera de Ingenieria de Sistemas</p>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-4 col-xs-4 col-xxs-8 fh5co-item-wrap">
+					<div class="fh5co-item margin_top animate-box">
+						<img src="images/avatar_2.png" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co">
+						<h3>Ignacio Cardozo</h3>
+						<span class="fh5co-price">Desarrollador</span>
+						<p>Estudiante de 4to año de la carrera de Ingenieria de Sistemas</p>
+					</div>
+				</div>
+				<div class="clearfix visible-sm-block visible-xs-block"></div>
+				<div class="col-md-2 col-sm-4 col-xs-4 col-xxs-8 fh5co-item-wrap">
+					<div class="fh5co-item animate-box">
+						<img src="images/avatar_3.png" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co">
+						<h3>Alejandro Montaño</h3>
+						<span class="fh5co-price">Desarrollador</span>
+						<p>Estudiante de 4to año de la carrera de Ingenieria de Sistemas</p>
+					</div>
+
+				</div>
+				<div class="col-md-2 col-sm-4 col-xs-4 col-xxs-8 fh5co-item-wrap">
+					<div class="fh5co-item margin_top animate-box">
+						<img src="images/avatar_4.png" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co">
+						<h3>Mauricio Paredes</h3>
+						<span class="fh5co-price">Desarrollador</span>
+						<p>Estudiante de 4to año de la carrera de Ingenieria de Sistemas</p>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-4 col-xs-4 col-xxs-8 fh5co-item-wrap">
+					<div class="fh5co-item animate-box">
+						<img src="images/avatar_5.png" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co">
+						<h3>Alejandro Reyes</h3>
+						<span class="fh5co-price">Desarrollador</span>
+						<p>Estudiante de 4to año de la carrera de Ingenieria de Sistemas</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="fh5co-featured-testimony" class="fh5co-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 fh5co-heading animate-box">
+					<h2>Testimonios</h2>
+					<div class="row">
+						<div class="col-md-6">
+							<p>¡Increíble experiencia con el sistema de pedidos y reservas en línea desarrollado por este talentoso equipo de estudiantes de Ingeniería de Sistemas! Nuestro restaurante ha experimentado un aumento significativo en la eficiencia y comodidad desde que implementamos esta solución innovadora. Los clientes adoran la facilidad con la que pueden hacer pedidos personalizados y reservar mesas, y nuestro personal aprecia la gestión simplificada. ¡Altamente recomendado para cualquier negocio de hospitalidad en busca de modernización y mejora!</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<footer id="fh5co-footer" role="contentinfo" class="fh5co-section">
+		<div class="container">
+			<div class="row row-pb-md">
+				<div class="col-md-6 fh5co-widget">
+					<h4>IOrder</h4>
+					<p>¡Explora más contenido interesante!
+
+						Esta sección está repleta de enlaces útiles que te pueden llevar a información valiosa. Te invitamos a explorar y descubrir todo lo que tenemos para ofrecerte.
+						
+						¿Quieres mantenerte actualizado? Síguenos en nuestras redes sociales para conocer las últimas novedades y consejos exclusivos.
+				</div>
+				<div class="col-md-2 col-md-push-1 fh5co-widget">
+					<h4>Links</h4>
+					<ul class="fh5co-footer-links">
+						<li><a href="index.html">Inicio</a></li>
+						<li><a href="menu.html">Equipo</a></li>
+						<li><a href="reservation.html">Servicios</a></li>
+						<li><a href="about.html">Conócenos</a></li>
+						<li><a href="contact.html">Contacto</a></li>
+					</ul>
+				</div>
+
+				<!-- <div class="col-md-2 col-md-push-1 fh5co-widget">
+					<h4>Categories</h4>
+					<ul class="fh5co-footer-links">
+						<li><a href="#">Landing Page</a></li>
+						<li><a href="#">Real Estate</a></li>
+						<li><a href="#">Personal</a></li>
+						<li><a href="#">Business</a></li>
+						<li><a href="#">e-Commerce</a></li>
+					</ul>
+				</div> -->
+
+				<div class="col-md-4 col-md-push-1 fh5co-widget">
+					<h4>Informacion de Contacto</h4>
+					<ul class="fh5co-footer-links">
+						<li>Edifico Bilbao,<br> Av. Monseñor Jose Quiroz, <br> N.100. Of.314</li>
+						<li><a href="tel://+59160503712">+591 60503712</a></li>
+						<li><a href="mailto:iorderbolivia@gmail.com">iorderbolivia@gmail.com</a></li>
+					</ul>
+				</div>
+
+			</div>
+
+			<div class="row copyright">
+				<div class="col-md-12 text-center">
+					<p>
+						<small class="block">&copy; 2023 IOrder. Todos los derechos reservados.</small>
+						<small class="block">Diseñado por <a href="index.html"
+								target="_blank">Iorder.com</a>
+					</p>
+					<p>
+					<ul class="fh5co-social-icons">
+						<li><a href="https://twitter.com/iOrdersystem?t=Weci_FFgkkP3Qm7XOHr09w&s=09"><i class="icon-twitter2"></i></a></li>
+						<li><a href="https://www.facebook.com/profile.php?id=61550248381503&mibextid=ZbWKwL"><i class="icon-facebook2"></i></a></li>
+					</ul>
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</footer>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up22"></i></a>
+	</div>
+	
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.stellar.min.js"></script>
+	<!-- Flexslider -->
+	<script src="js/jquery.flexslider-min.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+
+	</body>
+</html>
+
