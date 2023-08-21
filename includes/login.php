@@ -6,70 +6,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title>
     <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <style>
+        body {
+            background-color: black;
+            display: flex;
+            
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+    background-color: gray;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    max-width: 80%;
+    text-align: center;
+    margin: 0 auto; /* Agregar esta línea para centrar horizontalmente */
+}
+
+
+        .botonlogin {
+            text-decoration: none;
+            background-color: #1B9C85;
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .botonlogin:hover {
+            background-color: #168b6d;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            color: black;
+        }
+
+        .form-control {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%;
+            transition: box-shadow 0.3s, border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #1B9C85;
+            box-shadow: 0px 0px 5px rgba(27, 156, 133, 0.5);
+        }
+
+        .my-2 {
+            color: black;
+        }
+
+        .login-heading {
+            color: black;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>
     <div id="stars"></div>
     <div id="stars2"></div>
     <div id="stars3"></div>
-    <form action="_functions.php" method="POST">
-        <div id="login">
-            <div class="container ">
-                <div id="login-row" class="row justify-content-center align-items-center">
-                    <div id="login-column" class="col-md-8">
-                        <div id="login-box" class="col-md-12">
-                            <br>
-
-                            <br>
-                            <h3 class="text-center">Iniciar Sesión</h3>
-                            <br>
-                            <div class="form-group">
-                                <label for="correo">Correo:</label><br>
-                                <input type="email" name="correo" id="correo" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Contraseña:</label><br>
-                                <input type="password" name="password" id="password" class="form-control" required>
-                                <input type="hidden" name="accion" value="acceso_user">
-                            </div>
-                            <div class="form-group">
-                                <br>
-                                <center>
-                                    <input type="submit" class="botonlogin" value="Ingresar">
-                                </center>
-                                <div class="my-2">
-                                    <a href="../recuperacion/recovery.php">¿Olvidaste tu contraseña?</a>
-                                </div>
-                                <?php
-                                if (isset($_GET['message'])) {
-
-                                    ?>
-                                    <div class="alert alert-primary" role="alert">
-                                        <?php
-                                        switch ($_GET['message']) {
-                                            case 'ok':
-                                                echo 'Por favor, revisa tu correo';
-                                                break;
-                                            case 'success_password':
-                                                echo 'Inicia sesión con tu nueva contraseña';
-                                                break;
-
-                                            default:
-                                                echo 'Algo salió mal, intenta de nuevo';
-                                                break;
-                                        }
-                                        ?>
-                                    </div>
-                                    <?php
-                                }
-                                ?>
-    </form>
+    <div class="card">
+        <form action="_functions.php" method="POST">
+            <h3 class="login-heading">Iniciar Sesión</h3>
+            <div class="form-group">
+                <label for="correo">Correo:</label>
+                <input type="email" name="correo" id="correo" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" name="password" id="password" class="form-control" required>
+                <input type="hidden" name="accion" value="acceso_user">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="botonlogin" value="Ingresar">
+            </div>
+        </form>
+        <div class="my-2">
+            <a href="../recuperacion/recovery.php">¿Olvidaste tu contraseña?</a>
+        </div>
+        <?php
+        if (isset($_GET['message'])) {
+            ?>
+            <div class="alert alert-primary text-center" role="alert">
+                <?php
+                switch ($_GET['message']) {
+                    case 'ok':
+                        echo 'Por favor, revisa tu correo';
+                        break;
+                    case 'success_password':
+                        echo 'Inicia sesión con tu nueva contraseña';
+                        break;
+                    default:
+                        echo 'Algo salió mal, intenta de nuevo';
+                        break;
+                }
+                ?>
+            </div>
+        <?php
+        }
+        ?>
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </form>
+    
 </body>
 
 </html>

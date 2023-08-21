@@ -11,15 +11,6 @@ if ($validar == '') {
 }
 ?>
 
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
 <style>
     * {
         margin: 0;
@@ -28,46 +19,33 @@ if ($validar == '') {
         font-family: sans-serif;
     }
 
-    body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
 
-        .video-container {
-            position: relative;
-            height: 100vh;
-            overflow: hidden;
-        }
+    .video-container {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+    }
 
-        video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
-        .video-container::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-        }
+    .video-container::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+    }
 
-        .content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            z-index: 1; /* Asegura que el contenido esté sobre la capa de superposición */
-        }
+   
 
     .header {
         position: fixed;
@@ -206,10 +184,8 @@ if ($validar == '') {
             transition-delay: calc(0.1s * var(--i));
         }
     }
-
 </style>
 
-<body>
     <header class="header">
         <a href="#" class="logo">LOGO</a>
 
@@ -220,14 +196,24 @@ if ($validar == '') {
         </label>
 
         <nav class="navbar">
-            <a href="#" style="--i:0;">Home</a>
-            <a href="#" style="--i:1;">Informacion</a>
+            <a href="../SuperAdmin/index.php" style="--i:0;">Home</a>
+            <a href="../SuperAdmin/gestion.php" style="--i:1;">Usuarios</a>
             <a href="#" style="--i:2;">Reservas</a>
             <a href="#" style="--i:3;">Pedidos</a>
             <a href="#" style="--i:4;">Contacto</a>
+            <a href="../includes/_sesion/cerrarSesion.php" style="--i:4;">Salir</a>
         </nav>
     </header>
+    <script>
+    // Calcula y ajusta el margen superior del contenido para evitar superposiciones con el header
+    function adjustContentMargin() {
+        const headerHeight = document.querySelector('.header').offsetHeight;
+        document.body.style.paddingTop = `${headerHeight}px`;
+    }
 
-</body>
+    // Ejecuta la función una vez al cargar la página
+    window.addEventListener('load', adjustContentMargin);
 
-</html>
+    // Vuelve a ejecutar la función cuando se redimensiona la ventana
+    window.addEventListener('resize', adjustContentMargin);
+</script>
