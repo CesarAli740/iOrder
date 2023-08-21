@@ -8,32 +8,10 @@
     <link rel="stylesheet" type="text/css" href="../css/login.css">
 </head>
 
-<style>
-    body {
-        background-color: #ECF8F9;
-        margin-top: 5rem;
-    }
-
-    .botonlogin {
-        text-decoration: none;
-        background-color: #1B9C85;
-        border: none;
-        color: white;
-        padding: 0.375rem 0.75rem;
-        text-align: center;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius: 5px;
-        font-family: 'Roboto', sans-serif;
-    }
-</style>
-
 <body>
-<div id="stars"></div>
-  <div id="stars2"></div>
-  <div id="stars3"></div>
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
     <form action="_functions.php" method="POST">
         <div id="login">
             <div class="container ">

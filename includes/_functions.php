@@ -37,7 +37,6 @@ session_start();
         // Usuario no encontrado
         echo 'No existe el usuario';
     }
-    session_destroy();
 /* $hashContrasena = password_hash('12345', PASSWORD_BCRYPT);
 echo $hashContrasena; */
 }

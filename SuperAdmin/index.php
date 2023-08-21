@@ -5,26 +5,15 @@
     <title>Cambio de Colores</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
-
+<?php include '../NAVBARiorder/index.php'; ?>
 <body>
-    <form id="colorForm">
-        <label for="colorInput">Selecciona un color:</label>
-        <input type="color" id="colorInput" name="colorInput">
-        <button type="button" onclick="cambiarColores()">Cambiar Colores</button>
-    </form>
-    <script>
-        function cambiarColores() {
-            var nuevoColor = document.getElementById("colorInput").value;
-            var estiloCSS = document.styleSheets[0];
-
-            for (var i = 0; i < estiloCSS.rules.length; i++) {
-                if (estiloCSS.rules[i].selectorText === "body") {
-                    estiloCSS.rules[i].style.backgroundColor = nuevoColor;
-                    break;
-                }
-            }
-        }
-    </script>
+<video id="video-background" autoplay loop muted>
+        <source src="../video/pub.mp4" type="video/mp4">
+    </video>
+    <div class="content">
+        <h1>Video de Fondo en HTML</h1>
+        <p>¡Bienvenido al sitio web con video de fondo!</p>
+    </div>
 </body>
 
 </html>

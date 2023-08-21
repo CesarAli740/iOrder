@@ -1,15 +1,3 @@
-<?php
-session_start();
-error_reporting(0);
-$validar = $_SESSION['correo'];
-if ($validar == null || $validar == '') {
-    session_unset();
-    session_destroy();
-    header("Location: ../includes/login.php");
-    die();
-}
-?> 
-
 <!DOCTYPE html>
 <html lang="es-MX">
 
