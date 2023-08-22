@@ -69,14 +69,14 @@
         <div id="modalBuscar" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeModal('Buscar')">&times;</span>
-                <!-- Contenido del modal de Buscar -->
+                <?php include './buscar.php'; ?>
             </div>
         </div>
 
         <div id="modalEditar" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeModal('Editar')">&times;</span>
-                <!-- Contenido del modal de Editar -->
+                <?php include './editar.php'; ?>
             </div>
         </div>
 

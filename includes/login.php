@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="../css/login.css">
     <style>
         body {
-            background-color: black;
             display: flex;
             
             align-items: center;
