@@ -62,7 +62,7 @@
         <div id="modalListar" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeModal('Listar')">&times;</span>
-                <!-- Contenido del modal de Listar -->
+                <?php include './listar.php'; ?>
             </div>
         </div>
 

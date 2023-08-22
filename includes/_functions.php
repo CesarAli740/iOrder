@@ -23,7 +23,7 @@ session_start();
         $fila = $resultado->fetch_assoc();
         $hashAlmacenado = $fila["password_hash"];
         if (password_verify($password, $hashAlmacenado)) {
-            if ($fila['rol'] == 1) { // SuperAdmin
+            if ($fila['rol'] == 1 or $fila['rol'] == 2) { // SuperAdmin
                 header("Location: ../SuperAdmin/index.php");
             } else {
                 header('Location: ./login.php');
