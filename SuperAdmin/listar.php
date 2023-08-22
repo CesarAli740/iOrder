@@ -1,3 +1,15 @@
+<?php
+
+session_start();
+error_reporting(0);
+$rol = $_SESSION['rol'];
+if($rol != '1'){
+    session_unset();
+    session_destroy();
+    header("Location: ../includes/login.php");
+    die();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -129,7 +141,7 @@
                         </thead>
                         <tbody>
                             <?php
-                            $SQL = "SELECT user.id, user.nombre, user.apPAt, user.apMAt, user.correo, user.telefono, permisos.rol
+                            $SQL = "SELECT user.id, user.nombre, user.apPAt, user.apMAt, user.correo, user.telefono ,permisos.rol
                             FROM user
                             LEFT JOIN permisos ON user.rol = permisos.id";
                             $dato = mysqli_query($conexion, $SQL);

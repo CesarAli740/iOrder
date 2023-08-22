@@ -1,9 +1,8 @@
 <?php
-
 session_start();
 error_reporting(0);
 $rol = $_SESSION['rol'];
-if($rol != '1'){
+if($rol != '2'){
     session_unset();
     session_destroy();
     header("Location: ../includes/login.php");

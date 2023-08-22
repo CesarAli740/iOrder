@@ -15,16 +15,22 @@ function acceso_user()
 
     $correo = $_POST['correo'];
     $password = $_POST['password'];
-    $sql = "SELECT password_hash, rol FROM user WHERE correo = '$correo'";
+    $sql = "SELECT * FROM user WHERE correo = '$correo'";
     $resultado = $conexion->query($sql);
-session_start();
-  $_SESSION['correo'] = $correo;
+    session_start();
+    $_SESSION['correo'] = $correo;
     if ($resultado->num_rows == 1) {
         $fila = $resultado->fetch_assoc();
+
+        $_SESSION['id'] = $fila['id'];
+        $_SESSION['rol'] = $fila['rol'];
+        $_SESSION['establecimiento'] = $fila['tipo'];
         $hashAlmacenado = $fila["password_hash"];
         if (password_verify($password, $hashAlmacenado)) {
-            if ($fila['rol'] == 1 or $fila['rol'] == 2) { // SuperAdmin
+            if ($fila['rol'] == 1) { // SuperAdmin
                 header("Location: ../SuperAdmin/index.php");
+            } else if ($fila['rol'] == 2) { //Admin
+                header("Location: ../Admin/index.php");
             } else {
                 header('Location: ./login.php');
                 session_destroy();
@@ -37,7 +43,7 @@ session_start();
         // Usuario no encontrado
         echo 'No existe el usuario';
     }
-/* $hashContrasena = password_hash('12345', PASSWORD_BCRYPT);
-echo $hashContrasena; */
+    /* $hashContrasena = password_hash('12345', PASSWORD_BCRYPT);
+    echo $hashContrasena; */
 }
 ?>

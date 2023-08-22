@@ -1,9 +1,8 @@
 <?php
-
 session_start();
 error_reporting(0);
 $rol = $_SESSION['rol'];
-if($rol != '1'){
+if($rol != '2'){
     session_unset();
     session_destroy();
     header("Location: ../includes/login.php");
@@ -17,7 +16,7 @@ if($rol != '1'){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar Usuarios</title>
+    <title>Lista de Usuarios</title>
     <style>
         body {
             background-color: #ECF8F9;
@@ -38,7 +37,7 @@ if($rol != '1'){
             z-index: 999;
             padding: 10px; /* Reducir el padding general */
             margin-top: 50px; /* Reducir el margen superior */
-            margin-bottom: 50px; /* Reducir el margen superior */
+            margin-bottom: 50px;
         }
 
         .modal-content {
@@ -50,10 +49,16 @@ if($rol != '1'){
             background-color: #fff;
             margin-top: 0; /* Eliminar el margen superior del contenido */
             margin-bottom: 0;
-
         }
         .modal-title {
             color: #1B9C85; /* Color de las letras en los títulos de los modales */
+        }
+
+        .card-title {
+            color: #1B9C85;
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
         }
 
         .form-group {
@@ -101,55 +106,52 @@ if($rol != '1'){
         }
 
         th, td {
+            background-color: whitesmoke; /* Color de fondo de las celdas de encabezado */
+            color: black; /* Color de texto en las celdas de encabezado */
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
             padding: 10px;
             border: 1px solid #ccc;
             text-align: left;
         }
     </style>
 </head>
-<?php
-include ('../includes/_db.php');
 
-if (isset($_GET['buscar'])) {
-    $buscar = $_GET['buscar'];
-    $SQL = "SELECT user.id, user.nombre, user.apPAt, user.apMAt, user.correo, user.telefono, permisos.rol
-            FROM user
-            LEFT JOIN permisos ON user.rol = permisos.id
-            WHERE user.nombre LIKE '%$buscar%'
-            OR user.apPAt LIKE '%$buscar%'
-            OR user.apMAt LIKE '%$buscar%'
-            OR user.correo LIKE '%$buscar%'
-            OR user.telefono LIKE '%$buscar%'
-            OR permisos.rol LIKE '%$buscar%'";
-    $dato = mysqli_query($conexion, $SQL);
-}
-?>
 <body>
-    <div class="modal-contentB">
-        <h2 class="modal-title">Buscar un Usuario</h2>
-        <div class="container is-fluid">
-            <div class="col-xs-12"><br>
-                <form action="" method="GET">
-                    <label for="buscar">Buscar:</label>
-                    <input type="text" name="buscar" id="buscar">
-                    <button type="submit">Buscar</button>
-                </form>
-                <br>
-                <?php if (isset($_GET['buscar'])) : ?>
-                    <?php if ($dato->num_rows > 0) : ?>
-                        <table id="table_id">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Apellido Paterno</th>
-                                    <th>Apellido Materno</th>
-                                    <th>Correo</th>
-                                    <th>Telefono</th>
-                                    <th>Rol</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php while ($fila = mysqli_fetch_array($dato)) : ?>
+ 
+        <div class="modal-content">
+        <h2 class="modal-title">Lista de Usuarios</h2> 
+            <?php include ('../includes/_db.php'); ?>
+
+            <div class="container is-fluid">
+                <div class="col-xs-12"><br>
+
+                    <table id="table_id">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido Paterno</th>
+                                <th>Apellido Materno</th>
+                                <th>Correo</th>
+                                <th>Telefono</th>
+                                <th>Rol</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $loggedInUserId = $_SESSION['id']; 
+                            $SQL = "SELECT user.id, user.nombre, user.apPAt, user.apMAt, user.correo, user.telefono, permisos.rol
+                            FROM user
+                            LEFT JOIN permisos ON user.rol = permisos.id
+                            WHERE user.rol <> 1 AND user.rol <> 2 ";
+                    
+                            
+                            $dato = mysqli_query($conexion, $SQL);
+
+                            if ($dato->num_rows > 0) {
+                                while ($fila = mysqli_fetch_array($dato)) {
+                            ?>
                                     <tr>
                                         <td><?php echo $fila['nombre']; ?></td>
                                         <td><?php echo $fila['apPAt']; ?></td>
@@ -158,19 +160,20 @@ if (isset($_GET['buscar'])) {
                                         <td><?php echo $fila['telefono']; ?></td>
                                         <td><?php echo $fila['rol']; ?></td>
                                     </tr>
-                                <?php endwhile; ?>
-                            </tbody>
-                        </table>
-                    <?php else : ?>
-                        <p>No se encontraron resultados.</p>
-                    <?php endif; ?>
-                <?php endif; ?>
+                            <?php
+                                }
+                            } else { ?>
+                                <tr class="text-center">
+                                    <td colspan="7">No existen registros</td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 
-    
 </body>
-
 
 </html>

@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 $validar = isset($_SESSION['correo']) ? $_SESSION['correo'] : '';
-
+$rol = $_SESSION['rol'];
 if ($validar == '') {
   session_unset();
   session_destroy();
@@ -228,20 +228,21 @@ if ($validar == '') {
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
+<?php
+
+if($rol == '1'){
+?>
+
 <body>
   <header class="header">
     <a href="../SuperAdmin/index.php" class="logo">
     <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
 </a>
-
-
-
     <input type="checkbox" id="check">
     <label for="check" class="icons">
       <i class='bx bx-menu' id="menu-icon"></i>
       <i class='bx bx-x' id="close-icon"></i>
     </label>
-
     <nav class="navbar">
       <a href="../SuperAdmin/index.php" style="--i:0;">Inicio</a>
       <a href="../SuperAdmin/gestion.php" style="--i:1;">Usuarios</a>
@@ -262,4 +263,43 @@ if ($validar == '') {
   </div>
 </body>
 
+   <?php
+} else ?>
+   
+<?php
+if($rol == '2'){
+?>
+
+<body>
+  <header class="header">
+    <a href="../Admin/index.php" class="logo">
+    <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
+</a>
+    <input type="checkbox" id="check">
+    <label for="check" class="icons">
+      <i class='bx bx-menu' id="menu-icon"></i>
+      <i class='bx bx-x' id="close-icon"></i>
+    </label>
+    <nav class="navbar">
+      <a href="../Admin/index.php" style="--i:0;">Inicio</a>
+      <a href="../Admin/gestion.php" style="--i:1;">Usuarios</a>
+      <a href="#" style="--i:2;">Vista Admin</a>
+     <!-- <a href="#" style="--i:2;">Reservas</a>
+      <a href="#" style="--i:4;">Contacto</a> -->
+      <a href="../includes/_sesion/cerrarSesion.php" style="--i:3;">Salir</a>
+    </nav>
+  </header>
+  <div class="video-container">
+    <video autoplay loop muted>
+      <!-- <source src="./discoteca2.mp4" type="video/mp4">
+          <source src="./discoteca1.mp4" type="video/mp4">
+          <source src="./restaurante.mp4" type="video/mp4"> 
+          <source src="../video/pub.mp4" type="video/mp4"> -->
+      <source src="../video/SuperAdmin.mp4" type="video/mp4">
+    </video>
+  </div>
+</body>
+
+   <?php
+} ?>
 </html>
