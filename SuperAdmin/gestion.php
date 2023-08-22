@@ -1,48 +1,79 @@
-
 <?php include '../NAVBARiorder/index.php'; ?>
 <!DOCTYPE html>
-    <head>
-        <title>Gestión de Usuarios</title>
-        <style>
-            /* Estilos para los modales */
-            .modal {
-                display: none;
-                position: fixed;
-                z-index: 1;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                overflow: auto;
-                background-color: rgba(0, 0, 0, 0.7);
-            }
 
-            .modal-content {
-                background-color: #fefefe;
-                margin: 10% auto;
-                padding: 20px;
-                border: 1px solid #888;
-                width: 50%;
-            }
+<head>
+    <title>Gestión de Usuarios</title>
+    <style>
+        /* Estilos para los modales */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
 
-            .close {
-                color: #aaa;
-                float: right;
-                font-size: 28px;
-                font-weight: bold;
-            }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+        }
 
-            /* Estilos para los botones */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+
+        .content {
+            position: absolute;
+            top: 54%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
+            height: 60%;
+            width: 70%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            width: 35%;
+            height: 20%;
+            border-radius: 0.5em;
+            font-size: 1.3rem;
+            color: #ffffff;
+            cursor: pointer;
+            text-align: center;
+            margin: 5px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid #fff;
+            border-style: outset;
+        }
+
+        .button:hover {
+            background: rgba(255, 255, 255, 0.4);
+            color: black;
+        }
+
+        @media (max-width: 420px) {
             .button {
-                padding: 10px 20px;
-                margin: 10px;
-                background-color: #007bff;
-                color: white;
-                border: none;
-                cursor: pointer;
+                font-size: 1rem;
             }
-        </style>
-    </head>
+        }
+    </style>
+</head>
 
 <body>
     <div class="content"><!-- Botones para las funcionalidades -->

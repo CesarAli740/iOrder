@@ -95,76 +95,92 @@
         }
     </style>
 </head>
+<?php
+include ('../includes/_db.php');
 
+if (isset($_GET['buscar'])) {
+    $buscar = $_GET['buscar'];
+    $SQL = "SELECT user.id, user.nombre, user.apPAt, user.apMAt, user.correo, user.telefono, permisos.rol
+            FROM user
+            LEFT JOIN permisos ON user.rol = permisos.id
+            WHERE user.nombre LIKE '%$buscar%'
+            OR user.apPAt LIKE '%$buscar%'
+            OR user.apMAt LIKE '%$buscar%'
+            OR user.correo LIKE '%$buscar%'
+            OR user.telefono LIKE '%$buscar%'
+            OR permisos.rol LIKE '%$buscar%'";
+    $dato = mysqli_query($conexion, $SQL);
+}
+?>
 <body>
-        <div class="modal-contentB">
-        <h2 class="modal-title">Buscar un Usuario</h2> 
-            <?php include ('../includes/_db.php'); ?>
-
-            <div class="container is-fluid">
-                <div class="col-xs-12"><br>
-                    <form action="" method="GET">
-                        <label for="buscar">Buscar:</label>
-                        <input type="text" name="buscar" id="buscar">
-                        <button type="submit">Buscar</button>
-                    </form>
-                    <br>
-                    <?php
-                    if (isset($_GET['buscar'])) {
-                        $buscar = $_GET['buscar'];
-                        $SQL = "SELECT user.id, user.nombre, user.apPAt, user.apMAt, user.correo, user.telefono, permisos.rol
-                                FROM user
-                                LEFT JOIN permisos ON user.rol = permisos.id
-                                WHERE user.nombre LIKE '%$buscar%'
-                                OR user.apPAt LIKE '%$buscar%'
-                                OR user.apMAt LIKE '%$buscar%'
-                                OR user.correo LIKE '%$buscar%'
-                                OR user.telefono LIKE '%$buscar%'
-                                OR permisos.rol LIKE '%$buscar%'";
-                        $dato = mysqli_query($conexion, $SQL);
-
-                        if ($dato->num_rows > 0) {
-                    ?>
-                            <table id="table_id">
-                                <thead>
+    <div class="modal-contentB">
+        <h2 class="modal-title">Buscar un Usuario</h2>
+        <div class="container is-fluid">
+            <div class="col-xs-12"><br>
+                <form action="" method="GET">
+                    <label for="buscar">Buscar:</label>
+                    <input type="text" name="buscar" id="buscar">
+                    <button type="submit">Buscar</button>
+                </form>
+                <br>
+                <?php if (isset($_GET['buscar'])) : ?>
+                    <?php if ($dato->num_rows > 0) : ?>
+                        <table id="table_id">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Apellido Paterno</th>
+                                    <th>Apellido Materno</th>
+                                    <th>Correo</th>
+                                    <th>Telefono</th>
+                                    <th>Rol</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php while ($fila = mysqli_fetch_array($dato)) : ?>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Apellido Paterno</th>
-                                        <th>Apellido Materno</th>
-                                        <th>Correo</th>
-                                        <th>Telefono</th>
-                                        <th>Rol</th>
+                                        <td><?php echo $fila['nombre']; ?></td>
+                                        <td><?php echo $fila['apPAt']; ?></td>
+                                        <td><?php echo $fila['apMAt']; ?></td>
+                                        <td><?php echo $fila['correo']; ?></td>
+                                        <td><?php echo $fila['telefono']; ?></td>
+                                        <td><?php echo $fila['rol']; ?></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    while ($fila = mysqli_fetch_array($dato)) {
-                                    ?>
-                                        <tr>
-                                            <td><?php echo $fila['nombre']; ?></td>
-                                            <td><?php echo $fila['apPAt']; ?></td>
-                                            <td><?php echo $fila['apMAt']; ?></td>
-                                            <td><?php echo $fila['correo']; ?></td>
-                                            <td><?php echo $fila['telefono']; ?></td>
-                                            <td><?php echo $fila['rol']; ?></td>
-                                        </tr>
-                                    <?php
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                        <?php
-                        } else {
-                            echo "<p>No se encontraron resultados.</p>";
-                        }
-                    }
-                    ?>
-                </div>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    <?php else : ?>
+                        <p>No se encontraron resultados.</p>
+                    <?php endif; ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>
 
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.querySelector('.modal-contentB');
+            const form = modal.querySelector('form');
+            const buscarInput = form.querySelector('#buscar');
+            
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Evita el envío del formulario
+                if (buscarInput.value !== '') {
+                    // Ejecuta la búsqueda aquí si es necesario
+                    // Luego, muestra los resultados en la tabla
+
+                    modal.style.display = 'block';
+                }
+            });
+
+            buscarInput.addEventListener('input', function() {
+                if (this.value === '') {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
+
 
 </html>
