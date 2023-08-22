@@ -24,6 +24,9 @@
             justify-content: center;
             align-items: center;
             z-index: 999;
+            padding: 10px; /* Reducir el padding general */
+            margin-top: 50px; /* Reducir el margen superior */
+            margin-bottom: 50px; /* Reducir el margen superior */
         }
 
         .modal-content {
@@ -33,6 +36,9 @@
             width: 100%;
             padding: 15px; /* Reducido el padding */
             background-color: #fff;
+            margin-top: 0; /* Eliminar el margen superior del contenido */
+            margin-bottom: 0; 
+
         }
 
         .card-title {
@@ -119,14 +125,7 @@
         </div>
     </div>
 
-    <script>
-        const openModalBtn = document.getElementById("openModal");
-        const modal = document.getElementById("myModal");
-
-        openModalBtn.addEventListener("click", () => {
-            modal.style.display = "flex";
-        });
-    </script>
+    
 </body>
 
 </html>

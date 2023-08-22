@@ -24,6 +24,9 @@
             justify-content: center;
             align-items: center;
             z-index: 999;
+            padding: 10px; /* Reducir el padding general */
+            margin-top: 50px; /* Reducir el margen superior */
+            margin-bottom: 50px; /* Reducir el margen superior */
         }
 
         .modal-content {
@@ -33,6 +36,12 @@
             width: 100%;
             padding: 15px;
             background-color: #fff;
+            margin-top: 0; /* Eliminar el margen superior del contenido */
+            margin-bottom: 0;
+
+        }
+        .modal-title {
+            color: #1B9C85; /* Color de las letras en los títulos de los modales */
         }
 
         .form-group {
@@ -88,9 +97,9 @@
 </head>
 
 <body>
-        <div class="modal-content">
-            <?php  
-                  include ('../includes/_db.php'); ?>
+        <div class="modal-contentB">
+        <h2 class="modal-title">Buscar un Usuario</h2> 
+            <?php include ('../includes/_db.php'); ?>
 
             <div class="container is-fluid">
                 <div class="col-xs-12"><br>
@@ -155,10 +164,7 @@
         </div>
     </div>
 
-    <script>
-        const modal = document.querySelector(".modal");
-        modal.style.display = "flex"; // Abre el modal automáticamente al cargar la página
-    </script>
+    
 </body>
 
 </html>

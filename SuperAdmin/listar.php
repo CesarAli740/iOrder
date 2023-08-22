@@ -24,6 +24,9 @@
             justify-content: center;
             align-items: center;
             z-index: 999;
+            padding: 10px; /* Reducir el padding general */
+            margin-top: 50px; /* Reducir el margen superior */
+            margin-bottom: 50px;
         }
 
         .modal-content {
@@ -33,6 +36,11 @@
             width: 100%;
             padding: 15px;
             background-color: #fff;
+            margin-top: 0; /* Eliminar el margen superior del contenido */
+            margin-bottom: 0;
+        }
+        .modal-title {
+            color: #1B9C85; /* Color de las letras en los títulos de los modales */
         }
 
         .card-title {
@@ -87,6 +95,11 @@
         }
 
         th, td {
+            background-color: whitesmoke; /* Color de fondo de las celdas de encabezado */
+            color: black; /* Color de texto en las celdas de encabezado */
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
             padding: 10px;
             border: 1px solid #ccc;
             text-align: left;
@@ -97,8 +110,8 @@
 <body>
  
         <div class="modal-content">
-            <?php 
-                  include ('../includes/_db.php'); ?>
+        <h2 class="modal-title">Lista de Usuarios</h2> 
+            <?php include ('../includes/_db.php'); ?>
 
             <div class="container is-fluid">
                 <div class="col-xs-12"><br>
@@ -146,10 +159,6 @@
         </div>
     </div>
 
-    <script>
-        const modal = document.querySelector(".modal");
-        modal.style.display = "flex"; // Abre el modal automáticamente al cargar la página
-    </script>
 </body>
 
 </html>

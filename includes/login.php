@@ -9,22 +9,30 @@
     <style>
         body {
             display: flex;
-            
+
             align-items: center;
             height: 100vh;
             margin: 0;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #ffeba7;
+            overflow: hidden;
+            height: 100vh;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #12141d 100%);
         }
 
         .card {
-    background-color: gray;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-    width: 350px;
-    max-width: 80%;
-    text-align: center;
-    margin: 0 auto; /* Agregar esta línea para centrar horizontalmente */
-}
+            background-color: gray;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            max-width: 80%;
+            text-align: center;
+            margin: 0 auto;
+            /* Agregar esta línea para centrar horizontalmente */
+        }
 
 
         .botonlogin {
@@ -120,11 +128,11 @@
                 }
                 ?>
             </div>
-        <?php
+            <?php
         }
         ?>
     </div>
-    
+
 </body>
 
 </html>
