@@ -9,7 +9,6 @@
     <style>
         body {
             display: flex;
-
             align-items: center;
             height: 100vh;
             margin: 0;
@@ -37,7 +36,7 @@
 
         .botonlogin {
             text-decoration: none;
-            background-color: #1B9C85;
+            background-color: #161d32;
             border: none;
             color: white;
             padding: 0.5rem;
@@ -52,7 +51,7 @@
         }
 
         .botonlogin:hover {
-            background-color: #168b6d;
+            background-color: #435a9c;
         }
 
         .form-group {
@@ -106,10 +105,10 @@
             <div class="form-group">
                 <input type="submit" class="botonlogin" value="Ingresar">
             </div>
-        </form>
+        </form><!-- 
         <div class="my-2">
             <a href="../recuperacion/recovery.php">¿Olvidaste tu contraseña?</a>
-        </div>
+        </div> -->
         <?php
         if (isset($_GET['message'])) {
             ?>

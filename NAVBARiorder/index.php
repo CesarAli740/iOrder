@@ -73,7 +73,7 @@ if ($validar == '') {
   }
 
   .navbar a {
-    font-size: 1.15rem;
+    font-size: 1.5rem; /* Cambia el valor a tu preferencia */
     color: #ffffff;
     text-decoration: none;
     font-weight: 500;
@@ -243,12 +243,12 @@ if ($validar == '') {
     </label>
 
     <nav class="navbar">
-      <a href="../SuperAdmin/index.php" style="--i:0;">Home</a>
+      <a href="../SuperAdmin/index.php" style="--i:0;">Inicio</a>
       <a href="../SuperAdmin/gestion.php" style="--i:1;">Usuarios</a>
-      <a href="#" style="--i:2;">Reservas</a>
+     <!--  <a href="#" style="--i:2;">Reservas</a>
       <a href="#" style="--i:3;">Pedidos</a>
-      <a href="#" style="--i:4;">Contacto</a>
-      <a href="../includes/_sesion/cerrarSesion.php" style="--i:4;">Salir</a>
+      <a href="#" style="--i:4;">Contacto</a> -->
+      <a href="../includes/_sesion/cerrarSesion.php" style="--i:2;">Salir</a>
     </nav>
   </header>
   <div class="video-container">

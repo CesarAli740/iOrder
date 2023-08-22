@@ -18,7 +18,7 @@ $usuarios = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 </head>
 
 <body>
-  <h1>Lista de Usuarios</h1>
+  <h1 style=color:#1B9C85;">Lista de Usuarios</h1>
   <table>
     <thead>
       <tr>
