@@ -1,16 +1,17 @@
-
 <?php
 
 session_start();
 error_reporting(0);
 $rol = $_SESSION['rol'];
-if($rol != '2'){
+$establecimiento = $_SESSION['establecimiento'];
+if ($rol != '2') {
     session_unset();
     session_destroy();
     header("Location: ../includes/login.php");
     die();
 }
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -36,24 +37,31 @@ if($rol != '2'){
             justify-content: center;
             align-items: center;
             z-index: 999;
-            padding: 10px; /* Reducir el padding general */
-            margin-top: 50px; /* Reducir el margen superior */
-            margin-bottom: 50px; /* Reducir el margen superior */
+            padding: 10px;
+            /* Reducir el padding general */
+            margin-top: 50px;
+            /* Reducir el margen superior */
+            margin-bottom: 50px;
+            /* Reducir el margen superior */
         }
 
         .modal-content {
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 800px; /* Ancho máximo de la modal */
+            max-width: 800px;
+            /* Ancho máximo de la modal */
             width: 100%;
             padding: 15px;
             background-color: #fff;
-            margin-top: 0; /* Eliminar el margen superior del contenido */
+            margin-top: 0;
+            /* Eliminar el margen superior del contenido */
             margin-bottom: 0;
 
         }
+
         .modal-title {
-            color: #1B9C85; /* Color de las letras en los títulos de los modales */
+            color: #1B9C85;
+            /* Color de las letras en los títulos de los modales */
         }
 
         .form-group {
@@ -100,7 +108,8 @@ if($rol != '2'){
             border: 1px solid #ccc;
         }
 
-        th, td {
+        th,
+        td {
             padding: 10px;
             border: 1px solid #ccc;
             text-align: left;
@@ -108,22 +117,27 @@ if($rol != '2'){
     </style>
 </head>
 <?php
-include ('../includes/_db.php');
+include('../includes/_db.php');
 
 if (isset($_GET['buscar'])) {
     $buscar = $_GET['buscar'];
-    $SQL = "SELECT user.id, user.nombre, user.apPAt, user.apMAt, user.correo, user.telefono, permisos.rol
-            FROM user
-            LEFT JOIN permisos ON user.rol = permisos.id
-            WHERE user.nombre LIKE '%$buscar%'
-            OR user.apPAt LIKE '%$buscar%'
-            OR user.apMAt LIKE '%$buscar%'
-            OR user.correo LIKE '%$buscar%'
-            OR user.telefono LIKE '%$buscar%'
-            OR permisos.rol LIKE '%$buscar%'";
+    $SQL = "SELECT user.id, user.nombre, user.apPAt, user.apMAt, user.correo, user.telefono, user.tipo, permisos.rol
+    FROM user
+    LEFT JOIN permisos ON user.rol = permisos.id
+    WHERE (user.nombre LIKE '%$buscar%'
+        OR user.apPAt LIKE '%$buscar%'
+        OR user.apMAt LIKE '%$buscar%'
+        OR user.correo LIKE '%$buscar%'
+        OR user.telefono LIKE '%$buscar%'
+        OR permisos.rol LIKE '%$buscar%')
+    AND user.rol <> 1
+    AND user.rol <> 2
+    AND user.tipo = '$establecimiento'";
+
     $dato = mysqli_query($conexion, $SQL);
 }
 ?>
+
 <body>
     <div class="modal-contentB">
         <h2 class="modal-title">Buscar un Usuario</h2>
@@ -135,8 +149,8 @@ if (isset($_GET['buscar'])) {
                     <button type="submit">Buscar</button>
                 </form>
                 <br>
-                <?php if (isset($_GET['buscar'])) : ?>
-                    <?php if ($dato->num_rows > 0) : ?>
+                <?php if (isset($_GET['buscar'])): ?>
+                    <?php if ($dato->num_rows > 0): ?>
                         <table id="table_id">
                             <thead>
                                 <tr>
@@ -149,19 +163,31 @@ if (isset($_GET['buscar'])) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php while ($fila = mysqli_fetch_array($dato)) : ?>
+                                <?php while ($fila = mysqli_fetch_array($dato)): ?>
                                     <tr>
-                                        <td><?php echo $fila['nombre']; ?></td>
-                                        <td><?php echo $fila['apPAt']; ?></td>
-                                        <td><?php echo $fila['apMAt']; ?></td>
-                                        <td><?php echo $fila['correo']; ?></td>
-                                        <td><?php echo $fila['telefono']; ?></td>
-                                        <td><?php echo $fila['rol']; ?></td>
+                                        <td>
+                                            <?php echo $fila['nombre']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $fila['apPAt']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $fila['apMAt']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $fila['correo']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $fila['telefono']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $fila['rol']; ?>
+                                        </td>
                                     </tr>
                                 <?php endwhile; ?>
                             </tbody>
                         </table>
-                    <?php else : ?>
+                    <?php else: ?>
                         <p>No se encontraron resultados.</p>
                     <?php endif; ?>
                 <?php endif; ?>
@@ -169,7 +195,7 @@ if (isset($_GET['buscar'])) {
         </div>
     </div>
 
-    
+
 </body>
 
 

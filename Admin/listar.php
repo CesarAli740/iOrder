@@ -2,6 +2,7 @@
 session_start();
 error_reporting(0);
 $rol = $_SESSION['rol'];
+$establecimiento = $_SESSION['establecimiento'];
 if($rol != '2'){
     session_unset();
     session_destroy();
@@ -141,10 +142,10 @@ if($rol != '2'){
                         <tbody>
                             <?php
                             $loggedInUserId = $_SESSION['id']; 
-                            $SQL = "SELECT user.id, user.nombre, user.apPAt, user.apMAt, user.correo, user.telefono, permisos.rol
+                            $SQL = "SELECT user.id, user.nombre, user.apPAt, user.apMAt, user.correo, user.telefono, user.tipo, permisos.rol
                             FROM user
                             LEFT JOIN permisos ON user.rol = permisos.id
-                            WHERE user.rol <> 1 AND user.rol <> 2 ";
+                            WHERE user.rol <> 1 AND user.rol <> 2 AND user.tipo = '$establecimiento'";
                     
                             
                             $dato = mysqli_query($conexion, $SQL);

@@ -284,9 +284,9 @@ if($rol == '2'){
       <a href="../Admin/index.php" style="--i:0;">Inicio</a>
       <a href="../Admin/gestion.php" style="--i:1;">Usuarios</a>
       <a href="#" style="--i:2;">Vista Admin</a>
-     <!-- <a href="#" style="--i:2;">Reservas</a>
+     <a href="#" style="--i:3;">Reservas</a><!-- 
       <a href="#" style="--i:4;">Contacto</a> -->
-      <a href="../includes/_sesion/cerrarSesion.php" style="--i:3;">Salir</a>
+      <a href="../includes/_sesion/cerrarSesion.php" style="--i:4;">Salir</a>
     </nav>
   </header>
   <div class="video-container">
