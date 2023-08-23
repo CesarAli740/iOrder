@@ -20,6 +20,7 @@ if ($validar == '') {
   }
 
   body {
+    
     min-height: 100vh;
   }
 
@@ -161,7 +162,7 @@ if ($validar == '') {
     }
   }
 
-  .video-container {
+ /*  .video-container {
     position: relative;
     height: 100vh;
     overflow: hidden;
@@ -185,7 +186,7 @@ if ($validar == '') {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.4);
-  }
+  } */
 </style>
 
 <!--   <header class="header">
@@ -233,7 +234,7 @@ if ($validar == '') {
 if($rol == '1'){
 ?>
 
-<body>
+<body style="background-image: url('../images/endless-constellation.svg');">
   <header class="header">
     <a href="../SuperAdmin/index.php" class="logo">
     <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
@@ -246,21 +247,22 @@ if($rol == '1'){
     <nav class="navbar">
       <a href="../SuperAdmin/index.php" style="--i:0;">Inicio</a>
       <a href="../SuperAdmin/gestion.php" style="--i:1;">Usuarios</a>
-     <!--  <a href="#" style="--i:2;">Reservas</a>
-      <a href="#" style="--i:3;">Pedidos</a>
+      <a href="../SuperAdmin/establecimientos.php" style="--i:2;">Establecimientos</a>
+      <a href="../SuperAdmin/tipo.php" style="--i:3;">Tipo</a>
+     <!--  
       <a href="#" style="--i:4;">Contacto</a> -->
-      <a href="../includes/_sesion/cerrarSesion.php" style="--i:2;">Salir</a>
+      <a href="../includes/_sesion/cerrarSesion.php" style="--i:4;">Salir</a>
     </nav>
   </header>
-  <div class="video-container">
+  <!-- <div class="video-container">
     <video autoplay loop muted>
-      <!-- <source src="./discoteca2.mp4" type="video/mp4">
+      <source src="./discoteca2.mp4" type="video/mp4">
           <source src="./discoteca1.mp4" type="video/mp4">
           <source src="./restaurante.mp4" type="video/mp4"> 
-          <source src="../video/pub.mp4" type="video/mp4"> -->
+          <source src="../video/pub.mp4" type="video/mp4"> 
       <source src="../video/SuperAdmin.mp4" type="video/mp4">
     </video>
-  </div>
+  </div> -->
 </body>
 
    <?php
@@ -270,7 +272,7 @@ if($rol == '1'){
 if($rol == '2'){
 ?>
 
-<body>
+<body style="background-image: url('../images/constelacion.svg');">
   <header class="header">
     <a href="../Admin/index.php" class="logo">
     <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
@@ -289,15 +291,15 @@ if($rol == '2'){
       <a href="../includes/_sesion/cerrarSesion.php" style="--i:4;">Salir</a>
     </nav>
   </header>
-  <div class="video-container">
+  <!-- <div class="video-container">
     <video autoplay loop muted>
-      <!-- <source src="./discoteca2.mp4" type="video/mp4">
+      <source src="./discoteca2.mp4" type="video/mp4">
           <source src="./discoteca1.mp4" type="video/mp4">
           <source src="./restaurante.mp4" type="video/mp4"> 
-          <source src="../video/pub.mp4" type="video/mp4"> -->
+          <source src="../video/pub.mp4" type="video/mp4"> 
       <source src="../video/SuperAdmin.mp4" type="video/mp4">
     </video>
-  </div>
+  </div> -->
 </body>
 
    <?php
