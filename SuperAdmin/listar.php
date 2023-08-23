@@ -3,7 +3,7 @@
 session_start();
 error_reporting(0);
 $rol = $_SESSION['rol'];
-if($rol != '1'){
+if ($rol != '1') {
     session_unset();
     session_destroy();
     header("Location: ../includes/login.php");
@@ -23,36 +23,41 @@ if($rol != '1'){
             background-color: #ECF8F9;
             margin: 0;
             font-family: Arial, sans-serif;
+
         }
 
         .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
             justify-content: center;
             align-items: center;
             z-index: 999;
-            padding: 10px; /* Reducir el padding general */
-            margin-top: 50px; /* Reducir el margen superior */
-            margin-bottom: 50px;
+            padding: 10px;
+            /* Reducir el padding general */
+            margin-top: 0px;
+            /* Reducir el margen superior */
+            margin-bottom: 0px;
         }
 
         .modal-content {
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 800px; /* Ancho máximo de la modal */
+            max-width: 800px;
+            /* Ancho máximo de la modal */
             width: 100%;
             padding: 15px;
             background-color: #fff;
-            margin-top: 0; /* Eliminar el margen superior del contenido */
+            margin-top: 0;
+            /* Eliminar el margen superior del contenido */
             margin-bottom: 0;
         }
+
         .modal-title {
-            color: #1B9C85; /* Color de las letras en los títulos de los modales */
+            color: #1B9C85;
+            /* Color de las letras en los títulos de los modales */
         }
 
         .card-title {
@@ -106,9 +111,12 @@ if($rol != '1'){
             border: 1px solid #ccc;
         }
 
-        th, td {
-            background-color: whitesmoke; /* Color de fondo de las celdas de encabezado */
-            color: black; /* Color de texto en las celdas de encabezado */
+        th,
+        td {
+            background-color: whitesmoke;
+            /* Color de fondo de las celdas de encabezado */
+            color: black;
+            /* Color de texto en las celdas de encabezado */
             padding: 10px;
             border: 1px solid #ccc;
             text-align: left;
@@ -120,55 +128,55 @@ if($rol != '1'){
 </head>
 
 <body>
- 
-        <div class="modal-content">
-        <h2 class="modal-title">Lista de Usuarios</h2> 
-            <?php include ('../includes/_db.php'); ?>
 
-            <div class="container is-fluid">
-                <div class="col-xs-12"><br>
+    <div class="modal-content">
+        <h2 class="modal-title">Lista de Usuarios</h2>
+        <?php include('../includes/_db.php'); ?>
 
-                    <table id="table_id">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Apellido Paterno</th>
-                                <th>Apellido Materno</th>
-                                <th>Correo</th>
-                                <th>Telefono</th>
-                                <th>Rol</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $SQL = "SELECT user.id, user.nombre, user.apPAt, user.apMAt, user.correo, user.telefono ,permisos.rol
+        <div class="container is-fluid">
+            <div class="col-xs-12"><br>
+
+                <table id="table_id">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido Paterno</th>
+                            <th>Apellido Materno</th>
+                            <th>Correo</th>
+                            <th>Telefono</th>
+                            <th>Rol</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $SQL = "SELECT user.id, user.nombre, user.apPAt, user.apMAt, user.correo, user.telefono, permisos.rol
                             FROM user
                             LEFT JOIN permisos ON user.rol = permisos.id";
-                            $dato = mysqli_query($conexion, $SQL);
+                        $dato = mysqli_query($conexion, $SQL);
 
-                            if ($dato->num_rows > 0) {
-                                while ($fila = mysqli_fetch_array($dato)) {
-                            ?>
-                                    <tr>
-                                        <td><?php echo $fila['nombre']; ?></td>
-                                        <td><?php echo $fila['apPAt']; ?></td>
-                                        <td><?php echo $fila['apMAt']; ?></td>
-                                        <td><?php echo $fila['correo']; ?></td>
-                                        <td><?php echo $fila['telefono']; ?></td>
-                                        <td><?php echo $fila['rol']; ?></td>
-                                    </tr>
-                            <?php
-                                }
-                            } else { ?>
-                                <tr class="text-center">
-                                    <td colspan="7">No existen registros</td>
+                        if ($dato->num_rows > 0) {
+                            while ($fila = mysqli_fetch_array($dato)) {
+                        ?>
+                                <tr>
+                                    <td><?php echo $fila['nombre']; ?></td>
+                                    <td><?php echo $fila['apPAt']; ?></td>
+                                    <td><?php echo $fila['apMAt']; ?></td>
+                                    <td><?php echo $fila['correo']; ?></td>
+                                    <td><?php echo $fila['telefono']; ?></td>
+                                    <td><?php echo $fila['rol']; ?></td>
                                 </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                </div>
+                            <?php
+                            }
+                        } else { ?>
+                            <tr class="text-center">
+                                <td colspan="7">No existen registros</td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
     </div>
 
 </body>

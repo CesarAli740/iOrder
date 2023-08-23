@@ -3,12 +3,12 @@
 <html>
 
 <head>
-    <title>Super Administrador</title>
+    <title>Administrador</title>
 </head>
 
 
 <body>
-
+    
 
 </body>
 

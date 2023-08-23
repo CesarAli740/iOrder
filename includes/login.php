@@ -66,7 +66,7 @@
             border: 1px solid #ccc;
             padding: 10px;
             border-radius: 5px;
-            width: 100%;
+            width: 93%;
             transition: box-shadow 0.3s, border-color 0.3s;
         }
 

@@ -3,7 +3,7 @@
 session_start();
 error_reporting(0);
 $rol = $_SESSION['rol'];
-if($rol != '1'){
+if ($rol != '1') {
     session_unset();
     session_destroy();
     header("Location: ../includes/login.php");
@@ -23,37 +23,48 @@ if($rol != '1'){
             background-color: #ECF8F9;
             margin: 0;
             font-family: Arial, sans-serif;
+
         }
 
         .modal {
             display: none;
             position: fixed;
-            top: 0;
+            z-index: 1;
             left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-            padding: 10px; /* Reducir el padding general */
-            margin-top: 50px; /* Reducir el margen superior */
-            margin-bottom: 50px; /* Reducir el margen superior */
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
         }
 
         .modal-content {
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 800px; /* Ancho máximo de la modal */
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
             width: 100%;
-            padding: 15px;
-            background-color: #fff;
-            margin-top: 0; /* Eliminar el margen superior del contenido */
-            margin-bottom: 0;
+        }
+
+        .modal-title {
+            color: #1B9C85;
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .container.is-fluid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
         }
+
         .modal-title {
-            color: #1B9C85; /* Color de las letras en los títulos de los modales */
+            color: #1B9C85;
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
         }
 
         .form-group {
@@ -100,7 +111,8 @@ if($rol != '1'){
             border: 1px solid #ccc;
         }
 
-        th, td {
+        th,
+        td {
             padding: 10px;
             border: 1px solid #ccc;
             text-align: left;
@@ -108,7 +120,7 @@ if($rol != '1'){
     </style>
 </head>
 <?php
-include ('../includes/_db.php');
+include('../includes/_db.php');
 
 if (isset($_GET['buscar'])) {
     $buscar = $_GET['buscar'];
@@ -124,8 +136,9 @@ if (isset($_GET['buscar'])) {
     $dato = mysqli_query($conexion, $SQL);
 }
 ?>
+
 <body>
-    <div class="modal-contentB">
+    <div class="modal-content">
         <h2 class="modal-title">Buscar un Usuario</h2>
         <div class="container is-fluid">
             <div class="col-xs-12"><br>
@@ -169,7 +182,7 @@ if (isset($_GET['buscar'])) {
         </div>
     </div>
 
-    
+
 </body>
 
 
