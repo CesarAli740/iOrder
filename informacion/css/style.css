@@ -13,14 +13,18 @@
 body {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 400;
-  font-size: 23px;
+  font-size: 25px;
   line-height: 1.7;
-  color: rgba(243, 234, 234, 0.588);
-  background: #000 url(../images/broken_noise.png) repeat;
+  color: #fff;
+  background: #000 url(../images/fondo.jpg) repeat;
 }
+.timeline-body p {
+  color: #ffffff; /* Cambia "#yourDesiredColor" al color que desees */
+}
+
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   body {
-    background: #000 url(../images/broken_noise.png) repeat;
+    background: #000 url(../images/fondo.jpg) repeat;
   }
 }
 
@@ -130,6 +134,7 @@ h1, h2, h3, h4, h5, h6, figure {
   font-family: "Cormorant Garamond", Georgia, serif;
   color: #fff !important;
 }
+
 .scrolled .fh5co-nav #fh5co-logo {
   color: #000 !important;
 }
@@ -278,6 +283,7 @@ h1, h2, h3, h4, h5, h6, figure {
   background-repeat: no-repeat;
   background-attachment: fixed;
   position: relative;
+  height: 300px;
 }
 @media screen and (max-width: 768px) {
   #fh5co-header {
@@ -391,7 +397,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 #fh5co-header .display-tc .btn.btn-learn,
 .fh5co-cover .display-tc .btn.btn-learn {
-  background: #fee856;
+  background: #ea272d;
   border: none;
   color: #000 !important;
 }
@@ -437,8 +443,9 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 .fh5co-section {
-  padding: 1em 0;
+  padding: 2em 0;
 }
+
 @media screen and (max-width: 480px) {
   .fh5co-section {
     padding: 2em 0;
@@ -507,9 +514,9 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 #fh5co-featured-menu .fh5co-item .fh5co-price, #fh5co-gallery .fh5co-item .fh5co-price, #fh5co-reservation-form .fh5co-item .fh5co-price {
   font-style: 20px;
-  color: #fee856;
+  color: #ea272d;
   margin-bottom: 20px;
-  font-size: 15px;
+  font-size: 22px;
   display: block;
 }
 #fh5co-featured-menu .fh5co-item img, #fh5co-gallery .fh5co-item img, #fh5co-reservation-form .fh5co-item img {
@@ -551,7 +558,7 @@ h1, h2, h3, h4, h5, h6, figure {
   border: none !important;
 }
 #fh5co-featured-testimony .fh5co-heading {
-  margin-bottom: 170px;
+  margin-bottom: 120px;
 }
 @media screen and (max-width: 768px) {
   #fh5co-featured-testimony .fh5co-heading {
@@ -564,12 +571,12 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 #fh5co-featured-testimony .img-to-responsive img {
   margin-bottom: 20px;
-  height: 100%;
+  height: 80%;
   width: 100%;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 680px) {
   #fh5co-featured-testimony .img-to-responsive img {
-    max-width: 100px;
+    max-width: 80px;
   }
 }
 #fh5co-featured-testimony blockquote {
@@ -719,8 +726,8 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 #fh5co-footer {
-  background-color: #4cae4c;
-  padding: 7em 0;
+  background-color: #000000;
+  padding: 2em 0;
   clear: both
 }
 
@@ -799,6 +806,26 @@ h1, h2, h3, h4, h5, h6, figure {
 #fh5co-started .fh5co-heading p {
   color: rgba(255, 255, 255, 0.8);
   font-size: 20px;
+}
+
+#fh5co-started .row {
+  display: flex;
+  align-items: flex-start;
+}
+
+#fh5co-started .col-md-6 {
+  flex: 1;
+  padding: 10px;
+}
+
+.mission,
+.vision {
+  padding: 10px;
+}
+
+.mission p,
+.vision p {
+  margin-bottom: 20px; /* Agrega un poco más de espacio entre los párrafos */
 }
 
 .member {
@@ -1618,8 +1645,8 @@ h1, h2, h3, h4, h5, h6, figure {
   border: 2px solid #5cb85c;
 }
 .btn-success:hover, .btn-success:focus, .btn-success:active {
-  background: #4cae4c !important;
-  border-color: #4cae4c !important;
+  background: #fe3030 !important;
+  border-color: #fe3030 !important;
 }
 .btn-success.btn-outline {
   background: transparent;
@@ -1758,7 +1785,7 @@ textarea {
 }
 
 .row-pb-md {
-  padding-bottom: 4em !important;
+  padding-bottom: 0em !important;
 }
 
 .row-pb-sm {
@@ -1829,7 +1856,7 @@ textarea {
   text-align: center;
   font-weight: bold;
   color: #ffffff;
-  padding: 3rem;
+  padding: 10rem;
 }
 .parrafo-conocenos:hover {
   color: #ea272d;

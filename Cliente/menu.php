@@ -15,7 +15,7 @@
 
     
     <div class="titulo-menu">
-      <h1>Administra tu propio menú</h1>
+      <h1>¿Que vas a comer Hoy?</h1>
     </div>
     <section class="menu-section">
       <div class="menu-container">
