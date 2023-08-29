@@ -38,8 +38,8 @@ function acceso_user()
                 session_destroy();
             }
         } else {
-            // Contraseña incorrecta
-            echo 'Contraseña incorrecta';
+            header('Location: ./login.php');
+            session_destroy();
         }
     } else {
         // Usuario no encontrado

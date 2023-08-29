@@ -124,15 +124,17 @@ include('../includes/_db.php');
 
 if (isset($_GET['buscar'])) {
     $buscar = $_GET['buscar'];
-    $SQL = "SELECT user.id, user.nombre, user.apPAt, user.apMAt, user.correo, user.telefono, permisos.rol
-            FROM user
-            LEFT JOIN permisos ON user.rol = permisos.id
+    $SQL = "SELECT user.id, user.nombre, user.apPAt, user.apMAt, user.correo, user.telefono, permisos.rol, establecimiento_tipo.tipo
+    FROM user
+    LEFT JOIN permisos ON user.rol = permisos.id
+    LEFT JOIN establecimiento_tipo ON user.tipo = establecimiento_tipo.id
             WHERE user.nombre LIKE '%$buscar%'
             OR user.apPAt LIKE '%$buscar%'
             OR user.apMAt LIKE '%$buscar%'
             OR user.correo LIKE '%$buscar%'
             OR user.telefono LIKE '%$buscar%'
-            OR permisos.rol LIKE '%$buscar%'";
+            OR permisos.rol LIKE '%$buscar%'
+            OR establecimiento_tipo.tipo LIKE '%$buscar%'";
     $dato = mysqli_query($conexion, $SQL);
 }
 ?>
@@ -148,8 +150,8 @@ if (isset($_GET['buscar'])) {
                     <button type="submit">Buscar</button>
                 </form>
                 <br>
-                <?php if (isset($_GET['buscar'])) : ?>
-                    <?php if ($dato->num_rows > 0) : ?>
+                <?php if (isset($_GET['buscar'])): ?>
+                    <?php if ($dato->num_rows > 0): ?>
                         <table id="table_id">
                             <thead>
                                 <tr>
@@ -159,22 +161,38 @@ if (isset($_GET['buscar'])) {
                                     <th>Correo</th>
                                     <th>Telefono</th>
                                     <th>Rol</th>
+                                    <th>Establecimiento</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php while ($fila = mysqli_fetch_array($dato)) : ?>
+                                <?php while ($fila = mysqli_fetch_array($dato)): ?>
                                     <tr>
-                                        <td><?php echo $fila['nombre']; ?></td>
-                                        <td><?php echo $fila['apPAt']; ?></td>
-                                        <td><?php echo $fila['apMAt']; ?></td>
-                                        <td><?php echo $fila['correo']; ?></td>
-                                        <td><?php echo $fila['telefono']; ?></td>
-                                        <td><?php echo $fila['rol']; ?></td>
+                                        <td>
+                                            <?php echo $fila['nombre']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $fila['apPAt']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $fila['apMAt']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $fila['correo']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $fila['telefono']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $fila['rol']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $fila['tipo']; ?>
+                                        </td>
                                     </tr>
                                 <?php endwhile; ?>
                             </tbody>
                         </table>
-                    <?php else : ?>
+                    <?php else: ?>
                         <p>No se encontraron resultados.</p>
                     <?php endif; ?>
                 <?php endif; ?>

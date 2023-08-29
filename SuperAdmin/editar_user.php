@@ -28,8 +28,8 @@ if ($rol != '1') {
     }
 
     body {
+
       min-height: 100vh;
-      background-color: rgba(0, 0, 0, 0.7);
     }
 
     .header {
@@ -200,7 +200,7 @@ if ($rol != '1') {
     /* Estilos para los modales */
     .modal {
       display: none;
-      position: absolute;
+      position: fixed;
       z-index: 1;
       left: 0;
       top: 0;
@@ -266,28 +266,6 @@ if ($rol != '1') {
 </head>
 
 <body>
-  <header class="header">
-    <a href="../SuperAdmin/index.php" class="logo">
-      <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
-    </a>
-
-
-
-    <input type="checkbox" id="check">
-    <label for="check" class="icons">
-      <i class='bx bx-menu' id="menu-icon"></i>
-      <i class='bx bx-x' id="close-icon"></i>
-    </label>
-
-    <nav class="navbar">
-      <a href="../SuperAdmin/index.php" style="--i:0;">Inicio</a>
-      <a href="../SuperAdmin/gestion.php" style="--i:1;">Usuarios</a>
-      <!--  <a href="#" style="--i:2;">Reservas</a>
-      <a href="#" style="--i:3;">Pedidos</a>
-      <a href="#" style="--i:4;">Contacto</a> -->
-      <a href="../includes/_sesion/cerrarSesion.php" style="--i:2;">Salir</a>
-    </nav>
-  </header>
   <div class="modal-content">
     <span class="close" id="closeSpan">&times;</span>
     <h2 class="modal-title" style="color: green;">Editar Usuario</h2>
@@ -313,7 +291,8 @@ if ($rol != '1') {
 
     if (isset($_POST['actualizar'])) {
       extract($_POST);
-      $actualizar = "UPDATE user SET nombre = '$nombre', apPAt = '$apPAt', apMAt = '$apMAt', correo = '$correo', telefono = '$telefono' WHERE id = '$usuario_id'";
+      $password_hash = password_hash($password, PASSWORD_BCRYPT);
+      $actualizar = "UPDATE user SET nombre = '$nombre', apPAt = '$apPAt', apMAt = '$apMAt', correo = '$correo', telefono = '$telefono', password_hash = '$password_hash', tipo = '$tipo' WHERE id = '$usuario_id'";
       mysqli_query($conexion, $actualizar);
       header('Location: listar.php');
       exit();
@@ -323,24 +302,60 @@ if ($rol != '1') {
     <form method="POST">
       <div class="form-group">
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" value="<?php echo $usuario['nombre']; ?>" required class="form-control">
+        <input type="text" id="nombre" name="nombre" value="<?php echo $usuario['nombre']; ?>" required
+          class="form-control">
       </div>
       <div class="form-group">
         <label for="apPAt">Apellido Paterno:</label>
-        <input type="text" id="apPAt" name="apPAt" value="<?php echo $usuario['apPAt']; ?>" required class="form-control">
+        <input type="text" id="apPAt" name="apPAt" value="<?php echo $usuario['apPAt']; ?>" required
+          class="form-control">
       </div>
       <div class="form-group">
         <label for="apMAt">Apellido Materno:</label>
-        <input type="text" id="apMAt" name="apMAt" value="<?php echo $usuario['apMAt']; ?>" required class="form-control">
+        <input type="text" id="apMAt" name="apMAt" value="<?php echo $usuario['apMAt']; ?>" required
+          class="form-control">
       </div>
       <div class="form-group">
         <label for="correo">Correo:</label>
-        <input type="email" id="correo" name="correo" value="<?php echo $usuario['correo']; ?>" required class="form-control">
+        <input type="email" id="correo" name="correo" value="<?php echo $usuario['correo']; ?>" required
+          class="form-control">
       </div>
       <div class="form-group">
         <label for="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono" value="<?php echo $usuario['telefono']; ?>" required class="form-control">
+        <input type="tel" id="telefono" name="telefono" value="<?php echo $usuario['telefono']; ?>" required
+          class="form-control">
       </div>
+      <?php
+      $query = "SELECT id, tipo FROM establecimiento_tipo";
+      $resultado = $conexion->query($query);
+      ?>
+      <div class="form-group">
+    <label for="tipo" class="form-label">Tipo de Establecimiento *</label>
+    <select type='text' id="tipo" name="tipo" class="form-control" required>
+        <?php
+        echo '<option value="" disabled>Selecciona un tipo</option>';
+        while ($fila = $resultado->fetch_assoc()) {
+            $selected = ($fila["id"] === $tipo_actual) ? "selected" : "";
+            echo '<option value="' . $fila["id"] . '" ' . $selected . '>' . $fila["tipo"] . '</option>';
+        }
+        ?>
+    </select>
+</div>
+
+      <?php $query = "SELECT password_hash FROM user WHERE id = '$usuario_id'";
+      $resultado = $conexion->query($query);
+
+      if ($resultado->num_rows > 0) {
+        $fila = $resultado->fetch_assoc();
+        $current_password_hash_from_db = $fila["password_hash"];
+      } else {
+        die("No se encontró el usuario en la base de datos.");
+      } ?>
+      <div class="form-group">
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" value="<?php echo $current_password_hash_from_db?>" required class="form-control">
+      </div>
+
       <div class="form-group">
         <button class="button" type="submit" href="gestion.php" name="actualizar">Actualizar</button>
         <a class="button" href="gestion.php">Cancelar</a>
@@ -356,12 +371,12 @@ if ($rol != '1') {
     function closeModal(modalName) {
       document.getElementById(`modal${modalName}`).style.display = "none";
     }
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
       // Obtener el elemento span por su ID
       var closeSpan = document.getElementById("closeSpan");
 
       // Agregar un evento de clic al elemento span
-      closeSpan.addEventListener("click", function() {
+      closeSpan.addEventListener("click", function () {
         // Redirigir a la página "gestion.php"
         window.location.href = "gestion.php";
       });

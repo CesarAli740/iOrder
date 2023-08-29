@@ -92,6 +92,9 @@
     <div id="stars3"></div>
     <div class="card">
         <form action="_functions.php" method="POST">
+            <h3 class="login-heading">Bienvenido a </h3>
+        <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
+
             <h3 class="login-heading">Iniciar Sesión</h3>
             <div class="form-group">
                 <label for="correo">Correo:</label>

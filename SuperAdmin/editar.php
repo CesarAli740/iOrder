@@ -27,58 +27,7 @@ if ($rol != '1') {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Listar Usuarios</title>
-  <style>
-    body {
-      background-color: #ECF8F9;
-      margin: 0;
-      font-family: Arial, sans-serif;
-
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 50%;
-      /* Ajusta esta línea para cambiar la posición vertical */
-      transform: translateY(-50%);
-      /* Añade esta línea para centrar verticalmente */
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.7);
-    }
-
-    .modal-content {
-      background-color: #fefefe;
-      margin: 10% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 100%;
-    }
-
-    .modal-title {
-      color: #1B9C85;
-      font-size: 1.5rem;
-      margin-bottom: 3rem;
-      text-align: center;
-    }
-
-    .container.is-fluid {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-    }
-
-    .modal-title {
-      color: #1B9C85;
-      font-size: 1.5rem;
-      margin-bottom: 3rem;
-      text-align: center;
-    }
-  </style>
+  
 </head>
 
 <body>

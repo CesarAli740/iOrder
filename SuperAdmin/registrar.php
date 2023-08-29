@@ -120,6 +120,21 @@ if ($rol != '1') {
                 <label for="telefono" class="form-label">Telefono *</label>
                 <input type="tel" id="telefono" name="telefono" class="form-control" required>
             </div>
+            <?php
+            $query = "SELECT id, tipo FROM establecimiento_tipo";
+            $resultado = $conexion->query($query);
+            ?>
+            <div class="form-group">
+                <label for="tipo" class="form-label">Tipo de Establecimiento *</label>
+                <select type='text' id="tipo" name="tipo" class="form-control" required>
+                    <option value="" disabled selected>Selecciona un tipo</option>
+                    <?php
+                    while ($fila = $resultado->fetch_assoc()) {
+                        echo '<option value="' . $fila["id"] . '">' . $fila["tipo"] . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
             <div class="form-group">
                 <label for="password">Contraseña:</label>
                 <input type="password" name="password" id="password" class="form-control" required>
@@ -127,7 +142,7 @@ if ($rol != '1') {
 
             <div class="text-center">
                 <input type="submit" value="Guardar" class="btn btn-success" name="registrar">
-                <button type="button" class="btn btn-secondary">Cancelar</button>
+                <button onclick="./gestion.php" type="button" class="btn btn-secondary">Cancelar</button>
             </div>
         </form>
     </div>

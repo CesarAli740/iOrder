@@ -4,8 +4,26 @@
 <head>
     <title>Gestión de Usuarios</title>
     <style>
-        /* Estilos para los modales */
+         /* Estilos para los modales */
+         .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
 
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+        }
 
         .close {
             color: #aaa;
@@ -21,7 +39,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            z-index: 1;
+            z-index: 2;
             height: 60%;
             width: 70%;
             display: flex;

@@ -145,13 +145,15 @@ if ($rol != '1') {
                             <th>Correo</th>
                             <th>Telefono</th>
                             <th>Rol</th>
+                            <th>Establecimiento</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $SQL = "SELECT user.id, user.nombre, user.apPAt, user.apMAt, user.correo, user.telefono, permisos.rol
+                        $SQL = "SELECT user.id, user.nombre, user.apPAt, user.apMAt, user.correo, user.telefono, permisos.rol, establecimiento_tipo.tipo
                             FROM user
-                            LEFT JOIN permisos ON user.rol = permisos.id";
+                            LEFT JOIN permisos ON user.rol = permisos.id
+                            LEFT JOIN establecimiento_tipo ON user.tipo = establecimiento_tipo.id";
                         $dato = mysqli_query($conexion, $SQL);
 
                         if ($dato->num_rows > 0) {
@@ -164,6 +166,7 @@ if ($rol != '1') {
                                     <td><?php echo $fila['correo']; ?></td>
                                     <td><?php echo $fila['telefono']; ?></td>
                                     <td><?php echo $fila['rol']; ?></td>
+                                    <td><?php echo $fila['tipo']; ?></td>
                                 </tr>
                             <?php
                             }
