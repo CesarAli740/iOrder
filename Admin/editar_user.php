@@ -308,12 +308,6 @@ if ($rol != '2') {
     }
 
     if (isset($_POST['actualizar'])) {
-// Evita el uso de extract(), ya que puede ser peligroso si no se maneja adecuadamente.
-// Mejor accede directamente a los valores $_POST['nombre'], $_POST['apPAt'], etc.
-
-// Asegúrate de conectar a la base de datos de manera segura y de manejar posibles errores de conexión.
-
-// Escapa y valida los datos antes de usarlos en la consulta para evitar inyecciones SQL.
 $nombre = mysqli_real_escape_string($conexion, $_POST['nombre']);
 $apPAt = mysqli_real_escape_string($conexion, $_POST['apPAt']);
 $apMAt = mysqli_real_escape_string($conexion, $_POST['apMAt']);
@@ -321,10 +315,8 @@ $correo = mysqli_real_escape_string($conexion, $_POST['correo']);
 $telefono = mysqli_real_escape_string($conexion, $_POST['telefono']);
 $password = mysqli_real_escape_string($conexion, $_POST['password']);
 
-// Genera el hash de la contraseña
 $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
-// Evita la interpolación directa de variables en la consulta, utiliza consultas preparadas.
 $actualizar = "UPDATE user SET nombre = ?, apPAt = ?, apMAt = ?, correo = ?, telefono = ?, password_hash = ? WHERE id = ?";
 $stmt = mysqli_prepare($conexion, $actualizar);
 mysqli_stmt_bind_param($stmt, "ssssssi", $nombre, $apPAt, $apMAt, $correo, $telefono, $password_hash, $usuario_id);
@@ -336,8 +328,6 @@ if ($resultado) {
     echo "Error al actualizar: " . mysqli_error($conexion);
 }
 
-// Cierra la conexión a la base de datos.
-mysqli_close($conexion);
       header('Location: listar.php');
       exit();
     }
@@ -364,11 +354,20 @@ mysqli_close($conexion);
         <label for="telefono">Teléfono:</label>
         <input type="tel" id="telefono" name="telefono" value="<?php echo $usuario['telefono']; ?>" required class="form-control">
       </div>
+      <?php $query = "SELECT password_hash FROM user WHERE id = '$usuario_id'";
+      $resultado = $conexion->query($query);
 
+      if ($resultado->num_rows > 0) {
+        $fila = $resultado->fetch_assoc();
+        $current_password_hash_from_db = $fila["password_hash"];
+      } else {
+        die("No se encontró el usuario en la base de datos.");
+      } ?>
       <div class="form-group">
         <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" required class="form-control">
+        <input type="password" id="password" name="password" value="<?php echo $current_password_hash_from_db?>" required class="form-control">
       </div>
+
       <div class="form-group">
         <button class="button" type="submit" href="gestion.php" name="actualizar">Actualizar</button>
         <a class="button" href="gestion.php">Cancelar</a>
@@ -385,12 +384,8 @@ mysqli_close($conexion);
       document.getElementById(`modal${modalName}`).style.display = "none";
     }
     document.addEventListener("DOMContentLoaded", function() {
-      // Obtener el elemento span por su ID
       var closeSpan = document.getElementById("closeSpan");
-
-      // Agregar un evento de clic al elemento span
       closeSpan.addEventListener("click", function() {
-        // Redirigir a la página "gestion.php"
         window.location.href = "gestion.php";
       });
     });

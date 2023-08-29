@@ -124,7 +124,7 @@ if ($rol != '2') {
                 <input type="text" id="apMAt" name="apMAt" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="correo">Correo:</label>
+                <label for="correo" class="form-label">Correo:</label>
                 <input type="email" name="correo" id="correo" class="form-control" placeholder="">
             </div>
             <div class="form-group">
@@ -132,7 +132,7 @@ if ($rol != '2') {
                 <input type="tel" id="telefono" name="telefono" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="password">Contraseña:</label>
+                <label for="password" class="form-label">Contraseña:</label>
                 <input type="password" name="password" id="password" class="form-control" required>
             </div>
 
