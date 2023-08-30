@@ -136,6 +136,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 .scrolled .fh5co-nav #fh5co-logo {
+  font-size: 0; /* Cambia este valor a 0 para ocultar el logo */
   color: #000 !important;
 }
 .fh5co-nav #fh5co-logo a {
@@ -166,7 +167,7 @@ h1, h2, h3, h4, h5, h6, figure {
 .fh5co-nav ul li > a {
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-size: 20px;
+  font-size: 14px;
 }
 .fh5co-nav ul li a {
   padding: 30px 15px;
@@ -452,7 +453,7 @@ h1, h2, h3, h4, h5, h6, figure {
   }
 }
 .fh5co-section p {
-  color: rgba(243, 234, 234, 0.588);
+  color: #ffffff;
   font-size: 23px;
   line-height: 1.5;
 }
@@ -465,7 +466,7 @@ h1, h2, h3, h4, h5, h6, figure {
 .section-heading h2 {
   font-style: 40px;
   color: #fff;
-  font-family: "Satisfy", cursive;
+  font-family: "Cormorant Garamond", Georgia, serif;
 }
 
 #fh5co-about .img-wrap img {
@@ -489,7 +490,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 #fh5co-featured-menu .fh5co-heading h2, #fh5co-gallery .fh5co-heading h2, #fh5co-reservation-form .fh5co-heading h2 {
   color: #fff;
-  font-family: "Satisfy", cursive;
+  font-family: "Cormorant Garamond", Georgia, serif;
 }
 #fh5co-featured-menu .fh5co-item-wrap, #fh5co-gallery .fh5co-item-wrap, #fh5co-reservation-form .fh5co-item-wrap {
   padding-left: 20px;
@@ -567,7 +568,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 #fh5co-featured-testimony .fh5co-heading h2 {
   color: #fff;
-  font-family: "Satisfy", cursive;
+  font-family: "Cormorant Garamond", Georgia, serif;
 }
 #fh5co-featured-testimony .img-to-responsive img {
   margin-bottom: 20px;
@@ -613,7 +614,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 #fh5co-slider .fh5co-heading h2 {
-  font-family: "Satisfy", cursive;
+  font-family: "Cormorant Garamond", Georgia, serif;
   color: #fff;
 }
 
@@ -721,7 +722,7 @@ h1, h2, h3, h4, h5, h6, figure {
 #fh5co-content-section,
 #fh5co-contact,
 #fh5co-footer {
-  padding: 7em 0;
+  padding: 0em 0;
   clear: both;
 }
 
@@ -799,7 +800,7 @@ h1, h2, h3, h4, h5, h6, figure {
   margin-bottom: 0;
 }
 #fh5co-started .fh5co-heading h2 {
-  font-family: "Satisfy", cursive;
+  font-family: "Cormorant Garamond", Georgia, serif;
   color: #fff;
   margin-bottom: 20px !important;
 }
@@ -855,7 +856,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 #fh5co-timeline {
-  padding: 7em 0;
+  padding: 0em 0;
 }
 @media screen and (max-width: 768px) {
   #fh5co-timeline {
@@ -1073,7 +1074,7 @@ h1, h2, h3, h4, h5, h6, figure {
   }
 }
 #fh5co-blog .fh5co-heading h2, #fh5co-contact .fh5co-heading h2 {
-  font-family: "Satisfy", cursive;
+  font-family: "Cormorant Garamond", Georgia, serif;
   color: #fff;
 }
 
@@ -1299,10 +1300,10 @@ h1, h2, h3, h4, h5, h6, figure {
   padding: 0;
   margin: 0;
   list-style: none;
-  color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
 }
 #fh5co-footer .fh5co-footer-links li a {
-  color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
   text-decoration: none;
 }
 #fh5co-footer .fh5co-footer-links li a:hover {
@@ -1770,7 +1771,7 @@ h1, h2, h3, h4, h5, h6, figure {
   height: 54px;
   font-size: 20px;
   font-weight: 300;
-  font-family: "Satisfy", cursive;
+  font-family: "Cormorant Garamond", Georgia, serif;
   color: #fff;
 }
 .form-control:active, .form-control:focus {
@@ -1822,14 +1823,15 @@ textarea {
   color: #000 !important;
 }
 .tituloconocenos{
+  font-size: 25px;
   text-align: center;
-  margin: 5rem;
+  margin: 6rem;
   color: white;
   transition: color 0.4s, text-shadow 0.4s;
 }
 
 .tituloconocenos:hover {
-  color: #ea272d;
+  color: #ffffff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 @keyframes escribiendo{
@@ -1852,14 +1854,14 @@ textarea {
 }
 .parrafo-conocenos{
   margin-top: 4rem;
-  font-size: 2rem;
+  font-size: 25px;
   text-align: center;
   font-weight: bold;
   color: #ffffff;
-  padding: 10rem;
+  padding: 1rem;
 }
 .parrafo-conocenos:hover {
-  color: #ea272d;
+  color: #ffffff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   transition: color 0.4s, text-shadow 0.9s;
 }
@@ -1923,3 +1925,17 @@ textarea {
   }
 }
 /*# sourceMappingURL=style.css.map */
+/* Estilo para ocultar el logo al hacer scroll */
+.scrolled .fh5co-nav #fh5co-logo img {
+  display: none; /* Oculta la imagen del logo */
+}
+
+/* Estilo para ajustar el espacio cuando el logo está oculto */
+.scrolled .fh5co-nav .logo-wrap {
+  padding: 0; /* Ajusta el espacio según sea necesario */
+}
+
+/* Estilo para ajustar las opciones de menú cuando el logo está oculto */
+.scrolled .fh5co-nav .menu-1 {
+  margin-top: 0; /* Ajusta el margen superior según sea necesario */
+}

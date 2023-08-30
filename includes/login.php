@@ -46,7 +46,7 @@
             cursor: pointer;
             border-radius: 5px;
             font-family: 'Roboto', sans-serif;
-            width: 100%;
+            width: 90%;
             transition: background-color 0.3s;
         }
 

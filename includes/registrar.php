@@ -45,7 +45,7 @@
             cursor: pointer;
             border-radius: 5px;
             font-family: 'Roboto', sans-serif;
-            width: 100%;
+            width: 90%;
             transition: background-color 0.3s;
         }
         .botonlogin:hover {
@@ -148,7 +148,7 @@
                 </div>
             <input type="hidden" name="registrar" value="registrar">
             <div class="form-group">
-                <input type="submit" class="botonlogin" value="registrar">
+                <input type="submit" class="botonlogin" value="Registrar">
             </div>
 
             <div class="form-group">

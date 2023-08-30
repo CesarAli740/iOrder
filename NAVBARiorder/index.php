@@ -310,7 +310,7 @@ if ($rol == '2') {
 if ($rol == '5') {
   ?>
 
-  <body>
+  <body style="background-image: url('../images/constelacion.svg');">
     <header class="header">
       <a href="../Cliente/index.php" class="logo">
         <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
@@ -330,13 +330,13 @@ if ($rol == '5') {
       </nav>
     </header>
     <div class="video-container">
-    <video autoplay loop muted><!-- 
+    <!-- <video autoplay loop muted>
       <source src="./discoteca2.mp4" type="video/mp4">
           <source src="./discoteca1.mp4" type="video/mp4">
-          <source src="./restaurante.mp4" type="video/mp4">  -->
+          <source src="./restaurante.mp4" type="video/mp4"> 
           <source src="../video/pub.mp4" type="video/mp4"> 
-      <!-- <source src="../video/SuperAdmin.mp4" type="video/mp4"> -->
-    </video>
+      <source src="../video/SuperAdmin.mp4" type="video/mp4">
+    </video> -->
   </div>
   </body>
 
