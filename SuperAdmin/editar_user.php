@@ -10,6 +10,8 @@ if ($rol != '1') {
   die();
 }
 ?>
+<?php include '../NAVBARiorder/index.php';
+include '../includes/_db.php'; ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -18,189 +20,32 @@ if ($rol != '1') {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+  <link rel="stylesheet" href="../css/stylesuser">
   <title>Gestión de Usuarios</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: sans-serif;
-    }
-
     body {
-
-      min-height: 100vh;
+      background-color: transparent;
+      margin: 0;
+      font-family: Arial, sans-serif;
     }
 
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 1.3rem 10%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 100;
+    label {
+      color: white;
     }
 
-    .header::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(50px);
-      z-index: -1;
-    }
-
-    .header::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg,
-          transparent,
-          rgba(255, 255, 255, 0.4),
-          transparent);
-      transition: 0.5s;
-    }
-
-    .header:hover::after {
-      left: 100%;
-    }
-
-    .logo {
-      font-size: 2rem;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    .navbar a {
-      font-size: 1.5rem;
-      /* Cambia el valor a tu preferencia */
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 500;
-      margin-left: 2.5rem;
-    }
-
-    .navbar a:hover {
-      /* color: #f34dc3;
-  color: #9c3cea;
-  color: #582417;
-  color: #FDBB03;
-  color: #EE0000;
-  color: #00144b; */
-      color: black;
-      transition: 0.5s ease;
-    }
-
-    #check {
-      display: none;
-    }
-
-    .icons {
-      position: absolute;
-      right: 5%;
-      font-size: 2.8rem;
-      color: #fff;
-      cursor: pointer;
-      display: none;
-    }
-
-    /* responsive */
-    @media (max-width: 992px) {
-      .header {
-        padding: 1.3rem 5%;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .icons {
-        display: inline-flex;
-      }
-
-      #check:checked~.icons #menu-icon {
-        display: none;
-      }
-
-      .icons #close-icon {
-        display: none;
-      }
-
-      #check:checked~.icons #close-icon {
-        display: block;
-      }
-
-      .navbar {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        height: 0;
-        background: rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(50px);
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        transition: 0.3s ease;
-      }
-
-      #check:checked~.navbar {
-        height: 17.7rem;
-      }
-
-      .navbar a {
-        display: block;
-        font-size: 1.1rem;
-        margin: 1.9rem 0;
-        text-align: center;
-        transform: translateY(-50px);
-        opacity: 0;
-      }
-
-      #check:checked~.navbar a {
-        transform: translateY(0);
-        opacity: 1;
-        transition-delay: calc(0.1s * var(--i));
-      }
-    }
-
-    .video-container {
-      position: relative;
-      height: 100vh;
-      overflow: hidden;
-      z-index: 1;
-    }
-
-    video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .video-container::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.4);
+    h1,
+    h2,
+    h3 {
+      color: white;
+      text-align: center;
+      font-size: 50px;
     }
 
     /* Estilos para los modales */
     .modal {
       display: none;
-      position: fixed;
+      position: absolute;
       z-index: 1;
       left: 0;
       top: 0;
@@ -213,16 +58,29 @@ if ($rol != '1') {
       margin-bottom: 50px;
     }
 
+    .btn-success {
+      background-color: #1B9C85;
+    }
+
+    .btn-secondary {
+      background-color: #ccc;
+      color: #333;
+    }
+
     .modal-content {
-      background-color: #ffffff;
+      background-color: transparent;
       margin: auto;
+      max-width: 80%;
       padding: 20px;
-      border: 1px solid #ccc;
-      width: 70%;
+      border-radius: 10px;
+      width: 50%;
+      margin: 20px auto;
       margin-bottom: 0;
-      margin-top: 10%;
+      margin-top: 7%;
       /* Eliminar el margen superior del contenido */
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      display: block;
+      display: grid;
     }
 
     .close {
@@ -252,6 +110,22 @@ if ($rol != '1') {
       font-weight: bold;
     }
 
+    input {
+      color: white;
+      background-color: transparent;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      color: white;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
     .form-control {
       width: 100%;
       padding: 10px;
@@ -262,13 +136,22 @@ if ($rol != '1') {
     .form-control:focus {
       border-color: #007bff;
     }
+
+    .form-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .form-col {
+      flex-basis: calc(50% - 10px);
+      /* Distribuir en dos columnas, descontando el espacio entre ellas */
+    }
   </style>
 </head>
 
 <body>
   <div class="modal-content">
-    <span class="close" id="closeSpan">&times;</span>
-    <h2 class="modal-title" style="color: green;">Editar Usuario</h2>
+    <h2 class="modal-title" style="color: white;">Editar Usuario</h2>
     <?php
     include('../includes/_db.php');
 
@@ -291,37 +174,59 @@ if ($rol != '1') {
 
     if (isset($_POST['actualizar'])) {
       extract($_POST);
-      $password_hash = password_hash($password, PASSWORD_BCRYPT);
-      $actualizar = "UPDATE user SET nombre = '$nombre', apPAt = '$apPAt', apMAt = '$apMAt', correo = '$correo', telefono = '$telefono', password_hash = '$password_hash', tipo = '$tipo' WHERE id = '$usuario_id'";
+      $actualizar = "UPDATE user SET nombre = '$nombre', apPAt = '$apPAt', apMAt = '$apMAt', correo = '$correo', telefono = '$telefono', tipo = '$tipo' WHERE id = '$usuario_id'";
       mysqli_query($conexion, $actualizar);
-      header('Location: listar.php');
+      echo '<script>window.location.href = "gestion.php";</script>';
       exit();
+    }
+    if (isset($_POST['cambiar_contraseña'])) {
+      extract($_POST);
+      $password_hash = password_hash($new_password, PASSWORD_BCRYPT);
+      $actualizar = "UPDATE user SET password_hash = '$password_hash' WHERE id = '$usuario_id'";
+      mysqli_query($conexion, $actualizar);
+      echo '<script>window.location.href = "gestion.php";</script>';
+      exit();
+    }
+
+    $showChangePasswordForm = false;
+
+    if (isset($_POST['obtener_contraseña'])) {
+      $query = "SELECT password_hash FROM user WHERE id = '$usuario_id'";
+      $resultado = $conexion->query($query);
+
+      if ($resultado->num_rows > 0) {
+        $fila = $resultado->fetch_assoc();
+        $current_password_hash_from_db = $fila["password_hash"];
+        $showChangePasswordForm = true; // Mostrar el formulario de cambio de contraseña
+      } else {
+        die("No se encontró el usuario en la base de datos.");
+      }
     }
     ?>
 
     <form method="POST">
       <div class="form-group">
-        <label for="nombre">Nombre:</label>
+        <label for="nombre">Nombre:</label><br>
         <input type="text" id="nombre" name="nombre" value="<?php echo $usuario['nombre']; ?>" required
           class="form-control">
       </div>
       <div class="form-group">
-        <label for="apPAt">Apellido Paterno:</label>
+        <label for="apPAt">Apellido Paterno:</label><br>
         <input type="text" id="apPAt" name="apPAt" value="<?php echo $usuario['apPAt']; ?>" required
           class="form-control">
       </div>
       <div class="form-group">
-        <label for="apMAt">Apellido Materno:</label>
+        <label for="apMAt">Apellido Materno:</label><br>
         <input type="text" id="apMAt" name="apMAt" value="<?php echo $usuario['apMAt']; ?>" required
           class="form-control">
       </div>
       <div class="form-group">
-        <label for="correo">Correo:</label>
+        <label for="correo">Correo:</label><br>
         <input type="email" id="correo" name="correo" value="<?php echo $usuario['correo']; ?>" required
           class="form-control">
       </div>
       <div class="form-group">
-        <label for="telefono">Teléfono:</label>
+        <label for="telefono">Teléfono:</label><br>
         <input type="tel" id="telefono" name="telefono" value="<?php echo $usuario['telefono']; ?>" required
           class="form-control">
       </div>
@@ -330,39 +235,47 @@ if ($rol != '1') {
       $resultado = $conexion->query($query);
       ?>
       <div class="form-group">
-    <label for="tipo" class="form-label">Tipo de Establecimiento *</label>
-    <select type='text' id="tipo" name="tipo" class="form-control" required>
-        <?php
-        echo '<option value="" disabled>Selecciona un tipo</option>';
-        while ($fila = $resultado->fetch_assoc()) {
-            $selected = ($fila["id"] === $tipo_actual) ? "selected" : "";
+        <label for="tipo" class="form-label">Tipo de Establecimiento *</label><br>
+        <select type='text' id="tipo" name="tipo" class="form-control" required>
+          <?php
+          echo '<option value="" disabled>Selecciona un tipo</option>';
+          while ($fila = $resultado->fetch_assoc()) {
+            $selected = ($fila["id"] === $usuario['tipo']) ? "selected" : "";
             echo '<option value="' . $fila["id"] . '" ' . $selected . '>' . $fila["tipo"] . '</option>';
-        }
-        ?>
-    </select>
-</div>
-
-      <?php $query = "SELECT password_hash FROM user WHERE id = '$usuario_id'";
-      $resultado = $conexion->query($query);
-
-      if ($resultado->num_rows > 0) {
-        $fila = $resultado->fetch_assoc();
-        $current_password_hash_from_db = $fila["password_hash"];
-      } else {
-        die("No se encontró el usuario en la base de datos.");
-      } ?>
-      <div class="form-group">
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" value="<?php echo $current_password_hash_from_db?>" required class="form-control">
+          }
+          ?>
+        </select>
       </div>
 
       <div class="form-group">
-        <button class="button" type="submit" href="gestion.php" name="actualizar">Actualizar</button>
-        <a class="button" href="gestion.php">Cancelar</a>
+        <button class="btn btn-success" type="submit" name="actualizar">Actualizar</button>
+        <a href="gestion.php" class="btn btn-secondary">Cancelar</a>
       </div>
     </form>
-  </div>
 
+    <form method="POST">
+      <button type="submit" name="obtener_contraseña">Cambiar Contraseña *Opcional*</button>
+    </form>
+
+    <?php if (isset($current_password_hash_from_db) && !$showChangePasswordForm) { ?>
+      <div class="form-group">
+        <label for="password">Contraseña Obtenida:</label><br>
+        <input type="password" id="password" name="password" value="<?php echo $current_password_hash_from_db ?>" required
+          class="form-control" disabled>
+      </div>
+    <?php } ?>
+
+    <?php if ($showChangePasswordForm) { ?>
+      <form method="post">
+        <div class="form-group">
+          <label for="new_password">Nueva Contraseña:</label><br>
+          <input type="password" id="new_password" name="new_password" class="form-control">
+        </div>
+        <button type="submit" name="cambiar_contraseña">Cambiar Contraseña</button>
+      </form>
+    <?php } ?>
+
+  </div>
   <script>
     function openModal(modalName) {
       document.getElementById(`modal${modalName}`).style.display = "block";

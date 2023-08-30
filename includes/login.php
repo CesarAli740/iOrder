@@ -93,7 +93,7 @@
     <div class="card">
         <form action="_functions.php" method="POST">
             <h3 class="login-heading">Bienvenido a </h3>
-        <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
+            <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
 
             <h3 class="login-heading">Iniciar Sesión</h3>
             <div class="form-group">
@@ -108,6 +108,11 @@
             <div class="form-group">
                 <input type="submit" class="botonlogin" value="Ingresar">
             </div>
+            <h3 class="login-heading">¿No Estás Registrado?</h3>
+            <div class="form-group">
+                <a href="./registrar.php" class="botonlogin">Regístrate</a>
+            </div>
+
         </form><!-- 
         <div class="my-2">
             <a href="../recuperacion/recovery.php">¿Olvidaste tu contraseña?</a>

@@ -308,71 +308,95 @@ if ($rol != '2') {
     }
 
     if (isset($_POST['actualizar'])) {
-$nombre = mysqli_real_escape_string($conexion, $_POST['nombre']);
-$apPAt = mysqli_real_escape_string($conexion, $_POST['apPAt']);
-$apMAt = mysqli_real_escape_string($conexion, $_POST['apMAt']);
-$correo = mysqli_real_escape_string($conexion, $_POST['correo']);
-$telefono = mysqli_real_escape_string($conexion, $_POST['telefono']);
-$password = mysqli_real_escape_string($conexion, $_POST['password']);
-
-$password_hash = password_hash($password, PASSWORD_BCRYPT);
-
-$actualizar = "UPDATE user SET nombre = ?, apPAt = ?, apMAt = ?, correo = ?, telefono = ?, password_hash = ? WHERE id = ?";
-$stmt = mysqli_prepare($conexion, $actualizar);
-mysqli_stmt_bind_param($stmt, "ssssssi", $nombre, $apPAt, $apMAt, $correo, $telefono, $password_hash, $usuario_id);
-$resultado = mysqli_stmt_execute($stmt);
-
-if ($resultado) {
-    echo "Actualización exitosa.";
-} else {
-    echo "Error al actualizar: " . mysqli_error($conexion);
-}
-
-      header('Location: listar.php');
+      extract($_POST);
+      $actualizar = "UPDATE user SET nombre = '$nombre', apPAt = '$apPAt', apMAt = '$apMAt', correo = '$correo', telefono = '$telefono' WHERE id = '$usuario_id'";
+      mysqli_query($conexion, $actualizar);
+      echo '<script>window.location.href = "gestion.php";</script>';
       exit();
+    }
+  
+
+
+    if (isset($_POST['cambiar_contraseña'])) {
+      extract($_POST);
+      $password_hash = password_hash($new_password, PASSWORD_BCRYPT);
+      $actualizar = "UPDATE user SET password_hash = '$password_hash' WHERE id = '$usuario_id'";
+      mysqli_query($conexion, $actualizar);
+      echo '<script>window.location.href = "gestion.php";</script>';
+      exit();
+    }
+
+    $showChangePasswordForm = false;
+
+    if (isset($_POST['obtener_contraseña'])) {
+      $query = "SELECT password_hash FROM user WHERE id = '$usuario_id'";
+      $resultado = $conexion->query($query);
+
+      if ($resultado->num_rows > 0) {
+        $fila = $resultado->fetch_assoc();
+        $current_password_hash_from_db = $fila["password_hash"];
+        $showChangePasswordForm = true; // Mostrar el formulario de cambio de contraseña
+      } else {
+        die("No se encontró el usuario en la base de datos.");
+      }
     }
     ?>
 
     <form method="POST">
       <div class="form-group">
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" value="<?php echo $usuario['nombre']; ?>" required class="form-control">
+        <input type="text" id="nombre" name="nombre" value="<?php echo $usuario['nombre']; ?>" required
+          class="form-control">
       </div>
       <div class="form-group">
         <label for="apPAt">Apellido Paterno:</label>
-        <input type="text" id="apPAt" name="apPAt" value="<?php echo $usuario['apPAt']; ?>" required class="form-control">
+        <input type="text" id="apPAt" name="apPAt" value="<?php echo $usuario['apPAt']; ?>" required
+          class="form-control">
       </div>
       <div class="form-group">
         <label for="apMAt">Apellido Materno:</label>
-        <input type="text" id="apMAt" name="apMAt" value="<?php echo $usuario['apMAt']; ?>" required class="form-control">
+        <input type="text" id="apMAt" name="apMAt" value="<?php echo $usuario['apMAt']; ?>" required
+          class="form-control">
       </div>
       <div class="form-group">
         <label for="correo">Correo:</label>
-        <input type="email" id="correo" name="correo" value="<?php echo $usuario['correo']; ?>" required class="form-control">
+        <input type="email" id="correo" name="correo" value="<?php echo $usuario['correo']; ?>" required
+          class="form-control">
       </div>
       <div class="form-group">
         <label for="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono" value="<?php echo $usuario['telefono']; ?>" required class="form-control">
-      </div>
-      <?php $query = "SELECT password_hash FROM user WHERE id = '$usuario_id'";
-      $resultado = $conexion->query($query);
-
-      if ($resultado->num_rows > 0) {
-        $fila = $resultado->fetch_assoc();
-        $current_password_hash_from_db = $fila["password_hash"];
-      } else {
-        die("No se encontró el usuario en la base de datos.");
-      } ?>
-      <div class="form-group">
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" value="<?php echo $current_password_hash_from_db?>" required class="form-control">
+        <input type="tel" id="telefono" name="telefono" value="<?php echo $usuario['telefono']; ?>" required
+          class="form-control">
       </div>
 
+
       <div class="form-group">
-        <button class="button" type="submit" href="gestion.php" name="actualizar">Actualizar</button>
+        <button class="button" type="submit" name="actualizar">Actualizar</button>
         <a class="button" href="gestion.php">Cancelar</a>
       </div>
     </form>
+    <form method="POST">
+      <button type="submit" name="obtener_contraseña">Cambiar Contraseña *Opcional*</button>
+    </form>
+
+    <?php if (isset($current_password_hash_from_db) && !$showChangePasswordForm) { ?>
+      <div class="form-group">
+        <label for="password">Contraseña Obtenida:</label><br>
+        <input type="password" id="password" name="password" value="<?php echo $current_password_hash_from_db ?>" required
+          class="form-control" disabled>
+      </div>
+    <?php } ?>
+
+    <?php if ($showChangePasswordForm) { ?>
+      <form method="post">
+        <div class="form-group">
+          <label for="new_password">Nueva Contraseña:</label><br>
+          <input type="password" id="new_password" name="new_password" class="form-control">
+        </div>
+        <button type="submit" name="cambiar_contraseña">Cambiar Contraseña</button>
+      </form>
+    <?php } ?>
+
   </div>
 
   <script>
@@ -383,9 +407,9 @@ if ($resultado) {
     function closeModal(modalName) {
       document.getElementById(`modal${modalName}`).style.display = "none";
     }
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
       var closeSpan = document.getElementById("closeSpan");
-      closeSpan.addEventListener("click", function() {
+      closeSpan.addEventListener("click", function () {
         window.location.href = "gestion.php";
       });
     });

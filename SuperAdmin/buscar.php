@@ -18,78 +18,62 @@ if ($rol != '1') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscar Usuarios</title>
+    <link rel="stylesheet" href="../css/stylesuser">
     <style>
+        /* styles.css */
+
         body {
-            background-color: #ECF8F9;
+            background-color: transparent;
             margin: 0;
             font-family: Arial, sans-serif;
-
         }
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 10% auto;
+        .container {
+            margin-top: 70px;
+            max-width: 1000px;
+            margin: 0 auto;
             padding: 20px;
-            border: 1px solid #888;
-            width: 100%;
         }
-
-        .modal-title {
-            color: #1B9C85;
-            font-size: 1.5rem;
-            margin-bottom: 3rem;
+        
+        h1,
+        h2,
+        h3 {
+            color: white;
             text-align: center;
-        }
-
-        .container.is-fluid {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-        }
-
-        .modal-title {
-            color: #1B9C85;
-            font-size: 1.5rem;
-            margin-bottom: 3rem;
-            text-align: center;
+            font-size: 50px;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 20px;
         }
 
         .form-label {
             display: block;
             font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        label {
+            color: white    ;
         }
 
         .form-control {
             width: 100%;
-            padding: 0.5rem;
+            padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 10px;
+            font-size: 14px;
         }
 
         .btn {
             display: inline-block;
-            padding: 0.5rem 1rem;
+            padding: 10px 20px;
             border: none;
-            border-radius: 4px;
+            border-radius: 10px;
             cursor: pointer;
-            color: #fff;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
         .btn-success {
@@ -98,6 +82,7 @@ if ($rol != '1') {
 
         .btn-secondary {
             background-color: #ccc;
+            color: #333;
         }
 
         .text-center {
@@ -113,9 +98,32 @@ if ($rol != '1') {
 
         th,
         td {
-            padding: 10px;
+            color: white;
+            padding: 15px;
             border: 1px solid #ccc;
-            text-align: left;
+            text-align: center;
+        }
+
+        /* styles.css */
+
+        /* ... tus estilos generales ... */
+
+        /* Estilos para las secciones abiertas al hacer clic en los botones */
+        .section-container {
+            background-color: transparent;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 80%;
+            /* Ajusta el ancho máximo según tu preferencia */
+        }
+
+        .section-title {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
         }
     </style>
 </head>
@@ -137,24 +145,25 @@ if (isset($_GET['buscar'])) {
             OR establecimiento_tipo.tipo LIKE '%$buscar%'";
     $dato = mysqli_query($conexion, $SQL);
 }
-?>
+?><?php include '../NAVBARiorder/index.php'; ?>
 
 <body>
-    <div class="modal-content">
-        <h2 class="modal-title">Buscar un Usuario</h2>
-        <div class="container is-fluid">
-            <div class="col-xs-12"><br>
-                <form action="" method="GET">
-                    <label for="buscar">Buscar:</label>
-                    <input type="text" name="buscar" id="buscar">
-                    <button type="submit">Buscar</button>
-                </form>
-                <br>
-                <?php if (isset($_GET['buscar'])): ?>
-                    <?php if ($dato->num_rows > 0): ?>
-                        <table id="table_id">
-                            <thead>
-                                <tr>
+    <div class="container" style="margin-top: 5rem;">
+        <div class="section-container">
+            <h2>Buscar un Usuario</h2>
+            <div class="container is-fluid">
+                <div class="col-xs-12"><br>
+                    <form action="" method="GET">
+                        <label for="buscar">Buscar:</label>
+                        <input type="text" name="buscar" id="buscar">
+                        <button type="submit">Buscar</button>
+                    </form>
+                    <br>
+                    <?php if (isset($_GET['buscar'])) : ?>
+                        <?php if ($dato->num_rows > 0) : ?>
+                            <table>
+                                <thead>
+                                    <tr>
                                     <th>Nombre</th>
                                     <th>Apellido Paterno</th>
                                     <th>Apellido Materno</th>
@@ -162,11 +171,11 @@ if (isset($_GET['buscar'])) {
                                     <th>Telefono</th>
                                     <th>Rol</th>
                                     <th>Establecimiento</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php while ($fila = mysqli_fetch_array($dato)): ?>
-                                    <tr>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php while ($fila = mysqli_fetch_array($dato)) : ?>
+                                        <tr>
                                         <td>
                                             <?php echo $fila['nombre']; ?>
                                         </td>
@@ -188,20 +197,18 @@ if (isset($_GET['buscar'])) {
                                         <td>
                                             <?php echo $fila['tipo']; ?>
                                         </td>
-                                    </tr>
-                                <?php endwhile; ?>
-                            </tbody>
-                        </table>
-                    <?php else: ?>
-                        <p>No se encontraron resultados.</p>
+                                        </tr>
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
+                        <?php else : ?>
+                            <p>No se encontraron resultados.</p>
+                        <?php endif; ?>
                     <?php endif; ?>
-                <?php endif; ?>
-            </div>
-        </div>
-    </div>
-
-
+                </div>
+                <div class="text-center" style="margin-top: 20px;"> <!-- Agrega margen superior para separar del formulario -->
+                    <a href="gestion.php" class="btn btn-secondary">Regresar</a> <!-- Botón para regresar a gestion.php -->
+                </div>
 </body>
-
 
 </html>
