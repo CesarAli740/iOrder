@@ -1,0 +1,92 @@
+[
+    {
+      "nombre": "Carne Asada",
+      "precio": 120,
+      "imagen": "comida1.webp",
+      "tipo": "comida"
+    },
+    {
+      "nombre": "Ensalada",
+      "precio": 180,
+      "imagen": "comida2.webp",
+      "tipo": "comida"
+    },
+    {
+      "nombre": "Vegetariana",
+      "precio": 15,
+      "imagen": "comida3.webp",
+      "tipo": "comida"
+    },
+    {
+      "nombre": "Tallarin",
+      "precio": 20,
+      "imagen": "comida4.webp",
+      "tipo": "comida"
+    },
+    {
+      "nombre": "Especial de la semana",
+      "precio": 12,
+      "imagen": "comida5.jpeg",
+      "tipo": "comida"
+    },
+    {
+      "nombre": "Bife chorizo",
+      "precio": 18,
+      "imagen": "comida6.jpeg",
+      "tipo": "comida"
+    },
+    {
+      "nombre": "Jugo de naranja",
+      "precio": 5,
+      "imagen": "bebida1.webp",
+      "tipo": "bebida"
+    },
+    {
+      "nombre": "Jugo vegano",
+      "precio": 8,
+      "imagen": "bebida2.jpeg",
+      "tipo": "bebida"
+    },
+    {
+      "nombre": "Mojito naranja",
+      "precio": 6,
+      "imagen": "bebida3.webp",
+      "tipo": "bebida"
+    },
+    {
+      "nombre": "Mojito azul",
+      "precio": 10,
+      "imagen": "bebida4.webp",
+      "tipo": "bebida"
+    },
+    {
+      "nombre": "Jugo de coco",
+      "precio": 7,
+      "imagen": "bebida5.webp",
+      "tipo": "bebida"
+    },
+    {
+      "nombre": "Te helado",
+      "precio": 9,
+      "imagen": "bebida6.webp",
+      "tipo": "bebida"
+    },
+    {
+      "nombre": "Cerveza",
+      "precio": 4,
+      "imagen": "otro1.webp",
+      "tipo": "otro"
+    },
+    {
+      "nombre": "Mate",
+      "precio": 3,
+      "imagen": "otro2.jpeg",
+      "tipo": "otro"
+    },
+    {
+      "nombre": "Jugo de limon con hierbas",
+      "precio": 5,
+      "imagen": "otro3.webp",
+      "tipo": "otro"
+    }
+  ]
