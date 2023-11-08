@@ -329,15 +329,7 @@ if ($rol == '5') {
         <a href="../includes/_sesion/cerrarSesion.php" style="--i:4;">Salir</a>
       </nav>
     </header>
-    <div class="video-container">
-    <!-- <video autoplay loop muted>
-      <source src="./discoteca2.mp4" type="video/mp4">
-          <source src="./discoteca1.mp4" type="video/mp4">
-          <source src="./restaurante.mp4" type="video/mp4"> 
-          <source src="../video/pub.mp4" type="video/mp4"> 
-      <source src="../video/SuperAdmin.mp4" type="video/mp4">
-    </video> -->
-  </div>
+   
   </body>
 
   <?php

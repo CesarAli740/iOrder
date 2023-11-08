@@ -1,225 +1,184 @@
+<?php
+include '../includes/_db.php';
+session_start();
+error_reporting(0);
+$rol = $_SESSION['rol'];
+$establecimiento = $_SESSION['establecimiento'];
+if ($rol != '5') {
+  session_unset();
+  session_destroy();
+  header("Location: ../includes/login.php");
+  die();
+}
+?>
 <?php include '../NAVBARiorder/index.php'; ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RESERVAS</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Reservar Mesa</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      margin-top: 120px;
+      padding: 20px;
+    }
+
+    .contenedor-mesas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      /* Espacio entre las mesas */
+    }
+
+    .mesa {
+      width: 100px;
+      /* Ancho de cada mesa */
+      height: 100px;
+      /* Altura de cada mesa */
+      border: 2px solid #000;
+      border-radius: 10px;
+      /* Bordes redondeados */
+      margin: 20px;
+      /* Espaciado entre las mesas */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      /* Tamaño del número de mesa */
+      position: relative;
+      /* Para posicionar el número y el estado */
+    }
+
+    .numero-mesa {
+      position: absolute;
+      top: 100px;
+      /* Ajusta la posición vertical del número */
+      font-size: 18px;
+      /* Tamaño del número de mesa */
+    }
+
+
+    .estado-mesa {
+      font-size: 14px;
+      /* Tamaño del texto del estado */
+    }
+
+    .mesa i {
+      font-size: 48px;
+      /* Tamaño del icono */
+    }
+
+    .disponible {
+      color: green;
+    }
+
+    .reservado {
+      color: yellow;
+    }
+
+    .ocupado {
+      color: red;
+    }
+
+    /* Deshabilitar la interacción del usuario */
+    .mesa {
+      pointer-events: none;
+    }
+
+    .footer {
+      background-color: #f1f1f1;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
 </head>
-<style>
-  body {
-  display: flex;
-  justify-content: center;
-  align-items: center;  
-  margin: 0;
-  background: linear-gradient(to right, rgb(128, 74, 0), rgb(255, 162, 0));
-}
-
-.reservation-container {
-  margin: 3rem;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  width: 85%;
-  height: auto;
-  padding: 2rem;
-  background: white;
-  border-radius: 2rem;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0);
-}
-
-.form-container {
-  padding: 2rem;
-  margin: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 1rem;
-}
-label {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-}
-select,
-input[type="text"] {
-  width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 1rem;
-}
-#reserve-button {
-  background: rgb(245, 193, 104);
-  width: 9rem;
-  height: 2.5rem;
-  border-radius: 1rem;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  margin: auto;
-}
-#reserve-button:hover {
-  background: rgb(248, 217, 163);
-  cursor: pointer;
-}
-
-.reservation-details {
-  flex: 1;
-  padding: 2rem;
-  background: #f3f3f3;
-  border-radius: 1rem;
-}
-
-.table-map {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.table {
-  width: 6.5rem;
-  height: 6.5rem;
-  border-radius: 50%;
-  background: #dbd9d9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.table.selected {
-  background: #1cb978;
-  color: white;
-}
-
-@media (max-width: 746px) {
-    .reservation-container {
-        margin: 2rem;
-        display: flex;
-        flex-direction: column;
-    }
-    .table {
-        width: 4rem;
-        height: 4rem;
-    }
-    .form-group{
-        display: flex;
-        gap: 2rem;
-    }
-    .form-container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 1rem;
-    }
-}
-@media (max-width: 425px) {
-    .reservation-container {
-        margin: 1rem;
-        display: flex;
-        flex-direction: column;
-    }
-    .form-group{
-        display: flex;
-        gap: 1rem;
-    }
-}
-@media (max-width: 380px) {
-    .reservation-container {
-        margin: 1rem;
-        display: flex;
-        flex-direction: column;
-        padding: .4rem;
-    }
-    .form-group{
-        display: flex;
-        gap: 1rem;
-    }
-    .reservation-details{
-        padding: .8rem;
-        margin: .6rem;
-    }
-}
-</style>
 
 <body>
-    <div class="reservation-container">
-        <div class="form-container">
-            <h2>Reserva tu mesa</h2>
-            <div class="form-group">
-                <label for="day">Día:</label>
-                <select id="day" >
-                    <option value="">Selecciona un día</option>
-                    <option value="opcion1">Lunes</option>
-                    <option value="opcion3">Martes</option>
-                    <option value="opcion4">Miercoles</option>
-                    <option value="opcion5">Jueves</option>
-                    <option value="opcion6">Viernes</option>
-                    <option value="opcion7">Sábado</option>
-                    <option value="opcion8">Domingo</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="time">Hora:</label>
-                <input type="time" id="time">
-            </div>
-            <div class="form-group">
-                <label>Costo por mesa:</label>
-                <span id="cost">50 dólares</span>
-            </div>
-            <div class="form-group">
-                <label>Total:</label>
-                <span id="total">0 dólares</span>
-            </div>
-            <button id="reserve-button" onclick="reserveTable()">Reservar</button>
+  <h1>Reservar Mesa</h1>
+  <form action="_functions.php" method="post">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
+
+    <label for="telefono">Teléfono:</label>
+    <input type="tel" id="telefono" name="telefono" required><br>
+
+    <label for="fecha">Fecha de reserva:</label>
+    <input type="date" id="fecha" name="fecha" required><br>
+
+    <label for="hora">Hora de reserva:</label>
+    <input type="time" id="hora" name="hora" required><br>
+
+    <label for="mesa">Selecciona una mesa:</label>
+    <select id="mesaId" name="mesaId">
+      <?php
+      // Hacer una consulta a la base de datos para obtener las mesas disponibles
+      $sql = "SELECT id, estado FROM mesas WHERE mesas.establecimiento_id = $establecimiento";
+      $result = $conexion->query($sql);
+      $contador = 1;
+
+      // Mostrar las mesas disponibles en el formulario
+      while ($row = $result->fetch_assoc()) {
+        $mesa_id = $row['id'];
+        if ($row['estado'] == 'disponible') {
+          echo "<option value='$mesa_id'>Mesa $contador</option>";
+        }
+        $contador++;
+      }
+      ?>
+    </select>
+    <!-- Campo oculto para almacenar el ID de la mesa -->
+
+    <div class="contenedor-mesas">
+      <?php
+      if ($conexion->connect_error) {
+        die("Conexión fallida: " . $conexion->connect_error);
+      }
+
+      // Consultar las mesas de la base de datos
+      $sql = "SELECT id, nombre, estado FROM mesas WHERE mesas.establecimiento_id = $establecimiento";
+      $result = $conexion->query($sql);
+      $contador = 1;
+
+      while ($row = $result->fetch_assoc()) {
+        $mesa_id = $row['id'];
+        $estado_mesa = $row['estado'];
+        $clase_estado = ($estado_mesa == 'disponible') ? 'disponible' : (($estado_mesa == 'reservado') ? 'reservado' : 'ocupado');
+        $estado_texto = ($estado_mesa == 'disponible') ? 'Disponible' : (($estado_mesa == 'reservado') ? 'Reservado' : 'Ocupado');
+        ?>
+        <div class="mesa <?php echo $clase_estado; ?>" data-id="<?php echo $mesa_id; ?>">
+          <span class="numero-mesa">Mesa
+            <?php echo $contador; ?>
+          </span> <!-- Número de mesa con el prefijo "Mesa" -->
+          <i class="fa-solid fa-bowl-food"></i> <!-- Icono dentro del margen de la mesa -->
+          <span class="estado-mesa">
+            <?php echo $estado_texto; ?>
+          </span> <!-- Texto del estado debajo del icono -->
         </div>
-        <div class="reservation-details">
-            <h2>Mapa de mesas</h2>
-            <div class="table-map">
-                <!-- Generar mesas aquí -->
-            </div>
-        </div>
+
+        <?php
+        $contador++;
+      }
+
+      // Cerrar la conexión
+      $conexion->close();
+      ?>
     </div>
 
-
-    <script>
-        // Función para calcular el costo total
-        function calculateTotal() {
-            const selectedTables = document.querySelectorAll(".table.selected");
-            const costPerTable = 50;
-
-            const totalTables = selectedTables.length;
-            const totalCost = totalTables * costPerTable;
-
-            document.getElementById("total").textContent = totalCost + " dólares";
-        }
-
-        // Función para reservar mesa
-        function reserveTable() {
-            // Resto del código para recopilar los valores del formulario
-
-            // Llamamos a la función para calcular el costo total
-            calculateTotal();
-
-            // Resto del código para procesar la reserva
-        }
-
-        // Código para generar las mesas
-        const tableMap = document.querySelector(".table-map");
-        const numberOfTables = 8; // Puedes ajustar la cantidad de mesas aquí
-
-        for (let i = 1; i <= numberOfTables; i++) {
-            const table = document.createElement("div");
-            table.classList.add("table");
-            table.textContent = i;
-            table.addEventListener("click", () => {
-                table.classList.toggle("selected");
-                calculateTotal(); // Llamamos a la función para recalcular el costo total al seleccionar/deseleccionar mesas
-            });
-            tableMap.appendChild(table);
-        }
-    </script>
+    <br>
+    <input type="submit" value="Reservar">
+  </form>
+  <div class="footer">
+    <p>Seleccione un número de mesa para reservar.</p>
+  </div>
 </body>
+
 </html>

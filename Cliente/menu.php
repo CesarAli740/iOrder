@@ -33,9 +33,9 @@
       <h3>Buscar nombre de producto</h3>
       <input type="search" />
     </div>
-    <!-- <button>CREAR UN PRODUCTO</button>
+    <button>CREAR UN PRODUCTO</button>
     <button>EDITAR UN PRODUCTO</button>
-    <button>ELIMINAR UN PRODUCTO</button> -->
+    <button>ELIMINAR UN PRODUCTO</button>
   </div>
   <div class="menu-panel">
     <div class="panel-header">
