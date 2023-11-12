@@ -20,6 +20,12 @@ if ($validar == '') {
   }
 
   body {
+   
+ 
+    background-image: url('../images/imagenmesa.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Opcional: mantiene la imagen fija mientras se desplaza */
 
     min-height: 100vh;
   }
@@ -170,7 +176,7 @@ if ($validar == '') {
     z-index: 1;
   }
 
-  video {
+  .video {
     position: absolute;
     top: 0;
     left: 0;
@@ -188,37 +194,74 @@ if ($validar == '') {
     height: 100%;
     background: rgba(0, 0, 0, 0.4);
   }
+/* Add this CSS to your existing styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 2.5rem;
+    position: relative; /* Agregar posición relativa */
+}
+
+.dropdown-content {
+    position: absolute;
+    background-color:rgba(169, 169, 169, 0.5);;
+    width: 140px;
+    border-radius: 8px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    text-align: center;
+    left: 60%; /* Centrar horizontalmente con respecto al elemento padre */
+    transform: translateX(-50%); /* Centrar horizontalmente con respecto al elemento padre */
+    top: 100%; /* Coloca el menú debajo del elemento padre */
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+.navbar {
+    position: relative; /* Add relative positioning to the navbar container */
+}
+
+.dropdown:hover .dropdown-content {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 0;
+    margin-left: 2.5rem; /* Remove left margin to align the text to the left edge */
+    text-decoration: none;
+    display: block;
+    text-align: left; /* Align the text to the left within the dropdown option */
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Add a transition for the dropdown content */
+.dropdown:hover .dropdown-content {
+    opacity: 1;
+    visibility: visible;
+}
+
+    
+    .btn {
+        background-color: #4CAF50; /* Cambia el color de fondo del botón a verde */
+        color: #fff; /* Cambia el color del texto del botón a blanco */
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .btn:hover {
+        background-color: #45a049; /* Cambia el color de fondo al pasar el mouse */
+    }
+
 </style>
 
-<!--   <header class="header">
-        <a href="#" class="logo">LOGO</a>
 
-        <input type="checkbox" id="check">
-        <label for="check" class="icons">
-            <i class='bx bx-menu' id="menu-icon"></i>
-            <i class='bx bx-x' id="close-icon"></i>
-        </label>
-
-        <nav class="navbar">
-            <a href="../SuperAdmin/index.php" style="--i:0;">Home</a>
-            <a href="../SuperAdmin/gestion.php" style="--i:1;">Usuarios</a>
-            <a href="#" style="--i:2;">Reservas</a>
-            <a href="#" style="--i:3;">Pedidos</a>
-            <a href="#" style="--i:4;">Contacto</a>
-            <a href="../includes/_sesion/cerrarSesion.php" style="--i:4;">Salir</a>
-        </nav>
-        
-    </header>
-    <video id="video" autoplay loop muted>
-        <source src="../video/pub.mp4" type="video/mp4">
-    </video>
-
-
-    <h1>hooasss</h1><br>
-    <h1>hooasss</h1><br>
-    <h1>hooasss</h1><br>
-    <h1>hooasss</h1><br>
-    <h1>hooasss</h1><br> -->
 
 <!DOCTYPE html>
 <html lang="es">
@@ -235,37 +278,51 @@ if ($validar == '') {
 if ($rol == '1') {
   ?>
 
-  <body style="background-image: url('../images/endless-constellation.svg');">
+<body style="background-image: url('../images/mesa2.svg');">
     <header class="header">
-      <a href="../SuperAdmin/index.php" class="logo">
-        <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
-      </a>
-      <input type="checkbox" id="check">
-      <label for="check" class="icons">
-        <i class='bx bx-menu' id="menu-icon"></i>
-        <i class='bx bx-x' id="close-icon"></i>
-      </label>
-      <nav class="navbar">
-        <a href="../SuperAdmin/index.php" style="--i:0;">Inicio</a>
-        <a href="../SuperAdmin/gestion.php" style="--i:1;">Usuarios</a>
-        <a href="../SuperAdmin/establecimientos.php" style="--i:2;">Establecimientos</a>
-        <a href="../SuperAdmin/tipo.php" style="--i:3;">Tipo</a>
-        <!--  
-      <a href="#" style="--i:4;">Contacto</a> -->
-        <a href="../includes/_sesion/cerrarSesion.php" style="--i:4;">Salir</a>
-      </nav>
+        <a href="../SuperAdmin/index.php" class="logo">
+            <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
+        </a>
+        <input type="checkbox" id="check">
+        <label for="check" class="icons">
+            <i class='bx bx-menu' id="menu-icon"></i>
+            <i class='bx bx-x' id="close-icon"></i>
+        </label>
+        <nav class="navbar">
+            <a href="../SuperAdmin/index.php" style="--i:0;">Inicio</a>
+            <div class="dropdown">
+                <a href="#" style="--i:1;">Usuarios</a>
+                <div class="dropdown-content">
+                    <a href="../SuperAdmin/registrar.php">Crear</a>
+                    <a href="../SuperAdmin/listar.php">Listar</a>
+                    <a href="../SuperAdmin/buscar.php">Buscar</a>
+                    <a href="../SuperAdmin/editar.php">Editar</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" style="--i:2;">Establecimientos</a>
+                <div class="dropdown-content">
+                    <a href="../SuperAdmin/nuevo_establecimiento.php">Crear</a>
+                    <a href="../SuperAdmin/listar_establecimientos.php">Listar</a>
+                    <a href="../SuperAdmin/buscar_establecimiento.php">Buscar</a>
+                    <a href="../SuperAdmin/editar_establecimiento.php">Editar</a>
+                </div>
+            </div>
+            <!-- <div class="dropdown">
+                <a href="#" style="--i:3;">Tipo</a>
+                <div class="dropdown-content">
+                    <a href="../SuperAdmin/registrar_tipo.php">Crear</a>
+                    <a href="../SuperAdmin/listar_tipo.php">Listar</a>
+                    <a href="../SuperAdmin/buscar_tipo.php">Buscar</a>
+                    <a href="../SuperAdmin/editar_tipo_form.php">Editar</a>
+                </div>
+            </div> -->
+            <a href="../includes/_sesion/cerrarSesion.php" style="--i:4;">Salir</a>
+        </nav>
     </header>
-    <!-- <div class="video-container">
-    <video autoplay loop muted>
-      <source src="./discoteca2.mp4" type="video/mp4">
-          <source src="./discoteca1.mp4" type="video/mp4">
-          <source src="./restaurante.mp4" type="video/mp4"> 
-          <source src="../video/pub.mp4" type="video/mp4"> 
-      <source src="../video/SuperAdmin.mp4" type="video/mp4">
-    </video>
-  </div> -->
-  </body>
-
+  
+   
+</body>
   <?php
 } else ?>
 
@@ -273,35 +330,40 @@ if ($rol == '1') {
 if ($rol == '2') {
   ?>
 
-  <body style="background-image: url('../images/constelacion.svg');">
+<body style="background-image: url('../images/mesa3.svg');">
     <header class="header">
-      <a href="../Admin/index.php" class="logo">
-        <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
-      </a>
-      <input type="checkbox" id="check">
-      <label for="check" class="icons">
-        <i class='bx bx-menu' id="menu-icon"></i>
-        <i class='bx bx-x' id="close-icon"></i>
-      </label>
-      <nav class="navbar">
-        <a href="../Admin/index.php" style="--i:0;">Inicio</a>
-        <a href="../Admin/gestion.php" style="--i:1;">Usuarios</a>
-        <a href="#" style="--i:2;">Vista Admin</a>
-        <a href="#" style="--i:3;">Reservas</a>
-      <a href="../Admin/perfil.php" style="--i:4;">Perfil</a>
-        <a href="../includes/_sesion/cerrarSesion.php" style="--i:5;">Salir</a>
-      </nav>
+        <a href="../Admin/index.php" class="logo">
+            <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
+        </a>
+        <input type="checkbox" id="check">
+        <label for "check" class="icons">
+            <i class='bx bx-menu' id="menu-icon"></i>
+            <i class='bx bx-x' id="close-icon"></i>
+        </label>
+        <nav class="navbar">
+            <a href="../Admin/index.php" style="--i:0;">Inicio</a>
+            <div class="dropdown">
+                <a href="#" style="--i:1;">Usuarios</a>
+                <div class="dropdown-content">
+                    <a href="../Admin/registrar.php">Crear</a>
+                    <a href="../Admin/listar.php">Listar</a>
+                    <a href="../Admin/buscar.php">Buscar</a>
+                    <a href="../Admin/editar.php">Editar</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" style="--i:3;">Reportes</a>
+                <div class="dropdown-content">
+                    <a href="#">Pedidos</a>
+                    <a href="#">Reservas</a>
+                    
+                </div>
+            </div>
+            <a href="../Admin/perfil.php" style="--i:4;">Perfil</a>
+            <a href="../includes/_sesion/cerrarSesion.php" style="--i:5;">Salir</a>
+        </nav>
     </header>
-    <!-- <div class="video-container">
-    <video autoplay loop muted>
-      <source src="./discoteca2.mp4" type="video/mp4">
-          <source src="./discoteca1.mp4" type="video/mp4">
-          <source src="./restaurante.mp4" type="video/mp4"> 
-          <source src="../video/pub.mp4" type="video/mp4"> 
-      <source src="../video/SuperAdmin.mp4" type="video/mp4">
-    </video>
-  </div> -->
-  </body>
+</body>
 
   <?php
 } ?>
@@ -310,27 +372,28 @@ if ($rol == '2') {
 if ($rol == '5') {
   ?>
 
-  <body style="background-image: url('../images/constelacion.svg');">
+<body style="background-image: url('../images/mesa4.svg');">
     <header class="header">
-      <a href="../Cliente/index.php" class="logo">
-        <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
-      </a>
-      <input type="checkbox" id="check">
-      <label for="check" class="icons">
-        <i class='bx bx-menu' id="menu-icon"></i>
-        <i class='bx bx-x' id="close-icon"></i>
-      </label>
-      <nav class="navbar">
-        <a href="../Cliente/index.php" style="--i:0;">Inicio</a>
-        <a href="../Cliente/menu.php" style="--i:1;">Menu</a>
-        <a href="#" style="--i:2;">Vista Cliente</a>
-        <a href="../Cliente/reservar.php" style="--i:3;">Reservas</a><!-- 
-      <a href="#" style="--i:4;">Contacto</a> -->
-        <a href="../includes/_sesion/cerrarSesion.php" style="--i:4;">Salir</a>
-      </nav>
+        <a href="../Cliente/index.php" class="logo">
+            <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
+        </a>
+        <input type="checkbox" id="check">
+        <label for="check" class="icons">
+            <i class='bx bx-menu' id="menu-icon"></i>
+            <i class='bx bx-x' id="close-icon"></i>
+        </label>
+        <nav class="navbar">
+            <a href="../Cliente/index.php" style="--i:0;">Inicio</a>
+            <a href="../Cliente/menu.php" style="--i:1;">Menu</a>
+            <div class="dropdown">
+                <a href="../Cliente/reservar.php" style="--i:3;">Reservas</a>
+                <a href="../Cliente/index.php" style="--i:3;">Pedidos</a>
+            </div>
+            <a href="../includes/_sesion/cerrarSesion.php" style="--i:4;">Salir</a>
+        </nav>
     </header>
-   
-  </body>
+    
+</body>
 
   <?php
 } ?>

@@ -14,6 +14,7 @@ if($rol != '1'){
 <html lang="es">
 
 <head>
+<?php include '../NAVBARiorder/index.php'; ?>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +22,7 @@ if($rol != '1'){
   <style>
     /* Estilos para los modales */
     .modal {
+
       display: none;
       position: fixed;
       z-index: 1;
@@ -29,24 +31,24 @@ if($rol != '1'){
       width: 100%;
       height: 100%;
       overflow: auto;
-      background-color: rgba(0, 0, 0, 0.7);
-      margin-top: 50px; /* Reducir el margen superior */
+      background-color: white;
+      margin-top: 200px; /* Reducir el margen superior */
             margin-bottom: 50px; 
     }
 
     .modal-content {
-      background-color: #ffffff;
+      background-color: transparent;
       margin: auto;
       padding: 20px;
       border: 1px solid #ccc;
       width: 70%;
       margin-bottom: 0; 
-      margin-top: 0; /* Eliminar el margen superior del contenido */
+      margin-top: 200px; /* Eliminar el margen superior del contenido */
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .close {
-      color: #aaa;
+      color: white;
       float: right;
       font-size: 28px;
       font-weight: bold;
@@ -129,7 +131,7 @@ if($rol != '1'){
       </div>
       <div class="form-group">
         <button class="button" type="submit" name="actualizar">Actualizar</button>
-        <a class="button" href="listar_establecimientos.php">Cancelar</a>
+        <a class="button" href="editar_establecimiento.php">Cancelar</a>
       </div>
     </form>
   </div>

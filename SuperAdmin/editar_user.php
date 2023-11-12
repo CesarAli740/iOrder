@@ -59,24 +59,35 @@ include '../includes/_db.php'; ?>
     }
 
     .btn-success {
-      background-color: #1B9C85;
+      background-color: #ea272d;
+      color: white;
+      text-decoration: none;
+      margin-right: 2rem;
+    }
+
+    .btn-success:hover {
+      background-color: #7d1518;
     }
 
     .btn-secondary {
-      background-color: #ccc;
+      background-color: #5f5f5f;
       color: #333;
+      text-decoration: none;
+      margin-right: 2rem;
+    }
+
+    .btn-secondary:hover {
+      background-color: #ccc;
     }
 
     .modal-content {
       background-color: transparent;
       margin: auto;
-      max-width: 80%;
       padding: 20px;
       border-radius: 10px;
-      width: 50%;
       margin: 20px auto;
       margin-bottom: 0;
-      margin-top: 7%;
+      margin-top: 8%;
       /* Eliminar el margen superior del contenido */
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
       display: block;
@@ -104,8 +115,14 @@ include '../includes/_db.php'; ?>
     /* Estilos para los formularios */
     .form-group {
       margin-bottom: 1.5rem;
+      width: 25%;
     }
-
+    .form-group-newpass{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: .5rem;
+    }
     label {
       font-weight: bold;
     }
@@ -133,6 +150,12 @@ include '../includes/_db.php'; ?>
       border-radius: 4px;
     }
 
+    .form-label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
     .form-control:focus {
       border-color: #007bff;
     }
@@ -145,6 +168,15 @@ include '../includes/_db.php'; ?>
     .form-col {
       flex-basis: calc(50% - 10px);
       /* Distribuir en dos columnas, descontando el espacio entre ellas */
+    }
+
+    .form-container {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      text-align: center;
     }
   </style>
 </head>
@@ -176,7 +208,7 @@ include '../includes/_db.php'; ?>
       extract($_POST);
       $actualizar = "UPDATE user SET nombre = '$nombre', apPAt = '$apPAt', apMAt = '$apMAt', correo = '$correo', telefono = '$telefono', tipo = '$tipo' WHERE id = '$usuario_id'";
       mysqli_query($conexion, $actualizar);
-      echo '<script>window.location.href = "gestion.php";</script>';
+      echo '<script>window.location.href = "index.php";</script>';
       exit();
     }
     if (isset($_POST['cambiar_contraseña'])) {
@@ -184,7 +216,7 @@ include '../includes/_db.php'; ?>
       $password_hash = password_hash($new_password, PASSWORD_BCRYPT);
       $actualizar = "UPDATE user SET password_hash = '$password_hash' WHERE id = '$usuario_id'";
       mysqli_query($conexion, $actualizar);
-      echo '<script>window.location.href = "gestion.php";</script>';
+      echo '<script>window.location.href = "index.php";</script>';
       exit();
     }
 
@@ -205,93 +237,94 @@ include '../includes/_db.php'; ?>
     ?>
 
     <form method="POST">
-      <div class="form-group">
-        <label for="nombre">Nombre:</label><br>
-        <input type="text" id="nombre" name="nombre" value="<?php echo $usuario['nombre']; ?>" required
-          class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="apPAt">Apellido Paterno:</label><br>
-        <input type="text" id="apPAt" name="apPAt" value="<?php echo $usuario['apPAt']; ?>" required
-          class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="apMAt">Apellido Materno:</label><br>
-        <input type="text" id="apMAt" name="apMAt" value="<?php echo $usuario['apMAt']; ?>" required
-          class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="correo">Correo:</label><br>
-        <input type="email" id="correo" name="correo" value="<?php echo $usuario['correo']; ?>" required
-          class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="telefono">Teléfono:</label><br>
-        <input type="tel" id="telefono" name="telefono" value="<?php echo $usuario['telefono']; ?>" required
-          class="form-control">
-      </div>
-      <?php
-      $query = "SELECT id, tipo FROM establecimiento_tipo";
-      $resultado = $conexion->query($query);
-      ?>
-      <div class="form-group">
-        <label for="tipo" class="form-label">Tipo de Establecimiento *</label><br>
-        <select type='text' id="tipo" name="tipo" class="form-control" required>
-          <?php
-          echo '<option value="" disabled>Selecciona un tipo</option>';
-          while ($fila = $resultado->fetch_assoc()) {
-            $selected = ($fila["id"] === $usuario['tipo']) ? "selected" : "";
-            echo '<option value="' . $fila["id"] . '" ' . $selected . '>' . $fila["tipo"] . '</option>';
-          }
-          ?>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <button class="btn btn-success" type="submit" name="actualizar">Actualizar</button>
-        <a href="gestion.php" class="btn btn-secondary">Cancelar</a>
-      </div>
-    </form>
-
-    <form method="POST">
-      <button type="submit" name="obtener_contraseña">Cambiar Contraseña *Opcional*</button>
-    </form>
-
-    <?php if (isset($current_password_hash_from_db) && !$showChangePasswordForm) { ?>
-      <div class="form-group">
-        <label for="password">Contraseña Obtenida:</label><br>
-        <input type="password" id="password" name="password" value="<?php echo $current_password_hash_from_db ?>" required
-          class="form-control" disabled>
-      </div>
-    <?php } ?>
-
-    <?php if ($showChangePasswordForm) { ?>
-      <form method="post">
+      <div class="form-container">
         <div class="form-group">
-          <label for="new_password">Nueva Contraseña:</label><br>
-          <input type="password" id="new_password" name="new_password" class="form-control">
+          <label class="form-label" for="nombre">Nombre:</label><br>
+          <input type="text" id="nombre" name="nombre" value="<?php echo $usuario['nombre']; ?>" required class="form-control">
         </div>
-        <button type="submit" name="cambiar_contraseña">Cambiar Contraseña</button>
-      </form>
-    <?php } ?>
+        <div class="form-group">
+          <label class="form-label" for="apPAt">Apellido Paterno:</label><br>
+          <input type="text" id="apPAt" name="apPAt" value="<?php echo $usuario['apPAt']; ?>" required class="form-control">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="apMAt">Apellido Materno:</label><br>
+          <input type="text" id="apMAt" name="apMAt" value="<?php echo $usuario['apMAt']; ?>" required class="form-control">
+        </div>
+      </div>
+      <div class="form-container">
+        <div class="form-group">
+          <label class="form-label" for="correo">Correo:</label><br>
+          <input type="email" id="correo" name="correo" value="<?php echo $usuario['correo']; ?>" required class="form-control">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="telefono">Teléfono:</label><br>
+          <input type="tel" id="telefono" name="telefono" value="<?php echo $usuario['telefono']; ?>" required class="form-control">
+        </div>
+        <?php
+        $query = "SELECT id, tipo FROM establecimiento_tipo";
+        $resultado = $conexion->query($query);
+        ?>
+        <div class="form-group">
+          <label class="form-label" for="tipo">Tipo de Establecimiento *</label><br>
+          <select type='text' id="tipo" name="tipo" class="form-control" required>
+            <?php
+            echo '<option value="" disabled>Selecciona un tipo</option>';
+            while ($fila = $resultado->fetch_assoc()) {
+              $selected = ($fila["id"] === $usuario['tipo']) ? "selected" : "";
+              echo '<option value="' . $fila["id"] . '" ' . $selected . '>' . $fila["tipo"] . '</option>';
+            }
+            ?>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-container">
+        <div class="form-group">
+          <button class="btn btn-success" type="submit" name="actualizar">Actualizar</button>
+          <a href="editar.php" class="btn btn-secondary">Cancelar</a>
+        </div>
+        <form method="POST">
+          <button class="btn btn-success" type="submit" name="obtener_contraseña">Cambiar Contraseña Opcional</button>
+        </form>
+        <?php if (isset($current_password_hash_from_db) && !$showChangePasswordForm) { ?>
+          <div class="form-group">
+            <label for="password">Contraseña Obtenida:</label><br>
+            <input type="password" id="password" name="password" value="<?php echo $current_password_hash_from_db ?>" required class="form-control" disabled>
+          </div>
+        <?php } ?>
+
+        <?php if ($showChangePasswordForm) { ?>
+          <form method="post">
+            <div class="form-group-newpass">
+              <label class="label" for="new_password">Nueva Contraseña:</label>
+              <input type="password" id="new_password" name="new_password" class="form-control">
+              <button class="btn btn-success" type="submit" name="cambiar_contraseña">Cambiar Contraseña</button>
+            </div>
+            
+          </form>
+        <?php } ?>
+    </form>
+
+  </div>
+
 
   </div>
   <script>
     function openModal(modalName) {
-      document.getElementById(`modal${modalName}`).style.display = "block";
+      document.getElementById(modal${modalName}).style.display = "block";
     }
 
     function closeModal(modalName) {
-      document.getElementById(`modal${modalName}`).style.display = "none";
+      document.getElementById(modal${modalName}).style.display = "none";
     }
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
       // Obtener el elemento span por su ID
       var closeSpan = document.getElementById("closeSpan");
 
       // Agregar un evento de clic al elemento span
-      closeSpan.addEventListener("click", function () {
+      closeSpan.addEventListener("click", function() {
         // Redirigir a la página "gestion.php"
-        window.location.href = "gestion.php";
+        window.location.href = "index.php";
       });
     });
   </script>

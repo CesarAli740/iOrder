@@ -21,153 +21,225 @@ if ($rol != '2') {
     <title>Registros</title>
     <style>
         body {
-            background-color: #ECF8F9;
+            background-color: transparent;
             margin: 0;
             font-family: Arial, sans-serif;
         }
 
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-            padding: 10px;
-            /* Reducir el padding general */
-            margin-top: 50px;
-            /* Reducir el margen superior */
-            margin-bottom: 50px;
-            /* Reducir el margen superior */
+        .container {
+            margin-top: 6rem !important;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        .modal-content {
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            /* Reducido el ancho máximo */
-            width: 100%;
-            padding: 15px;
-            /* Reducido el padding */
-            background-color: #fff;
-            margin-top: 0;
-            /* Eliminar el margen superior del contenido */
-            margin-bottom: 0;
-
+        input {
+            background-color: transparent;
+            color: white;
         }
 
-        .card-title {
-            color: #1B9C85;
-            font-size: 1.5rem;
-            margin-bottom: 3rem;
+
+        h1,
+        h2,
+        h3 {
+            color: white;
             text-align: center;
+            font-size: 50px;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            gap: 5rem;
+            padding: 1rem;
+            /* border: 1px solid white;
+            border-radius: 1rem; */
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            color: white;
+            margin-bottom: 20px;
+            width: 25%;
         }
 
         .form-label {
             display: block;
             font-weight: bold;
+            margin-bottom: 2rem;
+            color: white;
         }
 
         .form-control {
             width: 100%;
-            padding: 0.5rem;
+            padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 10px;
+            font-size: 14px;
         }
 
         .btn {
             display: inline-block;
-            padding: 0.5rem 1rem;
+            padding: 10px 20px;
             border: none;
-            border-radius: 4px;
+            border-radius: 10px;
             cursor: pointer;
-            color: #fff;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
+
         .btn-success {
-            background-color: #1B9C85;
+            background-color: #ea272d !important;
+            color: white;
+            margin-right: 1rem;
+        }
+
+        .btn-success:hover {
+            background-color: #7d1518 !important;
         }
 
         .btn-secondary {
-            background-color: #ccc;
+            background-color: #ccc !important;
+            color: #333;
+            margin-left: 1rem;
+            text-decoration: none !important;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5f5f5f !important;
         }
 
         .text-center {
             text-align: center;
         }
+
+        /* Estilos de la tabla */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #ccc;
+        }
+
+        th,
+        td {
+            color: white;
+            padding: 15px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .section-container {
+            background-color: transparent;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 80%;
+        }
+
+        .section-title {
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .container-form {
+            display: flex;
+            justify-content: space-around;
+            align-items: stretch;
+            flex-direction: column;
+        }
+
+        .container-form-child {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+        }
+
+        .form-select {
+            border-radius: 1rem;
+            width: 11rem;
+            height: 3rem;
+            background-color: white;
+            color: black;
+            font-weight: bold;
+        }
     </style>
 </head>
+<?php include '../NAVBARiorder/index.php'; ?>
 
 <body>
 
-    <div class="modal-content">
-        <h3 class="card-title">Registro de nuevo usuario</h3>
+    <div class="container">
+        <h3 class="section-container">Registro de nuevo usuario</h3>
         <form action="../includes/validar.php" method="POST">
-            <div class="form-group">
-                <label for="nombre" class="form-label">Nombre *</label>
-                <input type="text" id="nombre" name="nombre" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="apPAt" class="form-label">Apellido Paterno *</label>
-                <input type="text" id="apPAt" name="apPAt" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="apMAt" class="form-label">Apellido Materno *</label>
-                <input type="text" id="apMAt" name="apMAt" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="correo" class="form-label">Correo:</label>
-                <input type="email" name="correo" id="correo" class="form-control" placeholder="">
-            </div>
-            <div class="form-group">
-                <label for="telefono" class="form-label">Telefono *</label>
-                <input type="tel" id="telefono" name="telefono" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="password" class="form-label">Contraseña:</label>
-                <input type="password" name="password" id="password" class="form-control" required>
-            </div>
-
-            <div class="form-group">
-                <label for="rol" class="form-label">Rol de usuario </label>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-6 col-md-9">
-                            <select class="form-select " type="number" id="rol" name="rol">
-                                <?php
-                                $SQL = "SELECT * FROM permisos WHERE id <> 1 AND id <> 2;";
-                                $dato = mysqli_query($conexion, $SQL);
-                                if ($dato->num_rows > 0) {
-                                    while ($fila = mysqli_fetch_array($dato)) {
-                                        ?>
-                                        <option value="<?php echo $fila['id']; ?>"><?php echo $fila['rol']; ?></option>
-                                        <?php
-                                    }
-                                } else {
-                                    ?>
-                                    <option value="">No Existen Registros</option>
-                                    <?php
-                                }
-                                ?>
-                            </select>
-                        </div>
+            <div class="container-form">
+                <div class="container-form-child">
+                    <div class="section-title">
+                        <label for="nombre" class="form-label">Nombre *</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="apPAt" class="form-label">Apellido Paterno *</label>
+                        <input type="text" id="apPAt" name="apPAt" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="apMAt" class="form-label">Apellido Materno *</label>
+                        <input type="text" id="apMAt" name="apMAt" class="form-control" required>
+                    </div>
+                </div>
+                <div class="container-form-child">
+                    <div class="form-group">
+                        <label for="correo" class="form-label">Correo:</label>
+                        <input type="email" name="correo" id="correo" class="form-control" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono" class="form-label">Telefono *</label>
+                        <input type="tel" id="telefono" name="telefono" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-label">Contraseña:</label>
+                        <input type="password" name="password" id="password" class="form-control" required>
                     </div>
                 </div>
             </div>
 
-            <div class="text-center">
-                <input type="submit" value="Guardar" class="btn btn-success" name="Admin_registrar">
-                <input type="hidden" value="<?php echo $establecimiento; ?>" name="establecimiento">
-                <button type="button" class="btn btn-secondary">Cancelar</button>
+            <div class="container-form-child">
+
+                <div class="row">
+                    <label for="rol" class="form-label">Rol de usuario </label>
+                    <div class="col-6 col-md-9">
+                        <select class="form-select" type="number" id="rol" name="rol">
+                            <?php
+                            $SQL = "SELECT * FROM permisos WHERE id <> 1 AND id <> 2;";
+                            $dato = mysqli_query($conexion, $SQL);
+                            if ($dato->num_rows > 0) {
+                                while ($fila = mysqli_fetch_array($dato)) {
+                            ?>
+                                    <option value="<?php echo $fila['id']; ?>"><?php echo $fila['rol']; ?></option>
+                                <?php
+                                }
+                            } else {
+                                ?>
+                                <option value="">No Existen Registros</option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+
+                </div>
+
+                <div class="text-center">
+                    <input type="submit" value="Guardar" class="btn btn-success" name="Admin_registrar">
+                    <input type="hidden" value="<?php echo $establecimiento; ?>" name="establecimiento">
+                    <a href="index.php" class="btn btn-secondary">Cancelar</a>
+                </div>
             </div>
+
         </form>
     </div>
     </div>

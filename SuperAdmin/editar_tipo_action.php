@@ -25,24 +25,24 @@ if($rol != '1'){
       position: fixed;
       z-index: 1;
       left: 0;
-      top: 0;
+      top: 100px;
       width: 100%;
       height: 100%;
       overflow: auto;
       background-color: rgba(0, 0, 0, 0.7);
-      margin-top: 50px; /* Reducir el margen superior */
+      
             margin-bottom: 50px; 
     }
 
     .modal-content {
-      background-color: #ffffff;
-      margin: auto;
+      margin-top: 200px;
+      background-color: transparent;
       padding: 20px;
       border: 1px solid #ccc;
       width: 70%;
       margin-bottom: 0; 
-      margin-top: 0; /* Eliminar el margen superior del contenido */
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+     margin-left: 300px;
+      
     }
 
     .close {
@@ -84,7 +84,7 @@ if($rol != '1'){
     }
   </style>
 </head>
-
+<?php include '../NAVBARiorder/index.php'; ?>
 <body>
   <div class="modal-content">
     <span class="close" onclick="closeModal('Editar')">&times;</span>

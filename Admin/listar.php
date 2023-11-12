@@ -14,77 +14,70 @@ if($rol != '2'){
 <html lang="es">
 
 <head>
+<?php include '../NAVBARiorder/index.php'; ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Usuarios</title>
     <style>
         body {
-            background-color: #ECF8F9;
+           
+            background-color: transparent;
             margin: 0;
             font-family: Arial, sans-serif;
+            min-height: 100vh;
         }
 
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-            padding: 10px; /* Reducir el padding general */
-            margin-top: 50px; /* Reducir el margen superior */
-            margin-bottom: 50px;
+        .container {
+            margin: auto;
+        margin-top: 50px;
+        background-color: transparent;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        color: white; /* Cambia el color de texto a negro */
+        width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        .modal-content {
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 800px; /* Ancho máximo de la modal */
-            width: 100%;
-            padding: 15px;
-            background-color: #fff;
-            margin-top: 0; /* Eliminar el margen superior del contenido */
-            margin-bottom: 0;
-        }
-        .modal-title {
-            color: #1B9C85; /* Color de las letras en los títulos de los modales */
-        }
-
-        .card-title {
-            color: #1B9C85;
-            font-size: 1.5rem;
-            margin-bottom: 3rem;
+        h1,
+        h2,
+        h3 {
+            color: white;
             text-align: center;
+            font-size: 50px;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 20px;
         }
 
         .form-label {
             display: block;
             font-weight: bold;
+            margin-bottom: 5px;
         }
 
         .form-control {
             width: 100%;
-            padding: 0.5rem;
+            padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 10px;
+            font-size: 14px;
         }
 
         .btn {
             display: inline-block;
-            padding: 0.5rem 1rem;
+            padding: 10px 20px;
             border: none;
-            border-radius: 4px;
+            border-radius: 10px;
             cursor: pointer;
-            color: #fff;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
         .btn-success {
@@ -92,7 +85,8 @@ if($rol != '2'){
         }
 
         .btn-secondary {
-            background-color: #ccc;
+            background-color: #ea272d;
+            color: white;
         }
 
         .text-center {
@@ -102,29 +96,67 @@ if($rol != '2'){
         /* Estilos de la tabla */
         table {
             border-collapse: collapse;
-            width: 100%;
-            border: 1px solid #ccc;
+            margin: auto;
+      
+        background-color: transparent;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        color: white; /* Cambia el color de texto a negro */
+        width: 100%;
+           
         }
 
-        th, td {
-            background-color: whitesmoke; /* Color de fondo de las celdas de encabezado */
-            color: black; /* Color de texto en las celdas de encabezado */
-            padding: 10px;
+        th,
+        td {
+            color: white;
+            padding: 15px;
             border: 1px solid #ccc;
-            text-align: left;
-            padding: 10px;
-            border: 1px solid #ccc;
-            text-align: left;
+            text-align: center;
+            background-color: rgba(128, 128, 128, 0.5);
+        }
+
+        /* styles.css */
+
+        /* ... tus estilos generales ... */
+
+        /* Estilos para las secciones abiertas al hacer clic en los botones */
+        .section-container {
+            background-color: transparent;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 80%;
+            /* Ajusta el ancho máximo según tu preferencia */
+        }
+
+        .section-title {
+            color: #1B9C85;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .table-header{
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 5rem;
+            margin-bottom: 2rem;
         }
     </style>
 </head>
 
 <body>
  
-        <div class="modal-content">
-        <h2 class="modal-title">Lista de Usuarios</h2> 
+<div class="modal-content" style="margin-top: 10rem">
+        <div class="table-header">
+            <h2 class="modal-title">Lista de Usuarios</h2>
             <?php include ('../includes/_db.php'); ?>
-
+</div>
             <div class="container is-fluid">
                 <div class="col-xs-12"><br>
 

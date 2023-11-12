@@ -14,33 +14,79 @@ if ($rol != '1') {
 <html lang="es-MX">
 
 <head>
+<?php include '../NAVBARiorder/index.php'; ?>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Establecimientos</title>
     <style>
-        /* Estilos para la tabla */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+    /* Estilos para la tabla */
+    .table-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    table {
+        margin: auto;
+        margin-top: 100px;
+        background-color: transparent;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        color: white; /* Cambia el color de texto a negro */
+        width: 80%;
+    }
+
+    th, td {
+        padding: 15px;
+        border: 1px solid #ccc;
+        text-align: center;
+    }
+    
+    h1,
+        h2,
+        h3 {
+            margin-top: 300px;
+            color: white;
+            text-align: center;
+            font-size: 50px;
         }
 
-        th,
-        td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
+        .table-header{
+            margin-top: -100px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 5rem;
+        }
+        .btn-success {
+            background-color: #1B9C85;
         }
 
-        th {
-            background-color: #f2f2f2;
+        .btn-secondary {
+            margin-top: 300px;
+            background-color: #ea272d;
+            color: white;
         }
-    </style>
+        .btn-secondary:hover {
+            background-color: #7d1518;
+        }
+</style>
+
+
+
 </head>
 
 <body>
-    <h2>Listado de Establecimientos</h2>
+<div class="table-header">
+            <h2 class="modal-title">Lista de Establecimientos</h2>
+            <button onclick="window.location.href='./index.php'" type="button"class="btn btn-secondary">Volver</button>
+        </div>
     <table>
         <thead>
             <tr>

@@ -1,0 +1,76 @@
+/* styles.css */
+
+body {
+    background-color: #f5f5f5;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #1B9C85;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.btn-success {
+    background-color: #1B9C85;
+}
+
+.btn-secondary {
+    background-color: #ccc;
+    color: #333;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Estilos de la tabla */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+th,
+td {
+    padding: 15px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+/* Agrega más estilos comunes aquí si es necesario */

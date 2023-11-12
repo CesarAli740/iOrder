@@ -32,7 +32,7 @@ function acceso_user()
             } else if ($fila['rol'] == 2) { //Admin
                 header("Location: ../Admin/index.php");
             } else if ($fila['rol'] == 5) { //Cliente
-                header("Location: ../Admin/index.php");
+                header("Location: ../Cliente/index.php");
             } else {
                 header('Location: ./login.php');
                 session_destroy();

@@ -30,11 +30,10 @@ if ($rol != '1') {
 
         .container {
             margin-top: 70px;
-            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
         }
-        
+
         h1,
         h2,
         h3 {
@@ -54,7 +53,7 @@ if ($rol != '1') {
         }
 
         label {
-            color: white    ;
+            color: white;
         }
 
         .form-control {
@@ -81,8 +80,12 @@ if ($rol != '1') {
         }
 
         .btn-secondary {
-            background-color: #ccc;
-            color: #333;
+            background-color: #ea272d !important;
+            color: white;
+            text-decoration: none;
+        }
+        .btn-secondary:hover {
+            background-color: #7d1518 !important;
         }
 
         .text-center {
@@ -92,8 +95,10 @@ if ($rol != '1') {
         /* Estilos de la tabla */
         table {
             border-collapse: collapse;
-            width: 100%;
+            width: 80%;
             border: 1px solid #ccc;
+            margin: auto;
+            font-family: Arial, sans-serif;
         }
 
         th,
@@ -102,7 +107,8 @@ if ($rol != '1') {
             padding: 15px;
             border: 1px solid #ccc;
             text-align: center;
-        }
+            background-color: transparent;    
+    }
 
         /* styles.css */
 
@@ -113,9 +119,8 @@ if ($rol != '1') {
             background-color: transparent;
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            padding: 1rem;
             margin: 20px auto;
-            max-width: 80%;
             /* Ajusta el ancho máximo según tu preferencia */
         }
 
@@ -124,6 +129,39 @@ if ($rol != '1') {
             font-size: 1.5rem;
             margin-bottom: 1rem;
             text-align: center;
+        }
+        .search-header{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 5rem;
+        }
+        /*ESTILOS DE HEADER SEARCH */
+        .etiqueta {
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .campo-texto {
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            width: 15rem;
+            margin-right: 1rem;
+        }
+
+        .boton-buscar {
+            background-color: #ea272d;;
+            color: #fff;
+            padding: .8rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .boton-buscar:hover {
+            background-color: #7d1518;
         }
     </style>
 </head>
@@ -150,65 +188,64 @@ if (isset($_GET['buscar'])) {
 <body>
     <div class="container" style="margin-top: 5rem;">
         <div class="section-container">
-            <h2>Buscar un Usuario</h2>
-            <div class="container is-fluid">
-                <div class="col-xs-12"><br>
-                    <form action="" method="GET">
-                        <label for="buscar">Buscar:</label>
-                        <input type="text" name="buscar" id="buscar">
-                        <button type="submit">Buscar</button>
-                    </form>
-                    <br>
-                    <?php if (isset($_GET['buscar'])) : ?>
-                        <?php if ($dato->num_rows > 0) : ?>
-                            <table>
-                                <thead>
-                                    <tr>
-                                    <th>Nombre</th>
-                                    <th>Apellido Paterno</th>
-                                    <th>Apellido Materno</th>
-                                    <th>Correo</th>
-                                    <th>Telefono</th>
-                                    <th>Rol</th>
-                                    <th>Establecimiento</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php while ($fila = mysqli_fetch_array($dato)) : ?>
-                                        <tr>
-                                        <td>
-                                            <?php echo $fila['nombre']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $fila['apPAt']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $fila['apMAt']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $fila['correo']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $fila['telefono']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $fila['rol']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $fila['tipo']; ?>
-                                        </td>
-                                        </tr>
-                                    <?php endwhile; ?>
-                                </tbody>
-                            </table>
-                        <?php else : ?>
-                            <p>No se encontraron resultados.</p>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                </div>
-                <div class="text-center" style="margin-top: 20px;"> <!-- Agrega margen superior para separar del formulario -->
-                    <a href="gestion.php" class="btn btn-secondary">Regresar</a> <!-- Botón para regresar a gestion.php -->
-                </div>
+            <div class="search-header">
+                <h2>Buscar un Usuario</h2>
+                <form action="" method="GET">
+                    <label class="etiqueta" for="buscar">Buscar:</label>
+                    <input class="campo-texto" type="text" name="buscar" id="buscar">
+                    <button class="boton-buscar" type="submit">Buscar</button>
+                </form>
+            </div>
+            <br>
+            <?php if (isset($_GET['buscar'])) : ?>
+                <?php if ($dato->num_rows > 0) : ?>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido Paterno</th>
+                                <th>Apellido Materno</th>
+                                <th>Correo</th>
+                                <th>Telefono</th>
+                                <th>Rol</th>
+                                <th>Establecimiento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($fila = mysqli_fetch_array($dato)) : ?>
+                                <tr>
+                                    <td>
+                                        <?php echo $fila['nombre']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $fila['apPAt']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $fila['apMAt']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $fila['correo']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $fila['telefono']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $fila['rol']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $fila['tipo']; ?>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                <?php else : ?>
+                    <p>No se encontraron resultados.</p>
+                <?php endif; ?>
+            <?php endif; ?>
+            <div class="text-center" style="margin-top: 20px;"> <!-- Agrega margen superior para separar del formulario -->
+                <a href="index.php" class="btn btn-secondary">Regresar</a> <!-- Botón para regresar a gestion.php -->
+            </div>
 </body>
 
 </html>

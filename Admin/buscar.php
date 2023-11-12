@@ -15,78 +15,67 @@ if ($rol != '2') {
 <html lang="es">
 
 <head>
+?><?php include '../NAVBARiorder/index.php'; ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscar Usuarios</title>
     <style>
+        /* styles.css */
+
         body {
-            background-color: #ECF8F9;
+            background-color: transparent;
             margin: 0;
             font-family: Arial, sans-serif;
         }
 
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-            padding: 10px;
-            /* Reducir el padding general */
-            margin-top: 50px;
-            /* Reducir el margen superior */
-            margin-bottom: 50px;
-            /* Reducir el margen superior */
+        .container {
+            margin-top: 70px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        .modal-content {
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            /* Ancho máximo de la modal */
-            width: 100%;
-            padding: 15px;
-            background-color: #fff;
-            margin-top: 0;
-            /* Eliminar el margen superior del contenido */
-            margin-bottom: 0;
-
-        }
-
-        .modal-title {
-            color: #1B9C85;
-            /* Color de las letras en los títulos de los modales */
+        h1,
+        h2,
+        h3 {
+            color: white;
+            text-align: center;
+            font-size: 50px;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 20px;
         }
 
         .form-label {
             display: block;
             font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        label {
+            color: white;
+            font-size: 30px;
         }
 
         .form-control {
+            margin-left: 700px;
             width: 100%;
-            padding: 0.5rem;
+            padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 10px;
+            font-size: 14px;
         }
 
         .btn {
             display: inline-block;
-            padding: 0.5rem 1rem;
+            padding: 10px 20px;
             border: none;
-            border-radius: 4px;
+            border-radius: 10px;
             cursor: pointer;
-            color: #fff;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
         .btn-success {
@@ -94,7 +83,11 @@ if ($rol != '2') {
         }
 
         .btn-secondary {
-            background-color: #ccc;
+            background-color: #ea272d;
+            color: white;
+            text-decoration: none;
+            width: 8rem;
+            border-radius: 1rem;
         }
 
         .text-center {
@@ -104,15 +97,83 @@ if ($rol != '2') {
         /* Estilos de la tabla */
         table {
             border-collapse: collapse;
-            width: 100%;
+            width: 80%;
             border: 1px solid #ccc;
+            margin: auto;
+            font-family: Arial, sans-serif;
+        }
+
+        th, td {
         }
 
         th,
         td {
-            padding: 10px;
+            color: white;
+            padding: 15px;
             border: 1px solid #ccc;
-            text-align: left;
+            text-align: center;
+            background-color: transparent;    
+    }
+
+        /* styles.css */
+
+        /* ... tus estilos generales ... */
+
+        /* Estilos para las secciones abiertas al hacer clic en los botones */
+        .section-container {
+            background-color: transparent;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            margin: 20px auto;
+            /* Ajusta el ancho máximo según tu preferencia */
+        }
+
+        .section-title {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .search-header{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 5rem;
+        }
+        /*ESTILOS DE HEADER SEARCH */
+        .etiqueta {
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .campo-texto {
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            width: 15rem;
+            margin-right: 1rem;
+        }
+
+        .boton-buscar {
+            background-color: #ea272d;;
+            color: #fff;
+            padding: .8rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .boton-buscar:hover {
+            background-color: #0056b3;
+        }
+        .container-search{
+            display: flex;
+            justify-content: space-evenly;
+        }
+        .input-search{
+            border-radius: 1rem;
         }
     </style>
 </head>
@@ -138,15 +199,17 @@ if (isset($_GET['buscar'])) {
 }
 ?>
 
-<body>
-    <div class="modal-contentB">
-        <h2 class="modal-title">Buscar un Usuario</h2>
+<body> <div class="container" style="margin-top: 10rem;"><div class="modal-contentB">
+        
         <div class="container is-fluid">
             <div class="col-xs-12"><br>
                 <form action="" method="GET">
-                    <label for="buscar">Buscar:</label>
-                    <input type="text" name="buscar" id="buscar">
-                    <button type="submit">Buscar</button>
+                    <div class="container-search">
+                    <h2 class="search-header">Buscar un Usuario</h2>
+                        <label for="buscar">Buscar:</label>
+                        <input class="input-search" type="text" name="buscar" id="buscar">
+                        <button class="btn-secondary" type="submit">Buscar</button>
+                    </div>
                 </form>
                 <br>
                 <?php if (isset($_GET['buscar'])): ?>

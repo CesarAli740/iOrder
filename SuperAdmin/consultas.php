@@ -21,7 +21,7 @@ if (isset($_POST['crear_establecimiento'])) {
         echo "Error al registrar el establecimiento: " . mysqli_error($conexion);
     }
 }
-
+/* 
 if(isset($_FILES['logo']) && $_FILES['logo']['error'] == 0) {
     // Ruta donde se guardará el archivo
     $uploadDir = '../logos/'; // Reemplaza esto con la ruta adecuada en tu servidor
@@ -41,5 +41,5 @@ if(isset($_FILES['logo']) && $_FILES['logo']['error'] == 0) {
     }
 } else {
     echo 'No se ha seleccionado ningún archivo.';
-} 
+} */
 ?>

@@ -27,7 +27,6 @@ if ($rol != '1') {
 
         .container {
             margin-top: 70px;
-            max-width: 400px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -45,16 +44,25 @@ if ($rol != '1') {
             text-align: center;
             font-size: 50px;
         }
-
+        .form-container{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            gap: 5rem;
+            padding: 1rem;
+            /* border: 1px solid white;
+            border-radius: 1rem; */
+        }
         .form-group {
             color: white;
             margin-bottom: 20px;
+            width: 25%;
         }
 
         .form-label {
             display: block;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 2rem;
         }
 
         .form-control {
@@ -76,12 +84,23 @@ if ($rol != '1') {
             text-transform: uppercase;
         }
 
+
         .btn-success {
-            background-color: #1B9C85;
+            background-color: #ea272d !important;
+            color: white;;
+            margin-right: 1rem;
+        }
+        .btn-success:hover {
+            background-color: #7d1518 !important;
         }
 
         .btn-secondary {
-            background-color: #ccc;
+            background-color: #ccc !important;
+            color: #333;
+            margin-left: 1rem;
+        }
+        .btn-secondary:hover {
+            background-color: #5f5f5f !important;
             color: #333;
         }
 
@@ -106,7 +125,6 @@ if ($rol != '1') {
 
         .section-container {
             background-color: transparent;
-            border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
             margin: 20px auto;
@@ -116,7 +134,7 @@ if ($rol != '1') {
         .section-title {
             color: white;
             font-size: 2.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 3rem;
             text-align: center;
         }
     </style>
@@ -129,51 +147,58 @@ if ($rol != '1') {
         <div class="section-container">
             <h2 class="section-title">Registrar Usuario</h2>
             <form action="../includes/validar.php" method="POST">
-                <div class="form-group">
-                    <label for="nombre" class="form-label">Nombre *</label>
-                    <input type="text" id="nombre" name="nombre" class="form-control" required>
+                <div class="form-container">
+                    <div class="form-group">
+                        <label for="nombre" class="form-label">Nombre *</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="apPAt" class="form-label">Apellido Paterno *</label>
+                        <input type="text" id="apPAt" name="apPAt" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="apMAt" class="form-label">Apellido Materno *</label>
+                        <input type="text" id="apMAt" name="apMAt" class="form-control" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="apPAt" class="form-label">Apellido Paterno *</label>
-                    <input type="text" id="apPAt" name="apPAt" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="apMAt" class="form-label">Apellido Materno *</label>
-                    <input type="text" id="apMAt" name="apMAt" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="correo" class="form-label">Correo:</label>
-                    <input type="email" name="correo" id="correo" class="form-control" placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="telefono" class="form-label">Telefono *</label>
-                    <input type="tel" id="telefono" name="telefono" class="form-control" required>
+                <div class="form-container">
+                    <div class="form-group">
+                        <label for="password" class="form-label">Contraseña:</label>
+                        <input type="password" name="password" id="password" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="correo" class="form-label">Correo:</label>
+                        <input type="email" name="correo" id="correo" class="form-control" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono" class="form-label">Telefono *</label>
+                        <input type="tel" id="telefono" name="telefono" class="form-control" required>
+                    </div>
                 </div>
                 <?php
                 $query = "SELECT id, nombre FROM establecimiento";
                 $resultado = $conexion->query($query);
                 ?>
-                <div class="form-group">
-                    <label for="establecimiento" class="form-label">Establecimiento *</label>
-                    <select type='text' id="establecimiento" name="establecimiento" class="form-control" required>
-                        <option value="" disabled selected>Selecciona un Establecimiento</option>
-                        <?php
-                        while ($fila = $resultado->fetch_assoc()) {
-                            echo '<option value="' . $fila["id"] . '">' . $fila["nombre"] . '</option>';
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="password">Contraseña:</label>
-                    <input type="password" name="password" id="password" class="form-control" required>
-                </div>
+                <div class="form-container">
 
-                <div class="text-center">
-                    <input type="submit" value="Guardar" class="btn btn-success" name="registrar"><button
-                        onclick="window.location.href='./gestion.php'" type="button"
-                        class="btn btn-secondary">Cancelar</button>
-
+                    <div class="form-group">
+                        <label for="establecimiento" class="form-label">Establecimiento *</label>
+                        <select type='text' id="establecimiento" name="establecimiento" class="form-control" required>
+                            <option value="" disabled selected>Selecciona un Establecimiento</option>
+                            <?php
+                            while ($fila = $resultado->fetch_assoc()) {
+                                echo '<option value="' . $fila["id"] . '">' . $fila["nombre"] . '</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    
+                    <div class="text-center">
+                        <input type="submit" value="Guardar" class="btn btn-success" name="registrar"><button
+                            onclick="window.location.href='./index.php'" type="button"
+                            class="btn btn-secondary">Cancelar</button>
+    
+                    </div>
                 </div>
             </form>
         </div>

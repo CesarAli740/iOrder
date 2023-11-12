@@ -36,10 +36,16 @@ if ($rol != '1') {
     }
 
     .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      margin-top: 7%;
+     
+        background-color: transparent;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        color: white; /* Cambia el color de texto a negro */
+        
+     
+      margin-top: 7rem;
     }
 
     h1,
@@ -77,6 +83,7 @@ if ($rol != '1') {
       color: white;
       font-weight: bold;
       text-transform: uppercase;
+      text-decoration: none;
     }
 
     .btn-success {
@@ -84,10 +91,13 @@ if ($rol != '1') {
     }
 
     .btn-secondary {
-      background-color: #ccc;
-      color: #333;
+      background-color: #ea272d !important;
+      color: white;
+      text-decoration: none;
     }
-
+    .btn-secondary:hover {
+      background-color: #7d1518 !important;
+    }
     .text-center {
       text-align: center;
     }
@@ -96,9 +106,16 @@ if ($rol != '1') {
     }
     /* Estilos de la tabla */
     table {
-      border-collapse: collapse;
-      width: 100%;
-      border: 1px solid #ccc;
+       border-collapse: collapse;
+            margin: auto;
+      
+        background-color: transparent;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        color: white; /* Cambia el color de texto a negro */
+        width: 100%;
     }
 
     th,
@@ -107,6 +124,7 @@ if ($rol != '1') {
       padding: 15px;
       border: 1px solid #ccc;
       text-align: center;
+      background-color: transparent;
     }
 
     /* styles.css */
@@ -135,7 +153,7 @@ if ($rol != '1') {
 
 <body>
   <?php include '../NAVBARiorder/index.php'; ?>
-  <div class="container" style="margin-top: 5rem;">
+  <div class="container">
     <div class="section-container">
       <h1>Lista de Usuarios</h1>
       <table>
@@ -161,7 +179,7 @@ if ($rol != '1') {
         </tbody>
       </table>
       <div class="text-center" style="margin-top: 20px;"> <!-- Agrega margen superior para separar del formulario -->
-        <a href="gestion.php" class="btn btn-secondary">Regresar</a> <!-- Botón para regresar a gestion.php -->
+        <a href="index.php" class="btn btn-secondary">Regresar</a> <!-- Botón para regresar a gestion.php -->
 </body>
 
 </html>

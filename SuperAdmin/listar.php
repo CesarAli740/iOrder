@@ -25,13 +25,22 @@ if ($rol != '1') {
             background-color: transparent;
             margin: 0;
             font-family: Arial, sans-serif;
+            min-height: 100vh;
         }
 
         .container {
+            margin: auto;
+        margin-top: 20px;
+        background-color: transparent;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        color: white; /* Cambia el color de texto a negro */
+        width: 100%;
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
-            margin-top: 7%;
         }
 
         h1,
@@ -72,12 +81,16 @@ if ($rol != '1') {
         }
 
         .btn-success {
-            background-color: #1B9C85;
+            background-color: #ea272d;
+            color: white;
         }
 
         .btn-secondary {
-            background-color: #ccc;
-            color: #333;
+            background-color: #ea272d !important;
+            color: white;
+        }
+        .btn-secondary:hover{
+            background-color: #7d1518 !important;
         }
 
         .text-center {
@@ -87,8 +100,16 @@ if ($rol != '1') {
         /* Estilos de la tabla */
         table {
             border-collapse: collapse;
-            width: 100%;
-            border: 1px solid #ccc;
+            margin: auto;
+      
+        background-color: transparent;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        color: white; /* Cambia el color de texto a negro */
+        width: 100%;
+           
         }
 
         th,
@@ -97,6 +118,7 @@ if ($rol != '1') {
             padding: 15px;
             border: 1px solid #ccc;
             text-align: center;
+            background-color: rgba(128, 128, 128, 0.5);
         }
 
         /* styles.css */
@@ -120,13 +142,25 @@ if ($rol != '1') {
             margin-bottom: 1rem;
             text-align: center;
         }
+        .table-header{
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 5rem;
+        }
     </style>
 </head>
 
 <body>
 
-    <div class="modal-content" style="margin-top: 7rem">
-        <h2 class="modal-title">Lista de Usuarios</h2>
+    <div class="modal-content" style="margin-top: 8rem">
+        <div class="table-header">
+            <h2 class="modal-title">Lista de Usuarios</h2>
+            <button onclick="window.location.href='./index.php'" type="button"class="btn btn-secondary">Volver</button>
+        </div>
+
         <?php include('../includes/_db.php'); ?>
 
         <div class="container is-fluid">
