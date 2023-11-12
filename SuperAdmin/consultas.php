@@ -10,36 +10,44 @@ if (isset($_POST['crear_establecimiento'])) {
     $numeroResponsable = $_POST["tel_responsable"];
     $tipo = $_POST["tipo"];
 
-    // Query para insertar los datos en la tabla establecimiento
-    $query = "INSERT INTO establecimiento (nombre, tipo_id, latitud, longitud, responsable, tel_responsable) VALUES ('$nombre', '$tipo', '$latitud', '$longitud', '$responsable', '$numeroResponsable')";
+    $imagen = $_FILES["imagen"];
 
-    // Ejecutar el query
-    if (mysqli_query($conexion, $query)) {
-        header("Location: index.php");
-        exit(); // Asegura que el script se detenga después de la redirección
+    // Validar que se haya seleccionado una imagen
+    if ($imagen["error"] != 0) {
+        echo "Se ha producido un error al subir la imagen.";
     } else {
-        echo "Error al registrar el establecimiento: " . mysqli_error($conexion);
+
+        // Obtener el nombre del archivo
+        $nombre_archivo = $imagen["name"];
+
+        // Obtener la extensión del archivo
+        $extension = pathinfo($nombre_archivo, PATHINFO_EXTENSION);
+
+        // Validar que la extensión del archivo sea válida
+        if (!in_array($extension, ["jpg", "jpeg", "png"])) {
+            echo "El archivo no es una imagen válida.";
+        } else {
+
+            // Guardar la imagen en el servidor
+            $nombreb = str_replace(' ', '_', $nombre);
+            $ruta_archivo = "logos/" . $nombreb . 'logo'. '.' . $extension;
+            move_uploaded_file($imagen["tmp_name"], $ruta_archivo);
+
+            // Insertar la imagen en la base de datos
+            $query = "INSERT INTO establecimiento (nombre, tipo_id, latitud, longitud, responsable, tel_responsable, logo) VALUES ('$nombre', '$tipo', '$latitud', '$longitud', '$responsable', '$numeroResponsable', '$ruta_archivo')";
+            $resultado = $conexion->query($query);
+
+            if ($resultado) {
+                echo "La imagen se ha subido correctamente.";
+                
+        header("Location: index.php");
+            } else {
+                echo "Se ha producido un error al guardar la imagen en la base de datos.";
+            }
+
+        }
+
     }
 }
-/* 
-if(isset($_FILES['logo']) && $_FILES['logo']['error'] == 0) {
-    // Ruta donde se guardará el archivo
-    $uploadDir = '../logos/'; // Reemplaza esto con la ruta adecuada en tu servidor
 
-    // Obtener el nombre original del archivo
-    $logoName = $_FILES['logo']['name'];
-
-    // Ruta completa del archivo en el servidor
-    $uploadFile = $uploadDir . $logoName;
-
-    // Mover el archivo cargado al destino
-    if(move_uploaded_file($_FILES['logo']['tmp_name'], $uploadFile)) {
-        // El archivo se ha cargado correctamente, ahora puedes guardar el nombre del archivo en la base de datos o realizar otras operaciones necesarias.
-        echo 'El archivo se ha cargado correctamente.';
-    } else {
-        echo 'Error al cargar el archivo.';
-    }
-} else {
-    echo 'No se ha seleccionado ningún archivo.';
-} */
 ?>

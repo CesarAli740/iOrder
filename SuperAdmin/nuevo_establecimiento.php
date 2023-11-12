@@ -91,23 +91,27 @@ if ($rol != '1') {
             margin: 0 5rem;
             padding: 2rem;
         }
-        .container-map-1{
+
+        .container-map-1 {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             width: 35%;
         }
-        .container-map-2{
+
+        .container-map-2 {
             width: 50%;
         }
-        .form-select{
+
+        .form-select {
             width: 100%;
             height: 3rem;
             border-radius: 1rem;
             cursor: pointer;
         }
-        form{
+
+        form {
             width: 100%;
         }
     </style>
@@ -144,6 +148,10 @@ if ($rol != '1') {
 
                     <label class="form-label" for="tel_responsable">Número del Responsable:</label>
                     <input class="form-control" type="tel" id="tel_responsable" name="tel_responsable" required><br>
+
+                    <label for="imagen">Seleccionar Logo:</label>
+                    <input type="file" name="imagen">
+
                     <button class="btn-success" type="submit" name="crear_establecimiento">Registrar</button>
                 </div>
                 <div class="container-map-2">
@@ -153,16 +161,8 @@ if ($rol != '1') {
 
             </div>
 
-
-
-            <label for="logo">Seleccionar Logo:</label>
-    <input type="file" id="logo" name="logo" accept="image/*"><br>
-
-
         </form>
     </div>
-
-
 
     <script>
         var map;
@@ -178,7 +178,7 @@ if ($rol != '1') {
             });
 
             // Agregar un evento de clic al mapa para obtener las coordenadas y colocar el marcador
-            map.addListener('click', function(event) {
+            map.addListener('click', function (event) {
                 placeMarker(event.latLng);
                 document.getElementById('latitud').value = event.latLng.lat();
                 document.getElementById('longitud').value = event.latLng.lng();
@@ -201,7 +201,7 @@ if ($rol != '1') {
             var formulario = document.getElementById('formulario');
 
             // Agregar un evento de submit al formulario
-            formulario.addEventListener('submit', function(event) {
+            formulario.addEventListener('submit', function (event) {
                 // Verificar si se ha colocado el marcador en el mapa
                 if (!marker) {
                     alert('Debes seleccionar una ubicación en el mapa antes de enviar el formulario.');
@@ -210,7 +210,8 @@ if ($rol != '1') {
             });
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDsMDudKEIbSQZH-dP2W9JP3b3F10_85k&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDsMDudKEIbSQZH-dP2W9JP3b3F10_85k&callback=initMap"
+        async defer></script>
 </body>
 
 </html>

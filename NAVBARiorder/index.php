@@ -1,8 +1,10 @@
 <?php
+include '../includes/_db.php';
 session_start();
 error_reporting(0);
 $validar = isset($_SESSION['correo']) ? $_SESSION['correo'] : '';
 $rol = $_SESSION['rol'];
+$establecimiento = $_SESSION['establecimiento'];
 if ($validar == '') {
   session_unset();
   session_destroy();
@@ -20,12 +22,13 @@ if ($validar == '') {
   }
 
   body {
-   
- 
+
+
     background-image: url('../images/imagenmesa.svg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Opcional: mantiene la imagen fija mientras se desplaza */
+    background-attachment: fixed;
+    /* Opcional: mantiene la imagen fija mientras se desplaza */
 
     min-height: 100vh;
   }
@@ -169,7 +172,7 @@ if ($validar == '') {
     }
   }
 
-   .video-container {
+  .video-container {
     position: relative;
     height: 100vh;
     overflow: hidden;
@@ -194,17 +197,20 @@ if ($validar == '') {
     height: 100%;
     background: rgba(0, 0, 0, 0.4);
   }
-/* Add this CSS to your existing styles */
-.dropdown {
+
+  /* Add this CSS to your existing styles */
+  .dropdown {
     position: relative;
     display: inline-block;
     margin-left: 2.5rem;
-    position: relative; /* Agregar posición relativa */
-}
+    position: relative;
+    /* Agregar posición relativa */
+  }
 
-.dropdown-content {
+  .dropdown-content {
     position: absolute;
-    background-color:rgba(169, 169, 169, 0.5);;
+    background-color: rgba(169, 169, 169, 0.5);
+    ;
     width: 140px;
     border-radius: 8px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -212,53 +218,62 @@ if ($validar == '') {
     opacity: 0;
     visibility: hidden;
     text-align: center;
-    left: 60%; /* Centrar horizontalmente con respecto al elemento padre */
-    transform: translateX(-50%); /* Centrar horizontalmente con respecto al elemento padre */
-    top: 100%; /* Coloca el menú debajo del elemento padre */
+    left: 60%;
+    /* Centrar horizontalmente con respecto al elemento padre */
+    transform: translateX(-50%);
+    /* Centrar horizontalmente con respecto al elemento padre */
+    top: 100%;
+    /* Coloca el menú debajo del elemento padre */
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-}
-.navbar {
-    position: relative; /* Add relative positioning to the navbar container */
-}
+  }
 
-.dropdown:hover .dropdown-content {
+  .navbar {
+    position: relative;
+    /* Add relative positioning to the navbar container */
+  }
+
+  .dropdown:hover .dropdown-content {
     opacity: 1;
     visibility: visible;
-}
+  }
 
-.dropdown-content a {
+  .dropdown-content a {
     color: white;
     padding: 12px 0;
-    margin-left: 2.5rem; /* Remove left margin to align the text to the left edge */
+    margin-left: 2.5rem;
+    /* Remove left margin to align the text to the left edge */
     text-decoration: none;
     display: block;
-    text-align: left; /* Align the text to the left within the dropdown option */
-}
+    text-align: left;
+    /* Align the text to the left within the dropdown option */
+  }
 
-.dropdown-content a:hover {
+  .dropdown-content a:hover {
     background-color: rgba(255, 255, 255, 0.2);
-}
+  }
 
-/* Add a transition for the dropdown content */
-.dropdown:hover .dropdown-content {
+  /* Add a transition for the dropdown content */
+  .dropdown:hover .dropdown-content {
     opacity: 1;
     visibility: visible;
-}
+  }
 
-    
-    .btn {
-        background-color: #4CAF50; /* Cambia el color de fondo del botón a verde */
-        color: #fff; /* Cambia el color del texto del botón a blanco */
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    
-    .btn:hover {
-        background-color: #45a049; /* Cambia el color de fondo al pasar el mouse */
-    }
 
+  .btn {
+    background-color: #4CAF50;
+    /* Cambia el color de fondo del botón a verde */
+    color: #fff;
+    /* Cambia el color del texto del botón a blanco */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background-color: #45a049;
+    /* Cambia el color de fondo al pasar el mouse */
+  }
 </style>
 
 
@@ -278,37 +293,37 @@ if ($validar == '') {
 if ($rol == '1') {
   ?>
 
-<body style="background-image: url('../images/mesa2.svg');">
+  <body style="background-image: url('../images/mesa2.svg');">
     <header class="header">
-        <a href="../SuperAdmin/index.php" class="logo">
-            <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
-        </a>
-        <input type="checkbox" id="check">
-        <label for="check" class="icons">
-            <i class='bx bx-menu' id="menu-icon"></i>
-            <i class='bx bx-x' id="close-icon"></i>
-        </label>
-        <nav class="navbar">
-            <a href="../SuperAdmin/index.php" style="--i:0;">Inicio</a>
-            <div class="dropdown">
-                <a href="#" style="--i:1;">Usuarios</a>
-                <div class="dropdown-content">
-                    <a href="../SuperAdmin/registrar.php">Crear</a>
-                    <a href="../SuperAdmin/listar.php">Listar</a>
-                    <a href="../SuperAdmin/buscar.php">Buscar</a>
-                    <a href="../SuperAdmin/editar.php">Editar</a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <a href="#" style="--i:2;">Establecimientos</a>
-                <div class="dropdown-content">
-                    <a href="../SuperAdmin/nuevo_establecimiento.php">Crear</a>
-                    <a href="../SuperAdmin/listar_establecimientos.php">Listar</a>
-                    <a href="../SuperAdmin/buscar_establecimiento.php">Buscar</a>
-                    <a href="../SuperAdmin/editar_establecimiento.php">Editar</a>
-                </div>
-            </div>
-            <!-- <div class="dropdown">
+      <a href="../SuperAdmin/index.php" class="logo">
+        <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
+      </a>
+      <input type="checkbox" id="check">
+      <label for="check" class="icons">
+        <i class='bx bx-menu' id="menu-icon"></i>
+        <i class='bx bx-x' id="close-icon"></i>
+      </label>
+      <nav class="navbar">
+        <a href="../SuperAdmin/index.php" style="--i:0;">Inicio</a>
+        <div class="dropdown">
+          <a href="#" style="--i:1;">Usuarios</a>
+          <div class="dropdown-content">
+            <a href="../SuperAdmin/registrar.php">Crear</a>
+            <a href="../SuperAdmin/listar.php">Listar</a>
+            <a href="../SuperAdmin/buscar.php">Buscar</a>
+            <a href="../SuperAdmin/editar.php">Editar</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <a href="#" style="--i:2;">Establecimientos</a>
+          <div class="dropdown-content">
+            <a href="../SuperAdmin/nuevo_establecimiento.php">Crear</a>
+            <a href="../SuperAdmin/listar_establecimientos.php">Listar</a>
+            <a href="../SuperAdmin/buscar_establecimiento.php">Buscar</a>
+            <a href="../SuperAdmin/editar_establecimiento.php">Editar</a>
+          </div>
+        </div>
+        <!-- <div class="dropdown">
                 <a href="#" style="--i:3;">Tipo</a>
                 <div class="dropdown-content">
                     <a href="../SuperAdmin/registrar_tipo.php">Crear</a>
@@ -317,12 +332,12 @@ if ($rol == '1') {
                     <a href="../SuperAdmin/editar_tipo_form.php">Editar</a>
                 </div>
             </div> -->
-            <a href="../includes/_sesion/cerrarSesion.php" style="--i:4;">Salir</a>
-        </nav>
+        <a href="../includes/_sesion/cerrarSesion.php" style="--i:4;">Salir</a>
+      </nav>
     </header>
-  
-   
-</body>
+
+
+  </body>
   <?php
 } else ?>
 
@@ -330,40 +345,58 @@ if ($rol == '1') {
 if ($rol == '2') {
   ?>
 
-<body style="background-image: url('../images/mesa3.svg');">
+  <body style="background-image: url('../images/mesa3.svg');">
     <header class="header">
-        <a href="../Admin/index.php" class="logo">
-            <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
-        </a>
-        <input type="checkbox" id="check">
-        <label for "check" class="icons">
-            <i class='bx bx-menu' id="menu-icon"></i>
-            <i class='bx bx-x' id="close-icon"></i>
-        </label>
-        <nav class="navbar">
-            <a href="../Admin/index.php" style="--i:0;">Inicio</a>
-            <div class="dropdown">
-                <a href="#" style="--i:1;">Usuarios</a>
-                <div class="dropdown-content">
-                    <a href="../Admin/registrar.php">Crear</a>
-                    <a href="../Admin/listar.php">Listar</a>
-                    <a href="../Admin/buscar.php">Buscar</a>
-                    <a href="../Admin/editar.php">Editar</a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <a href="#" style="--i:3;">Reportes</a>
-                <div class="dropdown-content">
-                    <a href="#">Pedidos</a>
-                    <a href="#">Reservas</a>
-                    
-                </div>
-            </div>
-            <a href="../Admin/perfil.php" style="--i:4;">Perfil</a>
-            <a href="../includes/_sesion/cerrarSesion.php" style="--i:5;">Salir</a>
-        </nav>
+      <a href="../Admin/index.php" class="logo">
+        <?php $query = "SELECT logo FROM establecimiento WHERE id = $establecimiento";
+
+        $resultado = $conexion->query($query);
+
+        if ($resultado) {
+          $fila = $resultado->fetch_assoc();
+          $logo = $fila['logo'];
+          $resultado->free();
+        } else {
+          echo "Error en la consulta: " . $conexion->error;
+        } ?>
+        <?php if (isset($logo)): ?>
+          <img src="../SuperAdmin/<?php echo $logo ?>" alt="LOGO" style="height: 5rem;">
+        <?php else: ?>
+          <p>No se encontró ninguna imagen para este establecimiento.</p>
+        <?php endif; ?>
+
+      </a>
+
+      <input type="checkbox" id="check">
+      <label for "check" class="icons">
+        <i class='bx bx-menu' id="menu-icon"></i>
+        <i class='bx bx-x' id="close-icon"></i>
+      </label>
+      <nav class="navbar">
+        <a href="../Admin/index.php" style="--i:0;">Inicio</a>
+        <a href="../Admin/menu.php" style="--i:0;">Menu</a>
+        <div class="dropdown">
+          <a href="#" style="--i:1;">Usuarios</a>
+          <div class="dropdown-content">
+            <a href="../Admin/registrar.php">Crear</a>
+            <a href="../Admin/listar.php">Listar</a>
+            <a href="../Admin/buscar.php">Buscar</a>
+            <a href="../Admin/editar.php">Editar</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <a href="#" style="--i:3;">Reportes</a>
+          <div class="dropdown-content">
+            <a href="#">Pedidos</a>
+            <a href="#">Reservas</a>
+
+          </div>
+        </div>
+        <a href="../Admin/perfil.php" style="--i:4;">Perfil</a>
+        <a href="../includes/_sesion/cerrarSesion.php" style="--i:5;">Salir</a>
+      </nav>
     </header>
-</body>
+  </body>
 
   <?php
 } ?>
@@ -372,28 +405,43 @@ if ($rol == '2') {
 if ($rol == '5') {
   ?>
 
-<body style="background-image: url('../images/mesa4.svg');">
+  <body style="background-image: url('../images/mesa4.svg');">
     <header class="header">
-        <a href="../Cliente/index.php" class="logo">
-            <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
-        </a>
-        <input type="checkbox" id="check">
-        <label for="check" class="icons">
-            <i class='bx bx-menu' id="menu-icon"></i>
-            <i class='bx bx-x' id="close-icon"></i>
-        </label>
-        <nav class="navbar">
-            <a href="../Cliente/index.php" style="--i:0;">Inicio</a>
-            <a href="../Cliente/menu.php" style="--i:1;">Menu</a>
-            <div class="dropdown">
-                <a href="../Cliente/reservar.php" style="--i:3;">Reservas</a>
-                <a href="../Cliente/index.php" style="--i:3;">Pedidos</a>
-            </div>
-            <a href="../includes/_sesion/cerrarSesion.php" style="--i:4;">Salir</a>
-        </nav>
+      <a href="../Cliente/index.php" class="logo">
+        <?php $query = "SELECT logo FROM establecimiento WHERE id = $establecimiento";
+
+        $resultado = $conexion->query($query);
+
+        if ($resultado) {
+          $fila = $resultado->fetch_assoc();
+          $logo = $fila['logo'];
+          $resultado->free();
+        } else {
+          echo "Error en la consulta: " . $conexion->error;
+        } ?>
+        <?php if (isset($logo)): ?>
+          <img src="../SuperAdmin/<?php echo $logo ?>" alt="LOGO" style="height: 5rem;">
+        <?php else: ?>
+          <p>No se encontró ninguna imagen para este establecimiento.</p>
+        <?php endif; ?>
+      </a>
+      <input type="checkbox" id="check">
+      <label for="check" class="icons">
+        <i class='bx bx-menu' id="menu-icon"></i>
+        <i class='bx bx-x' id="close-icon"></i>
+      </label>
+      <nav class="navbar">
+        <a href="../Cliente/index.php" style="--i:0;">Inicio</a>
+        <a href="../Cliente/menu.php" style="--i:1;">Menu</a>
+        <div class="dropdown">
+          <a href="../Cliente/reservar.php" style="--i:3;">Reservas</a>
+          <a href="../Cliente/index.php" style="--i:3;">Pedidos</a>
+        </div>
+        <a href="../includes/_sesion/cerrarSesion.php" style="--i:4;">Salir</a>
+      </nav>
     </header>
-    
-</body>
+
+  </body>
 
   <?php
 } ?>

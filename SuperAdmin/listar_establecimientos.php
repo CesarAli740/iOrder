@@ -91,7 +91,6 @@ if ($rol != '1') {
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Ubicación</th>
                 <th>Tipo</th>
             </tr>
         </thead>
@@ -104,7 +103,6 @@ if ($rol != '1') {
             while ($establecimiento = mysqli_fetch_assoc($resultado)) {
                 echo "<tr>";
                 echo "<td>" . $establecimiento['nombre'] . "</td>";
-                echo "<td>" . $establecimiento['ubicacion'] . "</td>";
                 echo "<td>" . $establecimiento['tipo'] . "</td>";
                 echo "</tr>";
             }

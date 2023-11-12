@@ -198,7 +198,6 @@ if ($rol != '1') {
                     while ($establecimiento = mysqli_fetch_assoc($resultado)) {
                         echo "<tr>";
                         echo "<td>" . $establecimiento['nombre'] . "</td>";
-                        echo "<td>" . $establecimiento['ubicacion'] . "</td>";
                         echo "<td>" . $establecimiento['tipo'] . "</td>";
                         echo "</tr>";
                     }

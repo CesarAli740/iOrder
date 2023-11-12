@@ -8,7 +8,6 @@ body {
   min-height: 100vh;
 }
 .header {
-  margin-top: 160px;
   position: fixed;
   top: 0;
   left: 0;
