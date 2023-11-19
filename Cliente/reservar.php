@@ -28,6 +28,11 @@ if ($rol != '5') {
     .container {
       width: 100%;
       text-align: center;
+      background-color: rgba(128, 128, 128, 0.7);
+      border: 1px solid black;
+      border-radius: 2rem;
+      padding: 1rem;
+      font-family: Arial, sans-serif;
     }
 
     .contenedor-mesas {
@@ -40,41 +45,32 @@ if ($rol != '5') {
 
     .mesa {
       width: 100px;
-      /* Ancho de cada mesa */
       height: 100px;
-      /* Altura de cada mesa */
       border: 2px solid #000;
       border-radius: 10px;
-      /* Bordes redondeados */
       margin: 20px;
-      /* Espaciado entre las mesas */
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       font-size: 24px;
-      /* Tamaño del número de mesa */
       position: relative;
-      /* Para posicionar el número y el estado */
+      cursor: pointer;
     }
 
     .numero-mesa {
       position: absolute;
       top: 100px;
-      /* Ajusta la posición vertical del número */
       font-size: 18px;
-      /* Tamaño del número de mesa */
+      margin-top: .5rem;
     }
-
 
     .estado-mesa {
       font-size: 14px;
-      /* Tamaño del texto del estado */
     }
 
     .mesa i {
       font-size: 48px;
-      /* Tamaño del icono */
     }
 
     .disponible {
@@ -89,19 +85,8 @@ if ($rol != '5') {
       color: red;
     }
 
-    /* Deshabilitar la interacción del usuario */
-    .mesa {
-      pointer-events: none;
-    }
-
-    .footer {
-      background-color: #ea272d;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
+    .mesa-select {
+      display: none;
     }
 
     .reservar-container {
@@ -127,56 +112,71 @@ if ($rol != '5') {
     .form-label {
       display: block;
       font-weight: bold;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 
     .form-control {
       width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
-      border-radius: 10px;
+      border-radius: 1rem;
       font-size: 14px;
     }
+
+    .btn-reservar {
+      background-color: #ea272d;
+      color: white;
+      border-radius: 1rem;
+      padding: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    .mesa.seleccionada {
+  background-color: lightblue;
+}
   </style>
 </head>
 
 <body>
   <div class="container">
-    <h1 class="title-reservas">Reservar Mesa</h1>
+    <h1 class="title-reservas">Reserva Tu Mesa</h1>
 
     <form action="_functions.php" method="post">
       <div class="reservar-container">
         <div class="form-group">
           <label class="form-label" for="nombre">Nombre:</label>
-          <input type="text" id="nombre" name="nombre" required><br>
+          <input class="form-control" type="text" id="nombre" name="nombre" required><br>
         </div>
         <div class="form-group">
           <label class="form-label" for="email">Email:</label>
-          <input type="email" id="email" name="email" required><br>
+          <input class="form-control" type="email" id="email" name="email" required><br>
         </div>
         <div class="form-group">
           <label class="form-label" for="telefono">Teléfono:</label>
-          <input type="tel" id="telefono" name="telefono" required><br>
+          <input class="form-control" type="tel" id="telefono" name="telefono" required><br>
         </div>
       </div>
       <div class="reservar-container">
         <div class="form-group">
           <label class="form-label" for="fecha">Fecha de reserva:</label>
-          <input type="date" id="fecha" name="fecha" required><br>
+          <input class="form-control" type="date" id="fecha" name="fecha" required><br>
         </div>
         <div class="form-group">
           <label class="form-label" for="hora">Hora de reserva:</label>
-          <input type="time" id="hora" name="hora" required><br>
+          <input class="form-control" type="time" id="hora" name="hora" required><br>
         </div>
         <div class="form-group">
-          <label class="form-label" for="mesa">Selecciona una mesa:</label>
-          <select id="mesaId" name="mesaId">
+          <label class="form-label" for="mesaSelect"></label>
+          <select class="form-control mesa-select" id="mesaSelect" name="mesaId">
             <?php
             // Hacer una consulta a la base de datos para obtener las mesas disponibles
             $sql = "SELECT id, estado FROM mesas WHERE mesas.establecimiento_id = $establecimiento";
             $result = $conexion->query($sql);
             $contador = 1;
-  
+
             // Mostrar las mesas disponibles en el formulario
             while ($row = $result->fetch_assoc()) {
               $mesa_id = $row['id'];
@@ -189,6 +189,7 @@ if ($rol != '5') {
           </select>
         </div>
       </div>
+
       <!-- Campo oculto para almacenar el ID de la mesa -->
 
       <div class="contenedor-mesas">
@@ -211,13 +212,12 @@ if ($rol != '5') {
           <div class="mesa <?php echo $clase_estado; ?>" data-id="<?php echo $mesa_id; ?>">
             <span class="numero-mesa">Mesa
               <?php echo $contador; ?>
-            </span> <!-- Número de mesa con el prefijo "Mesa" -->
-            <i class="fa-solid fa-utensils"></i> <!-- Icono dentro del margen de la mesa -->
+            </span>
+            <i class="fa-solid fa-utensils"></i>
             <span class="estado-mesa">
               <?php echo $estado_texto; ?>
-            </span> <!-- Texto del estado debajo del icono -->
+            </span>
           </div>
-
         <?php
           $contador++;
         }
@@ -228,13 +228,43 @@ if ($rol != '5') {
       </div>
 
       <br>
-      <input type="submit" value="Reservar">
+      <input class="btn-reservar" type="submit" value="Reservar">
     </form>
     <div class="footer">
       <p>Seleccione un número de mesa para reservar.</p>
     </div>
-
   </div>
+
+  <!-- ... tu código JavaScript ... -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const mesas = document.querySelectorAll(".mesa");
+
+  mesas.forEach(mesa => {
+    mesa.addEventListener("click", () => {
+      const mesaId = mesa.getAttribute("data-id");
+      const mesaSelect = document.getElementById("mesaSelect");
+      const estadoMesa = mesa.classList.contains("reservado") ? "reservado" : "disponible";
+
+      // Verificar si la mesa está disponible antes de seleccionarla
+      if (estadoMesa === "disponible") {
+        // Actualizar el valor del campo de selección
+        mesaSelect.value = mesaId;
+
+        // Agregar la clase 'seleccionada' a la mesa clicada
+        mesa.classList.add("seleccionada");
+
+        // Quitar la clase 'seleccionada' de otras mesas
+        mesas.forEach(otraMesa => {
+          if (otraMesa !== mesa) {
+            otraMesa.classList.remove("seleccionada");
+          }
+        });
+      }
+    });
+  });
+});
+  </script>
 </body>
 
 </html>

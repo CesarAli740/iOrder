@@ -25,7 +25,7 @@ if ($rol != '1') {
             background-color: transparent;
             margin: 0;
             font-family: Arial, sans-serif;
-            min-height: 100vh;
+          
         }
 
         .container {
@@ -41,6 +41,7 @@ if ($rol != '1') {
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
+            background-color: rgba(128, 128, 128, 0.7);
         }
 
         h1,
@@ -118,7 +119,7 @@ if ($rol != '1') {
             padding: 15px;
             border: 1px solid #ccc;
             text-align: center;
-            background-color: rgba(128, 128, 128, 0.5);
+            background-color: rgba(128, 128, 128, 0.5);
         }
 
         /* styles.css */

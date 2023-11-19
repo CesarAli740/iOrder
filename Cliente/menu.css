@@ -8,7 +8,6 @@ body {
   min-height: 100vh;
 }
 .header {
-  margin-top: 160px;
   position: fixed;
   top: 0;
   left: 0;
@@ -505,4 +504,30 @@ video {
   #menuTable td {
     text-align: center;
   }
+}
+
+.ver-carrito{
+  background-color: #A35E23;
+  padding: 1rem;
+  border-radius: 1rem;
+  color: white;
+  text-decoration: none;
+}
+.ver-carrito:hover{
+  background-color: #77461b;
+}
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem;
+  color: white;
+  font-size: 2rem;
+  background-color: #A35E23;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }

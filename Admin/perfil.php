@@ -32,20 +32,23 @@ if (isset($_POST['actualizar_perfil'])) {
     
     if ($conexion->query($actualizar_query) === TRUE) {
         header("Location: ./index.php"); 
-        echo '<script>window.location.href = "gestion.php";</script>';
+        echo '<script>window.location.href = "index.php";</script>';
         exit;
     } 
 }
 
 if (isset($_POST['cambiar_contraseña'])) {
     extract($_POST);
+    if (empty($new_password)) {
+        header("Location: ./index.php"); 
+        exit();  
+    }
     $password_hash = password_hash($new_password, PASSWORD_BCRYPT);
     $actualizar = "UPDATE user SET password_hash = '$password_hash' WHERE id = '$usuario_id'";
     mysqli_query($conexion, $actualizar);
     echo '<script>window.location.href = "gestion.php";</script>';
     exit();
   }
-
   $showChangePasswordForm = false;
 
   if (isset($_POST['obtener_contraseña'])) {
@@ -66,74 +69,85 @@ if (isset($_POST['cambiar_contraseña'])) {
 <html>
 <head>
     <title>Editar Perfil</title>
-</head>
-<style>
-    body {
-        margin-top: 5rem;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        background-color: #f0f0f0;
-    }
+    <style>
+        body {
+            margin-top: 8rem;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: rgba(128, 128, 128, 0.7);
+        }
+        
+        form {
+            margin-top: 20px;
+            width: 50rem;
+            padding: 3rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            background-color: rgba(128, 128, 128, 0.7);
+            color: white;
+        }
+
+        .form-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 1rem;
+            justify-content: center;
+        }
+        
+        .form-group label {
+            font-weight: bold;
+            width: 20%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="password"] {
+            color: white;
+            flex: 1;
+            width: 80%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            background-color: rgba(128, 128, 128, 0.7);
+        }
+
+        .form-group input[type="password"] {
+            width: 100%;
+        }
+
+        form button {
+            width: 20rem;
+            margin-top: 1rem;
+            margin-left: 15rem;
+            padding: 1rem;
+            background-color: red; /* Cambiado a rojo */
+            color: white;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: darkred; /* Cambiado a un tono más oscuro de rojo al pasar el mouse */
+        }
+        h1{
     
-    form {
-        width: 50rem;
-        padding: 3rem;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .form-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 1rem;
-        justify-content: center;
-    }
-    .form-group label {
-        font-weight: bold;
-        width: 20%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        text-align: center;
-    }
-
-    .form-group input[type="text"],
-    .form-group input[type="email"],
-    .form-group input[type="tel"],
-    .form-group input[type="password"] {
-        flex: 1;
-        width: 80%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        text-align: center;
-    }
-
-    .form-group input[type="password"] {
-        width: 100%;
-    }
-
-    form button {
-        width: 20rem;
-        margin-top: 1rem;
-        margin-left: 15rem;
-        padding: 1rem;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 9px;
-        cursor: pointer;
-    }
-
-    form button:hover {
-        background-color: #0056b3;
-    }
-</style>
+            color:white;
+            font-size: 40px;
+        }
+    </style>
+</head>
 <body>
     <h1>Editar Perfil</h1>
     <form method="post">
@@ -184,4 +198,3 @@ if (isset($_POST['cambiar_contraseña'])) {
 
 </body>
 </html>
-

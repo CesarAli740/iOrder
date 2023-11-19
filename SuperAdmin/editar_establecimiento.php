@@ -3,86 +3,189 @@
 session_start();
 error_reporting(0);
 $rol = $_SESSION['rol'];
-if($rol != '1'){
-    session_unset();
-    session_destroy();
-    header("Location: ../includes/login.php");
-    die();
+if ($rol != '1') {
+  session_unset();
+  session_destroy();
+  header("Location: ../includes/login.php");
+  die();
 }
 ?><?php
-include('../includes/_db.php');
+  include('../includes/_db.php');
 
-$consulta = "SELECT * FROM establecimiento";
-$resultado = mysqli_query($conexion, $consulta);
-$establecimientos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
-?>
- <style>
-    /* Estilos para la tabla */
-    .table-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-
-    table {
-      margin: auto;
-        margin-top: 2rem;
-        background-color: transparent;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        padding: 20px;
-        font-family: Arial, sans-serif;
-        color: white; /* Cambia el color de texto a negro */
-        width: 80%;
-    }
-
-    th, td {
-        padding: 15px;
-        border: 1px solid #ccc;
-        text-align: center;
-    }
-    h1, h2, h3 {
-        color: white;
-        text-align: center;
-        font-size: 50px;
-        margin-top: 200px;
-    }
-    
-</style>
-
+  $consulta = "SELECT * FROM establecimiento";
+  $resultado = mysqli_query($conexion, $consulta);
+  $establecimientos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+  ?>
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
- 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <div class="container" style="margin-top: 5rem;">
-    <div class="section-container">
-      <h1>Lista de Establecimientos</h1>
+  <link rel="stylesheet" href="../css/stylesuser"> <!-- Agrega la referencia al archivo de estilos -->
+  <style>
+    body {
+      background-color: transparent;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      margin-top: 10rem;
+      margin: 0 auto;
+      padding: 20px;
+      max-width: 80%;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: white;
+      text-align: center;
+      font-size: 50px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      color: white;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .btn-success {
+      background-color: #1B9C85;
+    }
+
+    .btn-secondary {
+      background-color: #ea272d !important;
+      color: white;
+      text-decoration: none;
+    }
+
+    .btn-secondary:hover {
+      background-color: #7d1518 !important;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    a {
+      color: red;
+    }
+
+    /* Estilos de la tabla */
+    table {
+      border-collapse: collapse;
+      margin: auto;
+
+      background-color: transparent;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      color: white;
+      /* Cambia el color de texto a negro */
+      width: 100%;
+    }
+
+    th,
+    td {
+      color: white;
+      padding: 15px;
+      border: 1px solid #ccc;
+      text-align: center;
+      background-color: transparent;
+    }
+
+    /* styles.css */
+
+    /* ... tus estilos generales ... */
+
+    /* Estilos para las secciones abiertas al hacer clic en los botones */
+    .section-container {
+      background-color: rgba(128, 128, 128, 0.7);
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      margin: 50px auto;
+      /* Ajusta el valor de margin-top según sea necesario */
+      max-width: 100%;
+      border: 1px solid white;
+      /* Nuevo estilo para el borde */
+      margin-top: 1rem;
+    }
+
+    .section-title {
+      color: #1B9C85;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .uppercontainer {
+      margin-top: 8rem;
+    }
+  </style>
 </head>
-<?php include '../NAVBARiorder/index.php'; ?>
+
 <body>
-  <table>
-    <thead>
-      <tr>
-        <th>Establecimiento</th>
-        <th>Editar</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php foreach ($establecimientos as $establecimiento) { ?>
-        <tr>
-          <td><?php echo $establecimiento['nombre']; ?></td>
-          <td>
-            <a href="editar_establecimiento_action.php?id=<?php echo $establecimiento['id']; ?>">editar</a>
-          </td>
-        </tr>
-      <?php } ?>
-    </tbody>
-  </table>
+  <?php include '../NAVBARiorder/index.php'; ?>
+  <div class="container uppercontainer">
+    <h1>Lista de Establecimientos</h1>
+    <div class="section-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Establecimiento</th>
+            <th>Nombre Responsable</th>
+            <th>Número Responsable</th>
+           
+            <th>Editar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($establecimientos as $establecimiento) { ?>
+            <tr>
+              <td><?php echo $establecimiento['nombre']; ?></td>
+              <td><?php echo $establecimiento['responsable']; ?></td>
+              <td><?php echo $establecimiento['tel_responsable']; ?></td>
+             
+              <td>
+                <a href="editar_establecimiento_action.php?id=<?php echo $establecimiento['id']; ?>">Editar</a>
+              </td>
+            </tr>
+          <?php } ?>
+        </tbody>
+      </table>
+      <div class="text-center" style="margin-top: 20px;"> <!-- Agrega margen superior para separar del formulario -->
+        <a href="index.php" class="btn btn-secondary">Regresar</a> <!-- Botón para regresar a gestion.php -->
+      </div>
+    </div>
 </body>
 
 </html>

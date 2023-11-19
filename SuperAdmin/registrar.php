@@ -21,21 +21,24 @@ if ($rol != '1') {
     <style>
         body {
             background-color: transparent;
-            margin: 0;
             font-family: Arial, sans-serif;
+            overflow: hidden;
         }
 
         .container {
-            margin-top: 70px;
             margin: 0 auto;
             padding: 20px;
+            background-color: rgba(128, 128, 128, 0.7);
+            max-width: 80%;
+            border: 1px solid white; /* Agregado: Borde delgado blanco */
+            border-radius: 10px; /* Agregado: Borde redondeado */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         input {
             background-color: transparent;
             color: white;
         }
-
 
         h1,
         h2,
@@ -44,15 +47,15 @@ if ($rol != '1') {
             text-align: center;
             font-size: 50px;
         }
-        .form-container{
+
+        .form-container {
             display: flex;
             justify-content: space-evenly;
             align-items: center;
             gap: 5rem;
             padding: 1rem;
-            /* border: 1px solid white;
-            border-radius: 1rem; */
         }
+
         .form-group {
             color: white;
             margin-bottom: 20px;
@@ -63,6 +66,7 @@ if ($rol != '1') {
             display: block;
             font-weight: bold;
             margin-bottom: 2rem;
+            font-size: 16px;
         }
 
         .form-control {
@@ -70,7 +74,7 @@ if ($rol != '1') {
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 10px;
-            font-size: 14px;
+            font-size: 16px;
         }
 
         .btn {
@@ -84,12 +88,12 @@ if ($rol != '1') {
             text-transform: uppercase;
         }
 
-
         .btn-success {
             background-color: #ea272d !important;
-            color: white;;
+            color: white;
             margin-right: 1rem;
         }
+
         .btn-success:hover {
             background-color: #7d1518 !important;
         }
@@ -99,6 +103,7 @@ if ($rol != '1') {
             color: #333;
             margin-left: 1rem;
         }
+
         .btn-secondary:hover {
             background-color: #5f5f5f !important;
             color: #333;
@@ -125,10 +130,8 @@ if ($rol != '1') {
 
         .section-container {
             background-color: transparent;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 80%;
+            padding: 2px;
+            margin: 5px;
         }
 
         .section-title {
@@ -136,16 +139,17 @@ if ($rol != '1') {
             font-size: 2.5rem;
             margin-bottom: 3rem;
             text-align: center;
+            font-weight: bold; /* Agregado: Texto en negrita */
         }
     </style>
-
 </head>
+
 <?php include '../NAVBARiorder/index.php'; ?>
 
 <body>
-    <div class="container" style="margin-top: 5rem;">
+<h2 style="margin-top: 8rem;">Registrar Usuario</h2>
+    <div class="container" style="margin-top: 1rem;">
         <div class="section-container">
-            <h2 class="section-title">Registrar Usuario</h2>
             <form action="../includes/validar.php" method="POST">
                 <div class="form-container">
                     <div class="form-group">

@@ -36,16 +36,10 @@ if ($rol != '1') {
     }
 
     .container {
-     
-        background-color: transparent;
-        border: 1px solid #ccc;
-        border-radius: 10px;
+        margin-top: 10rem;
+        margin: 0 auto;
         padding: 20px;
-        font-family: Arial, sans-serif;
-        color: white; /* Cambia el color de texto a negro */
-        
-     
-      margin-top: 7rem;
+        max-width: 80%;
     }
 
     h1,
@@ -133,13 +127,14 @@ if ($rol != '1') {
 
     /* Estilos para las secciones abiertas al hacer clic en los botones */
     .section-container {
-      background-color: transparent;
-      border-radius: 10px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 80%;
-      /* Ajusta el ancho máximo según tu preferencia */
+        background-color: rgba(128, 128, 128, 0.7);
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        margin: 50px auto; /* Ajusta el valor de margin-top según sea necesario */
+        max-width: 100%;
+        border: 1px solid white; /* Nuevo estilo para el borde */
+        margin-top: 1rem;
     }
 
     .section-title {
@@ -154,8 +149,8 @@ if ($rol != '1') {
 <body>
   <?php include '../NAVBARiorder/index.php'; ?>
   <div class="container">
+  <h2 style="margin-top: 7rem;">Lista de Usuarios</h2>
     <div class="section-container">
-      <h1>Lista de Usuarios</h1>
       <table>
         <thead>
           <tr>

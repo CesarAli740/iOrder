@@ -31,6 +31,8 @@ function acceso_user()
                 header("Location: ../SuperAdmin/index.php");
             } else if ($fila['rol'] == 2) { //Admin
                 header("Location: ../Admin/index.php");
+            } else if ($fila['rol'] == 4) { //Empleado
+                header("Location: ../Empleado/index.php");
             } else if ($fila['rol'] == 5) { //Cliente
                 header("Location: ../Cliente/index.php");
             } else {

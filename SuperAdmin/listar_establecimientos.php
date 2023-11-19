@@ -21,6 +21,9 @@ if ($rol != '1') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Establecimientos</title>
     <style>
+        body{
+            
+        }
     /* Estilos para la tabla */
     .table-container {
         display: flex;
@@ -31,8 +34,8 @@ if ($rol != '1') {
 
     table {
         margin: auto;
-        margin-top: 100px;
-        background-color: transparent;
+        margin-top: 50px;
+        background-color: rgba(128, 128, 128, 0.7);
         border: 1px solid #ccc;
         border-radius: 10px;
         padding: 20px;
@@ -92,11 +95,14 @@ if ($rol != '1') {
             <tr>
                 <th>Nombre</th>
                 <th>Tipo</th>
+                <th>Responsable</th>
+                <th>Telefono</th>
+                <th>Inicio de suscripción</th>
             </tr>
         </thead>
         <tbody>
             <?php
-            $consulta = "SELECT e.nombre, e.ubicacion, t.tipo 
+            $consulta = "SELECT *
                         FROM establecimiento AS e
                         INNER JOIN establecimiento_tipo AS t ON e.tipo_id = t.id";
             $resultado = mysqli_query($conexion, $consulta);
@@ -104,6 +110,9 @@ if ($rol != '1') {
                 echo "<tr>";
                 echo "<td>" . $establecimiento['nombre'] . "</td>";
                 echo "<td>" . $establecimiento['tipo'] . "</td>";
+                echo "<td>" . $establecimiento['responsable'] . "</td>";
+                echo "<td>" . $establecimiento['tel_responsable'] . "</td>";
+                echo "<td>" . $establecimiento['fecha_creacion'] . "</td>";
                 echo "</tr>";
             }
             ?>

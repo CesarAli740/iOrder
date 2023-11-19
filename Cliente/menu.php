@@ -78,6 +78,22 @@ function obtenerMenu()
 
     return $menuData;
 }
+
+
+//COLORES
+$queryEstablecimiento = "SELECT color1, color2 FROM establecimiento WHERE id = '$establecimiento'";
+$resultEstablecimiento = $conexion->query($queryEstablecimiento);
+
+$colores = [];
+
+if ($resultEstablecimiento) {
+    $colores = $resultEstablecimiento->fetch_assoc();
+}
+
+// Obtener los colores
+$color1 = isset($colores['color1']) ? $colores['color1'] : '';
+$color2 = isset($colores['color2']) ? $colores['color2'] : '';
+
 ?>
 
 <!DOCTYPE html>
@@ -111,7 +127,7 @@ function obtenerMenu()
                     echo '<img src="../Admin/menu/' . $item['imagen'] . '" alt="' . $item['nombre'] . '">';
                     echo '<h3>' . $item['nombre'] . '</h3>';
                     echo '<p class="price">$' . $item['precio'] . '</p>';
-                    echo '<button type="submit">Agregar al Carrito</button>';
+                    echo '<button type="submit" style="padding: 1rem; background-color: #A35E23; color: white; border-radius: 1rem; cursor: pointer;";>Agregar al Carrito</button>';
                     echo '</form>';
                     echo '</div>';
                 }
@@ -121,10 +137,10 @@ function obtenerMenu()
     </section>
     <div class="options">
         <div class="filter-options">
-            <h3>Buscar nombre de producto</h3>
+            <h3 id="filterh3">Buscar nombre de producto</h3>
             <input type="search" />
         </div>
-        <a href="ver_carrito.php">Ver Carrito</a>
+        <a class="ver-carrito" href="ver_carrito.php">Ver Carrito</a>
     </div>
     <div class="menu-panel">
         <div class="panel-header">
@@ -153,8 +169,66 @@ function obtenerMenu()
             </table>
         </div>
     </div>
+    <div id="popup" class="popup">
+        Se agregó al carrito.
+    </div>
     <script>
+        const color1 = '<?php echo $color1; ?>';
+        const color2 = '<?php echo $color2; ?>';
         document.addEventListener("DOMContentLoaded", () => {
+            //COLORES
+            document.body.style.backgroundColor = color2;
+
+            const menuNavbar1 = document.querySelector(".menu-navbar");
+            menuNavbar1.style.backgroundColor = color1;
+            const filterH3 = document.getElementById("filterh3");
+            filterH3.style.color = color2;
+
+            const panelH1 = document.querySelector(".panel-header h1");
+            panelH1.style.color = color2;
+
+            const thElements = document.querySelectorAll("#menuTable th");
+            thElements.forEach(th => th.style.backgroundColor = color1);
+
+            const crearProductButton = document.querySelector(".ver-carrito");
+            crearProductButton.style.backgroundColor = color1;
+            crearProductButton.style.color = color2;
+
+            crearProductButton.addEventListener("mouseover", () => {
+                const hoverColor = darkenColor(color1, 1);
+                crearProductButton.style.backgroundColor = hoverColor;
+            });
+            crearProductButton.addEventListener("mouseout", () => {
+                crearProductButton.style.backgroundColor = color1;
+            });
+
+            const categoryLinks = document.querySelectorAll(".menu-navbar a");
+
+            // Cambiar color al hacer hover
+            categoryLinks.forEach((link) => {
+                link.addEventListener("mouseover", () => {
+                    link.style.color = color2;
+                });
+
+                // Restaurar color original al quitar el hover
+                link.addEventListener("mouseout", () => {
+                    link.style.color = "";
+                });
+            });
+
+            // Función para oscurecer el color en porcentaje
+            function darkenColor(color, percent) {
+                const num = parseInt(color.slice(1), 16);
+                const amt = Math.round(2.55 * percent);
+                const R = (num >> 16) - amt;
+                const G = (num >> 8 & 0x00FF) - amt;
+                const B = (num & 0x0000FF) - amt;
+                return `#${(1 << 24 | R << 16 | G << 8 | B).toString(16).slice(1)}`;
+            }
+            //ACABA COLORES
+
+
+
             const filterInput = document.querySelector(".filter-options input[type='search']");
             const menuNavbar = document.querySelector(".menu-navbar");
 
@@ -204,6 +278,11 @@ function obtenerMenu()
                         const button = document.createElement("button");
                         button.type = "submit";
                         button.textContent = "Agregar al Carrito";
+                        button.style.padding = "1rem";
+                        button.style.backgroundColor = "#A35E23";
+                        button.style.color = "white";
+                        button.style.borderRadius = "1rem";
+                        button.style.cursor = "pointer";
                         form.appendChild(button);
 
                         card.appendChild(form);
@@ -245,6 +324,26 @@ function obtenerMenu()
                     const category = event.target.getAttribute("data-category");
                     renderMenuCards(category);
                 }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const formElements = document.querySelectorAll("form[action='']");
+
+            formElements.forEach(form => {
+                form.addEventListener("submit", (event) => {
+                    event.preventDefault();
+                    const popup = document.getElementById("popup");
+                    popup.textContent = "Se añadió al carrito ✅";
+                    popup.style.display = "block";
+
+                    // Oculta el popup después de 0.5 segundos (500 milisegundos)
+                    setTimeout(() => {
+                        popup.style.display = "none";
+                        form.submit();
+                    }, 300);
+                });
             });
         });
     </script>

@@ -9,6 +9,22 @@ if ($rol != '1') {
     header("Location: ../includes/login.php");
     die();
 }
+
+// Variable para determinar si se ha realizado la búsqueda
+$busqueda_realizada = false;
+$resultado = null;
+
+if (isset($_GET['nombre'])) {
+    $nombre = $_GET['nombre'];
+    $consulta = "SELECT *
+                 FROM establecimiento AS e
+                 INNER JOIN establecimiento_tipo AS t ON e.tipo_id = t.id
+                 WHERE e.nombre LIKE '%$nombre%'";
+    $resultado = mysqli_query($conexion, $consulta);
+    
+    // Si se encontraron resultados, establecer la variable de búsqueda a verdadero
+    $busqueda_realizada = mysqli_num_rows($resultado) > 0;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es-MX">
@@ -21,8 +37,6 @@ if ($rol != '1') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscar Establecimiento</title>
     <style>
-        /* styles.css */
-
         body {
             background-color: transparent;
             margin: 0;
@@ -30,20 +44,16 @@ if ($rol != '1') {
         }
 
         .container {
-            display: flex;
-            flex-direction: row;
-            margin-top: 70px;
-            padding: 20px;
-            width: 100%;
+            background-color: rgba(128, 128, 128, 0.7);
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        margin: 50px auto; /* Ajusta el valor de margin-top según sea necesario */
+        max-width: 80%;
+        border: 1px solid white; /* Nuevo estilo para el borde */
         }
 
-        form {
-            width: 100%;
-        }
-
-        h1,
-        h2,
-        h3 {
+        h2 {
             color: white;
             text-align: center;
             font-size: 50px;
@@ -54,13 +64,11 @@ if ($rol != '1') {
         }
 
         .form-label {
-            display: block;
             font-weight: bold;
+            display: block;
             margin-bottom: 5px;
-        }
-
-        label {
             color: white;
+            font-size:20px;
         }
 
         .form-control {
@@ -80,9 +88,11 @@ if ($rol != '1') {
             color: white;
             font-weight: bold;
             text-transform: uppercase;
+            padding: 10px 20px;
         }
 
         .btn-success {
+            padding: 10px 20px;
             background-color: #ea272d;
             color: white;
         }
@@ -101,17 +111,15 @@ if ($rol != '1') {
             color: #333;
         }
 
-        .text-center {
-            text-align: center;
-        }
-
-        /* Estilos de la tabla */
         table {
             border-collapse: collapse;
             width: 80%;
             border: 1px solid #ccc;
             margin: auto;
             font-family: Arial, sans-serif;
+            background-color: rgba(128, 128, 128, 0.7);
+            margin-top: 20px; /* Ajuste de margen superior */
+            border-radius: 10px;
         }
 
         th,
@@ -123,31 +131,8 @@ if ($rol != '1') {
             background-color: transparent;
         }
 
-        /* styles.css */
-
-        /* ... tus estilos generales ... */
-
-        /* Estilos para las secciones abiertas al hacer clic en los botones */
-
-        .section-title {
-            color: white;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        /*ESTILOS DE HEADER SEARCH */
-        .etiqueta {
-            font-weight: bold;
-            margin-right: 1rem;
-        }
-
-        .campo-texto {
-            padding: 10px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            width: 15rem;
-            margin-right: 1rem;
+        .results {
+            margin-top: 20px; /* Ajuste de margen superior */
         }
 
         .container-establecimiento {
@@ -163,48 +148,49 @@ if ($rol != '1') {
 </head>
 
 <body>
-    <h2>Buscar Establecimiento</h2>
+    <h2 style="margin-top: 10rem;">Buscar Establecimiento</h2>
     <div class="container">
         <form action="" method="GET">
-            <div class="container-establecimiento">
-                <label for="nombre" class="form-label">Nombre:</label>
+            <div class="container-establecimiento" >
+                <label for="nombre" class="form-label">Nombre Establecimiento:</label>
                 <input type="text" id="nombre" name="nombre" class="form-control">
                 <button type="submit" class="btn btn-success">Buscar</button>
-                <button type="button" class="btn btn-secondary" onclick="window.location.href='index.php'">Cancelar</button>
-
             </div>
         </form>
-    </div>
-
-    <div class="results">
-        <h3>Resultados de la búsqueda:</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Ubicación</th>
-                    <th>Tipo</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if (isset($_GET['nombre'])) {
-                    $nombre = $_GET['nombre'];
-                    $consulta = "SELECT e.nombre, e.ubicacion, t.tipo 
-                                 FROM establecimiento AS e
-                                 INNER JOIN establecimiento_tipo AS t ON e.tipo_id = t.id
-                                 WHERE e.nombre LIKE '%$nombre%'";
-                    $resultado = mysqli_query($conexion, $consulta);
+        
+        <?php
+        // Verificar si se ha realizado una búsqueda antes de imprimir la tabla
+        if ($busqueda_realizada) {
+        ?>
+        <div class="results">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    // Imprimir resultados de la búsqueda
                     while ($establecimiento = mysqli_fetch_assoc($resultado)) {
                         echo "<tr>";
                         echo "<td>" . $establecimiento['nombre'] . "</td>";
                         echo "<td>" . $establecimiento['tipo'] . "</td>";
                         echo "</tr>";
                     }
-                }
-                ?>
-            </tbody>
-        </table>
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <?php
+        }
+        ?>
+<div class="container-establecimiento" style="text-align: center; margin-top: 20px;">
+    <button type="button" class="btn btn-success" onclick="window.location.href='index.php'">Regresar</button>
+</div>
+
+
     </div>
 </body>
 

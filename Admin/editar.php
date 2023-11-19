@@ -38,14 +38,13 @@ $usuarios = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
     }
 
     .container {
-     
+     margin: 0 auto;
         background-color: transparent;
-        border: 1px solid #ccc;
         border-radius: 10px;
         padding: 20px;
         font-family: Arial, sans-serif;
         color: white; /* Cambia el color de texto a negro */
-        
+        max-width: 60%;
      
       margin-top: 7rem;
     }
@@ -109,9 +108,8 @@ $usuarios = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
       margin-top:100px; 
        border-collapse: collapse;
             margin: auto;
-      
-        background-color: transparent;
-        border: 1px solid #ccc;
+      border-radius: 1rem;
+            background-color: rgba(128, 128, 128, 0.7);
         border-radius: 10px;
         padding: 20px;
         font-family: Arial, sans-serif;
@@ -154,32 +152,33 @@ $usuarios = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 </head>
 
 <body>
-  
-<?php include '../NAVBARiorder/index.php'; ?>
-<div class="container">
-    <div class="section-container"></div>
-  <h1 style='color:white; margin-bottom: 1rem;'>Lista de Usuarios</h1>
-  <table>
-    <thead>
-    <tr>
-    <th>Nombre Completo</th>
-    <th>Editar</th>
-</tr>
-    </thead>
-    <tbody>
-  <?php foreach ($usuarios as $usuario) { ?>
-    <tr>
-      <td><?php echo $usuario['nombre'] . ' ' . $usuario['apPAt'] . ' ' . $usuario['apMAt']; ?></td>
-      <td>
-        <a href="editar_user.php?id=<?php echo $usuario['id']; ?>">Editar</a>
-      </td>
-    </tr>
-  <?php } ?>
-</tbody>
 
-  </table>
-</div>
-</div>
+    <?php include '../NAVBARiorder/index.php'; ?>
+    <div class="container">
+        <div class="section-container">
+            <h1 style='color:white; margin-bottom: 1rem;'>Lista de Usuarios</h1>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre Completo</th>
+                    <th>Editar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($usuarios as $usuario) { ?>
+                    <tr>
+                        <td><?php echo $usuario['nombre'] . ' ' . $usuario['apPAt'] . ' ' . $usuario['apMAt']; ?></td>
+                        <td>
+                            <a href="editar_user.php?id=<?php echo $usuario['id']; ?>">Editar</a>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+
 </body>
 
 </html>

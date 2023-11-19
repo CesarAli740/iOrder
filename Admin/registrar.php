@@ -24,12 +24,17 @@ if ($rol != '2') {
             background-color: transparent;
             margin: 0;
             font-family: Arial, sans-serif;
+            overflow: hidden;
         }
 
         .container {
-            margin-top: 6rem !important;
+            margin-top: 1rem !important;
             margin: 0 auto;
             padding: 20px;
+            background-color: rgba(128, 128, 128, 0.7);
+            border-radius: 1rem;
+            max-width: 70%;
+            border: 1px solid white; /* Borde delgado blanco */
         }
 
         input {
@@ -67,6 +72,7 @@ if ($rol != '2') {
             font-weight: bold;
             margin-bottom: 2rem;
             color: white;
+            font-size: 20px;
         }
 
         .form-control {
@@ -86,6 +92,7 @@ if ($rol != '2') {
             color: white;
             font-weight: bold;
             text-transform: uppercase;
+            font-size:15px;
         }
 
 
@@ -171,9 +178,8 @@ if ($rol != '2') {
 <?php include '../NAVBARiorder/index.php'; ?>
 
 <body>
-
+<h3 class="section-container" style="margin-top: 10rem;">Registro de nuevo usuario</h3>
     <div class="container">
-        <h3 class="section-container">Registro de nuevo usuario</h3>
         <form action="../includes/validar.php" method="POST">
             <div class="container-form">
                 <div class="container-form-child">

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,6 +49,7 @@
             width: 90%;
             transition: background-color 0.3s;
         }
+
         .botonlogin:hover {
             background-color: #435a9c;
         }
@@ -85,17 +87,17 @@
 </head>
 
 <?php
-    include './_db.php';
-    if (isset($_POST['registrar'])) {
-        extract($_POST);
-        $password_hash = password_hash($password, PASSWORD_BCRYPT);
-        $consulta = "INSERT INTO user (nombre, apPAt, apMAt, correo, telefono, password_hash, rol, tipo,estado)
+include './_db.php';
+if (isset($_POST['registrar'])) {
+    extract($_POST);
+    $password_hash = password_hash($password, PASSWORD_BCRYPT);
+    $consulta = "INSERT INTO user (nombre, apPAt, apMAt, correo, telefono, password_hash, rol, tipo,estado)
                      VALUES ('$nombre', '$apPAt', '$apMAt', '$correo', '$telefono', '$password_hash', '5','$establecimiento' ,'1')";
-        mysqli_query($conexion, $consulta);
-        mysqli_close($conexion);
-        header('Location: ../SuperAdmin/index.php');
-        exit();
-      }
+    mysqli_query($conexion, $consulta);
+    mysqli_close($conexion);
+    header('Location: ./login.php');
+    exit();
+}
 ?>
 
 
@@ -131,30 +133,18 @@
                 <label for="password">Contraseña:</label>
                 <input type="password" name="password" id="password" class="form-control" required>
             </div>
-            <?php
-                $query = "SELECT id, nombre FROM establecimiento";
-                $resultado = $conexion->query($query);
-                ?>
-                <div class="form-group">
-                    <label for="establecimiento" class="form-label">Establecimiento *</label>
-                    <select type='number' id="establecimiento" name="establecimiento" class="form-control" required>
-                        <option value="" disabled selected>Selecciona un Establecimiento</option>
-                        <?php
-                        while ($fila = $resultado->fetch_assoc()) {
-                            echo '<option value="' . $fila["id"] . '">' . $fila["nombre"] . '</option>';
-                        }
-                        ?>
-                    </select>
-                </div>
+
+            <input type="hidden" name="establecimiento" id="establecimiento" value="<?php echo $_GET['idvisita']; ?>">
             <input type="hidden" name="registrar" value="registrar">
             <div class="form-group">
                 <input type="submit" class="botonlogin" value="Registrar">
             </div>
 
             <div class="form-group">
-                <a href="./login.php" class="botonlogin">Volver</a>
+                <a href="./login.php?idvisita=<?php echo $_GET['idvisita']; ?>" class="botonlogin">Volver</a>
             </div>
         </form>
     </div>
 </body>
+
 </html>

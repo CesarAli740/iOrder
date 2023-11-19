@@ -31,7 +31,7 @@ if($rol != '2'){
         .container {
             margin: auto;
         margin-top: 50px;
-        background-color: transparent;
+        background-color: rgba(128, 128, 128, 0.7);
         border: 1px solid #ccc;
         border-radius: 10px;
         padding: 20px;

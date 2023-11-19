@@ -20,150 +20,114 @@ if ($rol != '1') {
     <title>Buscar Usuarios</title>
     <link rel="stylesheet" href="../css/stylesuser">
     <style>
-        /* styles.css */
-
-        body {
-            background-color: transparent;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        .container {
-            margin-top: 70px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        h1,
-        h2,
-        h3 {
-            color: white;
-            text-align: center;
-            font-size: 50px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        label {
-            color: white;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            font-size: 14px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            color: white;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .btn-success {
-            background-color: #1B9C85;
-        }
-
-        .btn-secondary {
-            background-color: #ea272d !important;
-            color: white;
-            text-decoration: none;
-        }
-        .btn-secondary:hover {
-            background-color: #7d1518 !important;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        /* Estilos de la tabla */
-        table {
-            border-collapse: collapse;
-            width: 80%;
-            border: 1px solid #ccc;
-            margin: auto;
-            font-family: Arial, sans-serif;
-        }
-
-        th,
-        td {
-            color: white;
-            padding: 15px;
-            border: 1px solid #ccc;
-            text-align: center;
-            background-color: transparent;    
+    body {
+        background-color: transparent;
+        font-family: Arial, sans-serif;
+        
     }
 
-        /* styles.css */
+    .container {
+        margin-top: 70px;
+        margin: 0 auto;
+        padding: 20px;
+        max-width: 80%;
+    }
 
-        /* ... tus estilos generales ... */
+    h2 {
+        color: white;
+        text-align: center;
+        font-size: 50px;
+    }
 
-        /* Estilos para las secciones abiertas al hacer clic en los botones */
-        .section-container {
-            background-color: transparent;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 1rem;
-            margin: 20px auto;
-            /* Ajusta el ancho máximo según tu preferencia */
-        }
+    .section-container {
+        background-color: rgba(128, 128, 128, 0.7);
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        margin: 50px auto; /* Ajusta el valor de margin-top según sea necesario */
+        max-width: 100%;
+        border: 1px solid white; /* Nuevo estilo para el borde */
+    }
 
-        .section-title {
-            color: white;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        .search-header{
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 5rem;
-        }
-        /*ESTILOS DE HEADER SEARCH */
-        .etiqueta {
-            font-weight: bold;
-            margin-right: 1rem;
-        }
+    .search-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 5rem;
+    }
 
-        .campo-texto {
-            padding: 10px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            width: 15rem;
-            margin-right: 1rem;
-        }
+    .etiqueta {
+        font-weight: bold;
+        margin-right: 1rem;
+        color: white;
+        font-size: 20px;
+    }
 
-        .boton-buscar {
-            background-color: #ea272d;;
-            color: #fff;
-            padding: .8rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    .campo-texto {
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        width: 15rem;
+        margin-right: 1rem;
+        color: white;
+        background-color: transparent;
+    }
 
-        .boton-buscar:hover {
-            background-color: #7d1518;
-        }
-    </style>
+    .boton-buscar {
+        background-color: #ea272d;
+        color: #fff;
+        padding: 8px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 15px; /* Ajusta el tamaño del texto */
+        font-weight: bold;
+    }
+
+    .boton-buscar:hover {
+        background-color: #7d1518;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 80%;
+        border: 1px solid #ccc;
+        margin: auto;
+        font-family: Arial, sans-serif;
+    }
+
+    th,
+    td {
+        color: white;
+        padding: 15px;
+        border: 1px solid #ccc;
+        text-align: center;
+        background-color: transparent;
+    }
+
+    .btn-secondary {
+        background-color: #ea272d !important;
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+        padding: 8px 10px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .btn-secondary:hover {
+        background-color: #7d1518 !important;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
+
 </head>
 <?php
 include('../includes/_db.php');
@@ -186,14 +150,15 @@ if (isset($_GET['buscar'])) {
 ?><?php include '../NAVBARiorder/index.php'; ?>
 
 <body>
-    <div class="container" style="margin-top: 5rem;">
+    <div class="container" style="margin-top: 7rem;">
+    <h2>Buscar Usuario</h2>
         <div class="section-container">
             <div class="search-header">
-                <h2>Buscar un Usuario</h2>
+
                 <form action="" method="GET">
                     <label class="etiqueta" for="buscar">Buscar:</label>
                     <input class="campo-texto" type="text" name="buscar" id="buscar">
-                    <button class="boton-buscar" type="submit">Buscar</button>
+                    <button class="boton-buscar" type="submit">BUSCAR</button>
                 </form>
             </div>
             <br>
@@ -244,7 +209,7 @@ if (isset($_GET['buscar'])) {
                 <?php endif; ?>
             <?php endif; ?>
             <div class="text-center" style="margin-top: 20px;"> <!-- Agrega margen superior para separar del formulario -->
-                <a href="index.php" class="btn btn-secondary">Regresar</a> <!-- Botón para regresar a gestion.php -->
+                <a href="index.php" class="boton-buscar">REGRESAR</a> <!-- Botón para regresar a gestion.php -->
             </div>
 </body>
 

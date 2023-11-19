@@ -233,7 +233,6 @@ video {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #A35E23;
   padding: 10px 0;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -335,8 +334,7 @@ video {
   gap: 1.5rem;
 }
 
-.filter-options h3 {
-  color: #A35E23;
+#filterh3 {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
   text-align: center;

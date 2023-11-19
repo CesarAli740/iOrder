@@ -1,16 +1,11 @@
 <?php
 include '../includes/_db.php';
 session_start();
+
 error_reporting(0);
-$validar = isset($_SESSION['correo']) ? $_SESSION['correo'] : '';
 $rol = $_SESSION['rol'];
 $establecimiento = $_SESSION['establecimiento'];
-if ($validar == '') {
-  session_unset();
-  session_destroy();
-  header("Location: ../includes/login.php");
-  die();
-}
+
 ?>
 
 <style>
@@ -202,7 +197,6 @@ if ($validar == '') {
   .dropdown {
     position: relative;
     display: inline-block;
-    margin-left: 2.5rem;
     position: relative;
     /* Agregar posición relativa */
   }
@@ -210,6 +204,7 @@ if ($validar == '') {
   .dropdown-content {
     position: absolute;
     background-color: rgba(169, 169, 169, 0.5);
+    
     ;
     width: 140px;
     border-radius: 8px;
@@ -321,6 +316,7 @@ if ($rol == '1') {
             <a href="../SuperAdmin/listar_establecimientos.php">Listar</a>
             <a href="../SuperAdmin/buscar_establecimiento.php">Buscar</a>
             <a href="../SuperAdmin/editar_establecimiento.php">Editar</a>
+            <a href="../SuperAdmin/control_establecimiento.php">Control</a>
           </div>
         </div>
         <!-- <div class="dropdown">
@@ -385,14 +381,66 @@ if ($rol == '2') {
           </div>
         </div>
         <div class="dropdown">
-          <a href="#" style="--i:3;">Reportes</a>
+          <a href="#" style="--i:1;">Mesas</a>
           <div class="dropdown-content">
-            <a href="#">Pedidos</a>
-            <a href="#">Reservas</a>
-
+            <a href="../Admin/registrar_mesa.php">Crear</a>
+            <a href="../Admin/listar_mesa.php">Listar</a>
+          
           </div>
         </div>
+        <div class="dropdown">
+          <a href="#" style="--i:3;">Reportes</a>
+          <div class="dropdown-content">
+            <a href="../Admin/reportes-pedidos.php">Pedidos</a>
+            <a href="../Admin/reportes-reservas.php">Reservas</a>
+          </div>
+       </div>
+
         <a href="../Admin/perfil.php" style="--i:4;">Perfil</a>
+        <a href="../includes/_sesion/cerrarSesion.php" style="--i:5;">Salir</a>
+      </nav>
+    </header>
+  </body>
+
+  <?php
+} ?>
+
+<?php
+if ($rol == '4') {
+  ?>
+
+  <body style="background-image: url('../images/mesa3.svg');">
+    <header class="header">
+      <a href="../Empleado/index.php" class="logo">
+        <?php $query = "SELECT logo FROM establecimiento WHERE id = $establecimiento";
+
+        $resultado = $conexion->query($query);
+
+        if ($resultado) {
+          $fila = $resultado->fetch_assoc();
+          $logo = $fila['logo'];
+          $resultado->free();
+        } else {
+          echo "Error en la consulta: " . $conexion->error;
+        } ?>
+        <?php if (isset($logo)): ?>
+          <img src="../SuperAdmin/<?php echo $logo ?>" alt="LOGO" style="height: 5rem;">
+        <?php else: ?>
+          <p>No se encontró ninguna imagen para este establecimiento.</p>
+        <?php endif; ?>
+
+      </a>
+
+      <input type="checkbox" id="check">
+      <label for "check" class="icons">
+        <i class='bx bx-menu' id="menu-icon"></i>
+        <i class='bx bx-x' id="close-icon"></i>
+      </label>
+      <nav class="navbar">
+        <a href="../Empleado/index.php" style="--i:0;">Inicio</a>
+        <a href="../Empleado/reservas.php" style="--i:1;">Reservas</a>
+        <a href="../Empleado/pedidos.php" style="--i:2;">Pedidos</a>
+        <a href="../Empleado/mesas.php" style="--i:3;">Mesas</a>
         <a href="../includes/_sesion/cerrarSesion.php" style="--i:5;">Salir</a>
       </nav>
     </header>
@@ -435,7 +483,6 @@ if ($rol == '5') {
         <a href="../Cliente/menu.php" style="--i:1;">Menu</a>
         <div class="dropdown">
           <a href="../Cliente/reservar.php" style="--i:3;">Reservas</a>
-          <a href="../Cliente/index.php" style="--i:3;">Pedidos</a>
         </div>
         <a href="../includes/_sesion/cerrarSesion.php" style="--i:4;">Salir</a>
       </nav>
@@ -444,6 +491,50 @@ if ($rol == '5') {
   </body>
 
   <?php
-} ?>
+}
+if (isset($_GET['idvisita'])){
+  $visita = $_GET['idvisita'];
+  ?>
+
+  <body style="background-image: url('../images/mesa4.svg');">
+    <header class="header">
+      <a href="../Cliente/index.php?idvisita=<?php echo $visita ?>" class="logo">
+        <?php $query = "SELECT logo FROM establecimiento WHERE id = $visita";
+
+        $resultado = $conexion->query($query);
+
+        if ($resultado) {
+          $fila = $resultado->fetch_assoc();
+          $logo = $fila['logo'];
+          $resultado->free();
+        } else {
+          echo "Error en la consulta: " . $conexion->error;
+        } ?>
+        <?php if (isset($logo)): ?>
+          <img src="../SuperAdmin/<?php echo $logo ?>" alt="LOGO" style="height: 5rem;">
+        <?php else: ?>
+          <p>No se encontró ninguna imagen para este establecimiento.</p>
+        <?php endif; ?>
+      </a>
+      <input type="checkbox" id="check">
+      <label for="check" class="icons">
+        <i class='bx bx-menu' id="menu-icon"></i>
+        <i class='bx bx-x' id="close-icon"></i>
+      </label>
+      <nav class="navbar">
+        <a href="../Cliente/index.php?idvisita=<?php echo $visita ?>" style="--i:0;">Inicio</a>
+        <a href="../Cliente/menu2.php?idvisita=<?php echo $visita ?>" style="--i:1;">Menu</a>
+        <div class="dropdown">
+          <a href="../includes/login.php?idvisita=<?php echo $visita ?>" style="--i:3;">Reservas</a>
+        </div>
+        <a href="../includes/login.php?idvisita=<?php echo $visita ?>" style="--i:4;">Inicia Sesión!</a>
+      </nav>
+    </header>
+
+  </body>
+
+<?php
+}
+?>
 
 </html>

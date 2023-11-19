@@ -30,10 +30,16 @@ if ($rol != '2') {
         }
 
         .container {
-            margin-top: 70px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(128, 128, 128, 0.7);
+    border-radius: 1rem;
+    max-width: 80%;
+    border: 1px solid white; /* Borde delgado blanco */
+}
+
+/* Otros estilos permanecen igual */
+
 
         h1,
         h2,
@@ -157,12 +163,14 @@ if ($rol != '2') {
         }
 
         .boton-buscar {
-            background-color: #ea272d;;
-            color: #fff;
-            padding: .8rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            background-color: #ea272d;
+        color: #fff;
+        padding: 8px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 15px; /* Ajusta el tamaño del texto */
+        font-weight: bold;
         }
 
         .boton-buscar:hover {
@@ -174,6 +182,8 @@ if ($rol != '2') {
         }
         .input-search{
             border-radius: 1rem;
+            font-size: 17px;
+            border: 2px solid #ccc;
         }
     </style>
 </head>
@@ -199,64 +209,63 @@ if (isset($_GET['buscar'])) {
 }
 ?>
 
-<body> <div class="container" style="margin-top: 10rem;"><div class="modal-contentB">
-        
-        <div class="container is-fluid">
-            <div class="col-xs-12"><br>
-                <form action="" method="GET">
-                    <div class="container-search">
-                    <h2 class="search-header">Buscar un Usuario</h2>
-                        <label for="buscar">Buscar:</label>
-                        <input class="input-search" type="text" name="buscar" id="buscar">
-                        <button class="btn-secondary" type="submit">Buscar</button>
-                    </div>
-                </form>
-                <br>
-                <?php if (isset($_GET['buscar'])): ?>
-                    <?php if ($dato->num_rows > 0): ?>
-                        <table id="table_id">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Apellido Paterno</th>
-                                    <th>Apellido Materno</th>
-                                    <th>Correo</th>
-                                    <th>Telefono</th>
-                                    <th>Rol</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php while ($fila = mysqli_fetch_array($dato)): ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo $fila['nombre']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $fila['apPAt']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $fila['apMAt']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $fila['correo']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $fila['telefono']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $fila['rol']; ?>
-                                        </td>
-                                    </tr>
-                                <?php endwhile; ?>
-                            </tbody>
-                        </table>
-                    <?php else: ?>
-                        <p>No se encontraron resultados.</p>
-                    <?php endif; ?>
-                <?php endif; ?>
+<body> 
+<h2 class="search-header" style="margin-top: 10rem;">Buscar un Usuario</h2>
+<div class="container" style="margin-top: 3rem;">
+    <div class="col-xs-12">
+        <form action="" method="GET">
+            <div class="container-search">
+                <label for="buscar">Buscar Usuario:</label>
+                <input class="input-search" type="text" name="buscar" id="buscar">
+                <button class="boton-buscar" type="submit">BUSCAR</button>
             </div>
-        </div>
+        </form>
+        <br>
+        <?php if (isset($_GET['buscar'])): ?>
+            <?php if ($dato->num_rows > 0): ?>
+                <table id="table_id">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido Paterno</th>
+                            <th>Apellido Materno</th>
+                            <th>Correo</th>
+                            <th>Telefono</th>
+                            <th>Rol</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($fila = mysqli_fetch_array($dato)): ?>
+                            <tr>
+                                <td>
+                                    <?php echo $fila['nombre']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $fila['apPAt']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $fila['apMAt']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $fila['correo']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $fila['telefono']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $fila['rol']; ?>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <p>No se encontraron resultados.</p>
+            <?php endif; ?>
+        <?php endif; ?>
     </div>
+</div>
+
 
 
 </body>

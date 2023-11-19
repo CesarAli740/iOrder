@@ -28,6 +28,7 @@ include '../includes/_db.php'; ?>
       background-color: transparent;
       margin: 0;
       font-family: Arial, sans-serif;
+      overflow:hidden;
     }
 
     label {
@@ -81,18 +82,17 @@ include '../includes/_db.php'; ?>
     }
 
     .modal-content {
-      background-color: transparent;
-      margin: auto;
-      padding: 20px;
-      border-radius: 10px;
-      margin: 20px auto;
-      margin-bottom: 0;
-      margin-top: 8%;
-      /* Eliminar el margen superior del contenido */
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-      display: block;
-      display: grid;
-    }
+    background-color: rgba(128, 128, 128, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 50px auto; /* Centrar en la pantalla */
+    max-width: 1500px; /* Ancho máximo del contenedor */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: grid;
+    gap: 1rem;
+    border: 1px solid white; /* Borde delgado blanco */
+}
+
 
     .close {
       color: #aaa;
@@ -154,6 +154,7 @@ include '../includes/_db.php'; ?>
       display: block;
       font-weight: bold;
       margin-bottom: 1rem;
+      font-size: 18px;
     }
 
     .form-control:focus {
@@ -182,8 +183,8 @@ include '../includes/_db.php'; ?>
 </head>
 
 <body>
+<h2 class="modal-title" style="margin-top: 10rem;">Editar Usuario</h2>
   <div class="modal-content">
-    <h2 class="modal-title" style="color: white;">Editar Usuario</h2>
     <?php
     include('../includes/_db.php');
 

@@ -22,4 +22,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Error al insertar la reserva: " . $conexion->error;
     }
 }
+
 ?>

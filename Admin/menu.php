@@ -24,6 +24,21 @@ if ($result) {
     $menuData[] = $row;
   }
 }
+
+//COLORES
+$queryEstablecimiento = "SELECT color1, color2 FROM establecimiento WHERE id = '$establecimiento'";
+$resultEstablecimiento = $conexion->query($queryEstablecimiento);
+
+$colores = [];
+
+if ($resultEstablecimiento) {
+  $colores = $resultEstablecimiento->fetch_assoc();
+}
+
+// Obtener los colores
+$color1 = isset($colores['color1']) ? $colores['color1'] : '';
+$color2 = isset($colores['color2']) ? $colores['color2'] : '';
+
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +50,52 @@ if ($result) {
   <title>NAVBAR</title>
   <link rel="stylesheet" href="menu.css" />
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <style>
+    .ver-carrito {
+      /* background-color: #ea272d; */
+      padding: 1rem;
+      border-radius: 1rem;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .ver-carrito:hover {
+      background-color: #7d1518;
+    }
+
+    .icono-menu {
+      width: 4rem;
+      height: 4rem;
+      text-align: center;
+      padding-top: .5rem;
+    }
+
+    .icons-container {
+      display: flex;
+      flex-direction: row;
+      border: 1px solid white;
+      background-color: white;
+      margin-bottom: 1rem;
+      border-radius: 1rem;
+    }
+
+    .icon1 {
+      color: blue;
+    }
+
+    .icon1:hover {
+      color: darkblue;
+    }
+
+    .icon2 {
+      color: #ea272d;
+    }
+
+    .icon2:hover {
+      color: #7d1518;
+    }
+  </style>
 </head>
 
 <body>
@@ -51,23 +112,25 @@ if ($result) {
         <?php
         foreach ($menuData as $item) {
           echo '<div class="card" data-category="' . $item['tipo'] . '">';
-          echo '<a href="editar_producto.php?id=' . $item['id'] . '&categoria=' . $item['tipo'] . '"><i class="bx bxs-edit bx-lg"></i></a>';
-          echo '<a href="eliminar_producto.php?id=' . $item['id'] . '&categoria=' . $item['tipo'] . '"><i class="bx bxs-trash bx-lg"></i></a>';
+          echo '<div class="icons-container">';
+          echo '<a class="icono-menu editar-btn" href="editar_producto.php?id=' . $item['id'] . '&categoria=' . $item['tipo'] . '"><i class="icon1 bx bxs-edit bx-lg"></i></a>';
+          echo '<a class="icono-menu eliminar-btn" href="eliminar_producto.php?id=' . $item['id'] . '&categoria=' . $item['tipo'] . '"><i class="icon2 bx bxs-trash bx-lg"></i></a>';
+          echo '</div>';
           echo '<img src="./menu/' . $item['imagen'] . '" alt="' . $item['nombre'] . '">';
           echo '<h3>' . $item['nombre'] . '</h3>';
           echo '<p class="price">$' . $item['precio'] . '</p>';
           echo '</div>';
-      }
+        }
         ?>
       </div>
     </div>
   </section>
   <div class="options">
     <div class="filter-options">
-      <h3>Buscar nombre de producto</h3>
+      <h3 id="filterh3">Buscar nombre de producto</h3>
       <input type="search" />
     </div>
-    <a href="crear_producto.php">CREAR UN PRODUCTO</a>
+    <a class="ver-carrito" href="crear_producto.php">CREAR UN PRODUCTO</a>
   </div>
   <div class="menu-panel">
     <div class="panel-header">
@@ -96,9 +159,66 @@ if ($result) {
       </table>
     </div>
   </div>
+
   <script>
+    const color1 = '<?php echo $color1; ?>';
+    const color2 = '<?php echo $color2; ?>';
+
     document.addEventListener("DOMContentLoaded", () => {
+
+      //COLORES
+      document.body.style.backgroundColor = color2;
+
+      const menuNavbar1 = document.querySelector(".menu-navbar");
+      menuNavbar1.style.backgroundColor = color1;
+      const filterH3 = document.getElementById("filterh3");
+      filterH3.style.color = color2;
+
+      const panelH1 = document.querySelector(".panel-header h1");
+      panelH1.style.color = color2;
+
+      const thElements = document.querySelectorAll("#menuTable th");
+      thElements.forEach(th => th.style.backgroundColor = color1);
+
+      const crearProductButton = document.querySelector(".ver-carrito");
+      crearProductButton.style.backgroundColor = color1;
+      crearProductButton.style.color = color2;
+
+      crearProductButton.addEventListener("mouseover", () => {
+        const hoverColor = darkenColor(color1, 1); // Ajusta el valor de oscurecimiento según tu preferencia
+        crearProductButton.style.backgroundColor = hoverColor;
+      });
+      crearProductButton.addEventListener("mouseout", () => {
+        crearProductButton.style.backgroundColor = color1;
+      });
+
+      const categoryLinks = document.querySelectorAll(".menu-navbar a");
+
+      // Cambiar color al hacer hover
+      categoryLinks.forEach((link) => {
+        link.addEventListener("mouseover", () => {
+          link.style.color = color2;
+        });
+
+        // Restaurar color original al quitar el hover
+        link.addEventListener("mouseout", () => {
+          link.style.color = "";
+        });
+      });
+
+      // Función para oscurecer el color en porcentaje
+      function darkenColor(color, percent) {
+        const num = parseInt(color.slice(1), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = (num >> 16) - amt;
+        const G = (num >> 8 & 0x00FF) - amt;
+        const B = (num & 0x0000FF) - amt;
+        return `#${(1 << 24 | R << 16 | G << 8 | B).toString(16).slice(1)}`;
+      }
+      //ACABA COLORES
+
       const filterInput = document.querySelector(".filter-options input[type='search']");
+
       const menuTableBody = document.querySelector("#menuTable tbody");
       let menuData = <?php echo json_encode($menuData); ?>;
 
@@ -111,6 +231,24 @@ if ($result) {
             const card = document.createElement("div");
             card.classList.add("card");
             card.setAttribute("data-category", item.tipo);
+
+            const iconsContainer = document.createElement("div");
+            iconsContainer.classList.add("icons-container");
+
+            const editarBtn = document.createElement("a");
+            editarBtn.classList.add("icono-menu", "editar-btn");
+            editarBtn.href = `editar_producto.php?id=${item.id}&categoria=${item.tipo}`;
+            editarBtn.innerHTML = '<i class="icon1 bx bxs-edit bx-lg"></i>';
+
+            const eliminarBtn = document.createElement("a");
+            eliminarBtn.classList.add("icono-menu", "eliminar-btn");
+            eliminarBtn.href = `eliminar_producto.php?id=${item.id}&categoria=${item.tipo}`;
+            eliminarBtn.innerHTML = '<i class="icon2 bx bxs-trash bx-lg"></i>';
+
+            iconsContainer.appendChild(editarBtn);
+            iconsContainer.appendChild(eliminarBtn);
+
+            card.appendChild(iconsContainer);
 
             const imagen = document.createElement("img");
             imagen.src = `./menu/${item.imagen}`;
@@ -163,6 +301,18 @@ if ($result) {
         if (event.target.tagName === "A") {
           const category = event.target.getAttribute("data-category");
           renderMenuCards(category);
+
+          // Ocultar o mostrar botones según la categoría
+          const editarBtns = document.querySelectorAll(".editar-btn");
+          const eliminarBtns = document.querySelectorAll(".eliminar-btn");
+
+          if (category === "comida" || "bebida" || "otros") {
+            editarBtns.forEach((btn) => (btn.style.display = "block"));
+            eliminarBtns.forEach((btn) => (btn.style.display = "block"));
+          } else {
+            editarBtns.forEach((btn) => (btn.style.display = "none"));
+            eliminarBtns.forEach((btn) => (btn.style.display = "none"));
+          }
         }
       });
     });

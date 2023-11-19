@@ -30,7 +30,6 @@
             max-width: 80%;
             text-align: center;
             margin: 0 auto;
-            /* Agregar esta línea para centrar horizontalmente */
         }
 
 
@@ -93,8 +92,28 @@
     <div class="card">
         <form action="_functions.php" method="POST">
             <h3 class="login-heading">Bienvenido a </h3>
-            <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
+            <?php
+            include '../includes/_db.php';
+            if (isset($_GET['idvisita'])) {
+                if ($conexion->connect_error) {
+                    die("Conexión fallida: " . $conexion->connect_error);
+                }
+                $idvisita = $_GET['idvisita'];
+                $sql = "SELECT logo FROM establecimiento WHERE id = $idvisita";
+                $result = $conexion->query($sql);
 
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $rutaLogo = $row['logo'];
+                    ?>
+                    <img src="../SuperAdmin/<?php echo $rutaLogo; ?>" alt="LOGO" style="width: 10rem;">
+                    <?php
+                }
+
+            } else {
+                ?>
+                <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
+            <?php } ?>
             <h3 class="login-heading">Iniciar Sesión</h3>
             <div class="form-group">
                 <label for="correo">Correo:</label>
@@ -108,15 +127,17 @@
             <div class="form-group">
                 <input type="submit" class="botonlogin" value="Ingresar">
             </div>
-            <h3 class="login-heading">¿No Estás Registrado?</h3>
-            <div class="form-group">
-                <a href="./registrar.php" class="botonlogin">Regístrate</a>
-            </div>
-
-        </form><!-- 
-        <div class="my-2">
-            <a href="../recuperacion/recovery.php">¿Olvidaste tu contraseña?</a>
-        </div> -->
+            <?php
+            if (isset($_GET['idvisita'])) {
+                ?>
+                <h3 class="login-heading">¿No Estás Registrado?</h3>
+                <div class="form-group">
+                    <a href="./registrar.php?idvisita=<?php echo $_GET['idvisita'] ?>" class="botonlogin">Regístrate</a>
+                </div>
+                <?php
+            }
+            ?>
+        </form>
         <?php
         if (isset($_GET['message'])) {
             ?>

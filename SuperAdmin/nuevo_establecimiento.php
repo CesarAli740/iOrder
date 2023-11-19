@@ -23,11 +23,25 @@ if ($rol != '1') {
     <style>
         .container-map {
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
+            /* Alinea el contenedor hacia la derecha */
             align-items: center;
-            margin-top: 8rem;
+            margin-top: 1rem;
             color: white;
             width: 100%;
+            background-color: rgba(128, 128, 128, 0.7);
+        }
+
+        .titulo {
+            margin-top: 150px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: white;
+            text-align: center;
+            font-size: 50px;
         }
 
         .form-group {
@@ -41,11 +55,15 @@ if ($rol != '1') {
             font-size: 1.4rem;
         }
 
-        .form-control {
+        .form-control,
+        .form-select,
+        textarea {
             width: 100%;
             padding: 0.5rem;
             border: 1px solid #ccc;
             border-radius: 4px;
+            margin-bottom: 1rem;
+            /* Espacio entre los elementos */
         }
 
         .btn {
@@ -66,6 +84,7 @@ if ($rol != '1') {
             height: 3rem;
             border-radius: 1rem;
             cursor: pointer;
+            margin-top: 1rem;
         }
 
         .btn-success:hover {
@@ -75,13 +94,7 @@ if ($rol != '1') {
         .btn-secondary {
             background-color: #ccc;
             color: #333;
-            margin-left: 8rem;
-        }
-
-        .btn-secondary:hover {
-            background-color: #5f5f5f;
-            color: #333;
-            margin-left: 8rem;
+            border-radius: 1rem;
         }
 
         .container-map-child {
@@ -101,24 +114,78 @@ if ($rol != '1') {
         }
 
         .container-map-2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             width: 50%;
-        }
-
-        .form-select {
-            width: 100%;
-            height: 3rem;
-            border-radius: 1rem;
-            cursor: pointer;
         }
 
         form {
             width: 100%;
         }
+        .container-image-logo {
+            width: 6rem;
+            height: 6rem;
+            border-radius: .1rem;
+            overflow: hidden; 
+        }
+        .imagen-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .container-logo{
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .input-logo{
+            width: 80%;
+            background-color: #ea272d;
+            font-size: 1rem;
+            border-radius: 1rem;
+        }
+        .send-form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .btn-success-2{
+            background-color: #ea272d;
+            color: white;
+            width: 20%;
+            height: 3rem;
+            border-radius: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        .btn-success-2:hover {
+            background-color: #7d1518;
+        }
+        .colores{
+            display: flex;
+            gap: 1rem;
+        }
+        .color-input{
+            width: 8rem;
+            height: 3rem;
+            cursor: pointer;
+            border-radius: .5rem;
+        }
+        .form-label-colors{
+            text-align: center;
+        }
+
     </style>
     <?php include '../NAVBARiorder/index.php'; ?>
 </head>
 
 <body>
+    <div class="titulo">
+        <h2>Registro de Establecimiento</h2>
+    </div>
     <div class="container-map">
         <form id="formulario" method="POST" action="consultas.php" enctype="multipart/form-data">
             <div class="container-map-child">
@@ -140,7 +207,7 @@ if ($rol != '1') {
                         }
                         ?>
                     </select>
-                    <input class="form-control" type="hidden" id="latitud" name="latitud" required>
+                    <input class="form-label" type="hidden" id="latitud" name="latitud" required>
                     <input class="form-control" type="hidden" id="longitud" name="longitud" required><br>
 
                     <label class="form-label" for="responsable">Nombre del Responsable:</label>
@@ -148,17 +215,45 @@ if ($rol != '1') {
 
                     <label class="form-label" for="tel_responsable">Número del Responsable:</label>
                     <input class="form-control" type="tel" id="tel_responsable" name="tel_responsable" required><br>
+                    <!-- REVISARRRRRRRRRRRRRR -->
+                    <label class="form-label" for="horario">Horario de Operación:</label>
+                    <textarea id="horario" name="horario" rows="4" cols="50" required></textarea>
 
-                    <label for="imagen">Seleccionar Logo:</label>
-                    <input type="file" name="imagen">
+                    <label class="form-label" for="vision">Frase o Visión del Negocio:</label>
+                    <textarea id="vision" name="vision" rows="4" cols="50" required></textarea>
 
-                    <button class="btn-success" type="submit" name="crear_establecimiento">Registrar</button>
+                    <label class="form-label" for="tel_responsable">Seleccione sus colores principales:</label>
+                    <div class="colores">
+                        <div class="form-label-colors">
+                            <input class="color-input" name="color1" type="color" required><br>
+                            <label for="">Menu</label>
+                        </div>
+                        <div class="form-label-colors">
+                            <input class="color-input" name="color2" type="color" required><br>
+                            <label  for="">Letras</label>
+                        </div>
+                    </div>
+
+                    
                 </div>
                 <div class="container-map-2">
                     <label class="form-label" for="ubicacion">Selecciona tu Ubicación!:</label>
                     <div id="map" style="width: 100%; height: 450px;"></div><br>
+                    <label class="form-label" for="imagen">Seleccionar Logo:</label>
+                    <div class="container-logo">
+                        <div class="container-image-logo">
+                            <img class="imagen-logo" src="" alt="">
+                        </div>
+                        <input class="input-logo" type="file" id="seleccionar-imagen" name="imagen" accept=".jpg, .jpeg, .png, .gif, .bmp, .tiff, .webp, .svg, .ico" required>
+                    </div>
+                    <label class="form-label" for="descripcion">Descripción de Establecimiento:</label>
+                    <textarea id="descripcion" name="descripcion" rows="4" cols="50" required></textarea>
                 </div>
 
+            </div>
+
+            <div class="send-form">
+                <button class="btn-success-2" type="submit" name="crear_establecimiento">Registrar</button>
             </div>
 
         </form>
@@ -178,7 +273,7 @@ if ($rol != '1') {
             });
 
             // Agregar un evento de clic al mapa para obtener las coordenadas y colocar el marcador
-            map.addListener('click', function (event) {
+            map.addListener('click', function(event) {
                 placeMarker(event.latLng);
                 document.getElementById('latitud').value = event.latLng.lat();
                 document.getElementById('longitud').value = event.latLng.lng();
@@ -201,7 +296,7 @@ if ($rol != '1') {
             var formulario = document.getElementById('formulario');
 
             // Agregar un evento de submit al formulario
-            formulario.addEventListener('submit', function (event) {
+            formulario.addEventListener('submit', function(event) {
                 // Verificar si se ha colocado el marcador en el mapa
                 if (!marker) {
                     alert('Debes seleccionar una ubicación en el mapa antes de enviar el formulario.');
@@ -210,8 +305,15 @@ if ($rol != '1') {
             });
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDsMDudKEIbSQZH-dP2W9JP3b3F10_85k&callback=initMap"
-        async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDsMDudKEIbSQZH-dP2W9JP3b3F10_85k&callback=initMap" async defer></script>
+    <script>
+    const imagen = document.querySelector('.imagen-logo'); // Usar querySelector en lugar de getElementsByClassName
+    const input = document.getElementById('seleccionar-imagen'); // Corregir el nombre del id
+
+    input.addEventListener('change', (e) => {
+        imagen.src = URL.createObjectURL(e.target.files[0]);
+    });
+</script>
 </body>
 
 </html>

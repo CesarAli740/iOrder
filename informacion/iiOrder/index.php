@@ -1,3 +1,52 @@
+<?php
+include '../../includes/_db.php';
+if(!$conexion){
+echo "No se realizo la conexion a la base de datos, el error fue:".
+mysqli_connect_error() ;
+}
+// Obtener todos los IDs de establecimientos
+$idResult = mysqli_query($conexion, "SELECT id FROM establecimiento");
+
+if ($idResult !== false) {
+    // Verificar si se obtuvieron resultados
+    if (mysqli_num_rows($idResult) > 0) {
+        // Inicializar el array para almacenar la información
+        $establecimientos = array();
+
+        // Obtener el nombre, tipo y logo de cada establecimiento
+        while ($idRow = mysqli_fetch_assoc($idResult)) {
+            $id = $idRow["id"];
+
+            // Consulta SQL para obtener el nombre, tipo y logo de cada establecimiento
+            $sql = "SELECT e.nombre, et.tipo, e.logo FROM establecimiento e
+                    INNER JOIN establecimiento_tipo et ON e.tipo_id = et.id
+                    WHERE e.id = $id";
+
+            $result = mysqli_query($conexion, $sql);
+
+            if ($result !== false && mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
+                $nombreEstablecimiento = $row["nombre"];
+                $tipoEstablecimiento = $row["tipo"];
+                $logoEstablecimiento = $row["logo"];
+
+                $establecimientos[] = array(
+                    'id' => $id,
+                    'nombre' => $nombreEstablecimiento,
+                    'tipo' => $tipoEstablecimiento,
+                    'logo' => $logoEstablecimiento
+                );
+            }
+        }
+    } else {
+        echo "No se encontraron establecimientos.";
+    }
+} else {
+    // Manejar errores en la consulta
+    echo "Error en la consulta: " . mysqli_error($conexion);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -83,8 +132,8 @@
                         <li>Informes sobre actividad de reservas y actividad de pedidos.</li>
                         <li><strong>Soporte y mantenimiento mensual.</strong></li>
                     </ul>
-                    <h3 class="display-4 mb-3 text-white font-weight-bold" style="font-size: 2rem;">Bs. 100000/mes</h3>
-                    <a href="mailto:paredesmauricio777@gmail.com?subject=Solicitud de Plan Premium" class="btn btn-lg btn-outline-light mt-auto px-4">Suscribirse</a>
+                    <h3 class="display-4 mb-3 text-white font-weight-bold" style="font-size: 2rem;">Bs. 350/mes + costo de tablets</h3>
+                    <a href="paypal.html" class="btn btn-lg btn-outline-light mt-auto px-4">Suscribirse</a>
                 </div>
             </div>
             <div class="col-md-6 p-0">
@@ -98,8 +147,8 @@
                         <li>Informes sobre actividad de reservas y actividad de pedidos.</li>
                         <li><strong>Soporte y mantenimiento mensual.</strong></li>
                     </ul>
-                    <h3 class="display-4 mb-3 text-white font-weight-bold" style="font-size: 2rem;">Bs. 50000/mes</h3>
-                    <a href="mailto:paredesmauricio777@gmail.com?subject=Solicitud de Plan Basico" class="btn btn-lg btn-outline-light mt-auto px-4">Suscribirse</a>
+                    <h3 class="display-4 mb-3 text-white font-weight-bold" style="font-size: 2rem;">Bs. 350/mes</h3>
+                    <a href="paypal.html" class="btn btn-lg btn-outline-light mt-auto px-4">Suscribirse</a>
                 </div>
             </div>
         </div>
@@ -181,6 +230,78 @@
     </div>
     
     <!-- Features End -->
+       <!-- Team Start -->
+
+    <div class="container pt-5 team">
+        <div class="d-flex flex-column text-center mb-5">
+            <h4 class="text-primary font-weight-bold" style="font-size: 50px;">Nuestros Establecimientos Asociados</h4>
+            <h4 class="display-4 font-weight-bold">Revisa sus Menús</h4>
+        </div>
+        <style>
+            .carousel-control-prev,
+            .carousel-control-next {
+                width: auto;
+                background: none;
+                border: none;
+                font-size: 1rem; /* Ajusta el tamaño de la fuente según sea necesario */
+            }
+        
+            .carousel-control-prev-icon,
+            .carousel-control-next-icon {
+                width: 20px; /* Ajusta el tamaño del icono según sea necesario */
+                height: 20px; /* Ajusta el tamaño del icono según sea necesario */
+            }
+        </style>
+ <div id="card-carousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <?php
+        $contador = 0; // Inicializar el contador
+        $totalEstablecimientos = count($establecimientos);
+
+        foreach ($establecimientos as $establecimiento) {
+            if ($contador % 4 === 0) {
+                // Si el contador es divisible por 4, comienza una nueva diapositiva
+                echo '<div class="carousel-item';
+                echo $contador === 0 ? ' active' : ''; // Agrega la clase "active" a la primera diapositiva
+                echo '"><div class="row">';
+            }
+
+            // Muestra la tarjeta actual
+            echo '<div class="col-lg-3 col-md-6 mb-5">
+            <div class="card border-0 bg-secondary text-center text-white">
+                <div style="height: 200px; overflow: hidden;">
+                    <img class="card-img-top mx-auto" src="../../SuperAdmin/' . $establecimiento['logo'] . '" alt="" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                </div>
+                <div class="card-social d-flex align-items-center justify-content-center">
+                    <a class="btn btn-outline-light rounded-pill text-center mr-2 px-3" href="../../Cliente/index.php?idvisita='.$establecimiento['id'].'">Ver Menú</a>
+                </div>
+                <div class="card-body bg-secondary">
+                    <h4 class="card-title text-primary">' . $establecimiento['nombre'] . '</h4>
+                    <p class="card-text">' . $establecimiento['tipo'] . '</p>
+                </div>
+            </div>
+          </div>';
+
+            $contador++;
+
+            if ($contador % 4 === 0 || $contador === $totalEstablecimientos) {
+                // Si el contador es divisible por 4 o es el último elemento, cierra la fila
+                echo '</div></div>';
+            }
+        }
+        ?>
+    </div>
+    <a class="carousel-control-prev" href="#card-carousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </a>
+    <a class="carousel-control-next" href="#card-carousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </a>  
+</div>
+
+
+    </div>
+    <!-- Team End -->
 
     <!-- Footer Start -->
     <div class="footer container-fluid mt-5 py-5 px-sm-3 px-md-5 text-white">
