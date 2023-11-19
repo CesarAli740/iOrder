@@ -107,6 +107,9 @@
                     $rutaLogo = $row['logo'];
                     ?>
                     <img src="../SuperAdmin/<?php echo $rutaLogo; ?>" alt="LOGO" style="width: 10rem;">
+                <!-- </br>
+            <h5 class="login-heading">por:</h5>
+                <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 5rem;"> -->
                     <?php
                 }
 

@@ -100,7 +100,12 @@ $color2 = isset($colores['color2']) ? $colores['color2'] : '';
 
 <body>
 
-  <br><br><br><br><br><br>
+  <br><br><br><br><br><br><br><br>
+  <form action="menu_reporte.php" method="post">
+        <input type="submit" value="Generar Reporte del Menú">
+    </form>
+
+  <br><br><br>
   <section class="menu-section">
     <div class="menu-container">
       <div class="menu-navbar">

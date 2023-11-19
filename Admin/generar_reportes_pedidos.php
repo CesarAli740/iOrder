@@ -12,7 +12,8 @@ $sql = "SELECT pedidos.*, detalles_pedido.*, menu.nombre as nombre_producto, men
         FROM pedidos
         JOIN detalles_pedido ON pedidos.id = detalles_pedido.pedido_id
         JOIN menu ON detalles_pedido.producto_id = menu.id
-        WHERE pedidos.fecha BETWEEN '$fecha_inicio' AND '$fecha_fin'";
+        WHERE pedidos.fecha BETWEEN '$fecha_inicio' AND '$fecha_fin'
+        ORDER BY pedidos.fecha";
 
 $result = $conexion->query($sql);
 
@@ -78,42 +79,70 @@ $result = $conexion->query($sql);
         }
     </style>
 </head>
-
 <body>
     <?php
+
+    $currentDateTime = null;
+    $total = 0;
 
     if ($result->num_rows > 0) {
         echo "<div class='container'>";
         echo "<h2>Reporte de Pedidos</h2>";
         echo "<table>
                 <tr>
-                    <th>ID Pedido</th>
+                    <th># Pedido</th>
                     <th>Fecha</th>
                     <th>Usuario</th>
                     <th>Mesa</th>
+                    <th></th>
                     <th>Producto</th>
+                    <th></th>
                     <th>Cantidad</th>
+                    <th></th>
                     <th>Precio Unitario</th>
-                    <th>Total</th>
+                    <th></th>
+                    <th>Precio Total</th>
                 </tr>";
 
         while ($row = $result->fetch_assoc()) {
-            $total = $row['cantidad'] * $row['precio_producto'];
-            echo "<tr>
-                    <td>{$row['id']}</td>
-                    <td>{$row['fecha']}</td>
-                    <td>{$row['usuario_correo']}</td>
-                    <td>{$row['mesa_id']}</td>
-                    <td>{$row['nombre_producto']}</td>
-                    <td>{$row['cantidad']}</td>
-                    <td>Bs. {$row['precio_producto']}</td>
-                    <td>Bs. {$total}</td>
-                </tr>";
+            $fechaActual = $row['fecha'];
+
+            // Verificar si es la misma fecha y hora que la actual
+            if ($fechaActual != $currentDateTime) {
+                // Si no es la misma fecha y hora, imprimir una nueva fila
+                if ($currentDateTime !== null) {
+                    echo "<td colspan='7' style='white-space: nowrap;'><div>{$productos}</div></td>"; // Combina las celdas
+                    echo "<td>Bs. {$total}</td>"; // Añadir total
+                    echo "</tr><tr>"; // Nueva fila para mantener el formato de la tabla
+                } else {
+                    echo "<tr>"; // Inicia una nueva fila
+                }
+
+                echo "<td>{$row['id']}</td>
+                        <td>{$row['fecha']}</td>
+                        <td>{$row['usuario_correo']}</td>
+                        <td>{$row['mesa_id']}</td>";
+
+                $productos = "{$row['nombre_producto']}: {$row['cantidad']} x Bs. {$row['precio_producto']}";
+                $total = $row['cantidad'] * $row['precio_producto'];
+                $currentDateTime = $fechaActual;
+            } else {
+                // Si es la misma fecha y hora, agregar producto al string
+                $productos .= "<br>{$row['nombre_producto']}: {$row['cantidad']} x Bs. {$row['precio_producto']}";
+                $total += $row['cantidad'] * $row['precio_producto'];
+            }
+        }
+
+        // Imprimir el total para la última fecha
+        if ($currentDateTime !== null) {
+            echo "<td colspan='7' style='white-space: nowrap;'><div>{$productos}</div></td>"; // Combina las celdas
+            echo "<td>Bs. {$total}</td>"; // Añadir total
+            echo "</tr>"; // Cierre de la última fila
         }
 
         echo "</table>";
         echo "</div>";
-      
+
     } else {
         echo "No se encontraron pedidos en el rango de fechas seleccionado.";
     }
@@ -121,6 +150,7 @@ $result = $conexion->query($sql);
     $conexion->close();
     ?>
 </body>
+
 <div style="text-align: center; margin-top: 20px;">
     <a href="reportes-pedidos.php">
         <button style="background-color: #ea272d; color: white; padding: 10px 20px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; text-transform: uppercase;">
