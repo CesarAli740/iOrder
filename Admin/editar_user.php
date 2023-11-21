@@ -95,8 +95,7 @@ if ($rol != '2') {
     h1 {
         color: white;
         font-size: 40px;
-        po
-        sition: relative;
+        position: relative;
     }
     h2 {
         color: white;

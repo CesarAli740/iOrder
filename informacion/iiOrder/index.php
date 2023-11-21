@@ -1,8 +1,8 @@
 <?php
 include '../../includes/_db.php';
-if(!$conexion){
-echo "No se realizo la conexion a la base de datos, el error fue:".
-mysqli_connect_error() ;
+if (!$conexion) {
+    echo "No se realizo la conexion a la base de datos, el error fue:" .
+        mysqli_connect_error();
 }
 // Obtener todos los IDs de establecimientos
 $idResult = mysqli_query($conexion, "SELECT id FROM establecimiento");
@@ -81,45 +81,46 @@ if ($idResult !== false) {
     </div>
     <!--Navbar End -->
 
- <!-- Carousel Start -->
- <div class="container-fluid p-0">
-    <div id="blog-carousel" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="w-100" src="img/pasa1.png" alt="Image">
-                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                    <h3 class="text-primary text-capitalize m-0" style="font-size: 3em;">Bienvenido a iOrder</h3>
-                    <h2 class="display-2 m-0 mt-2 mt-md-4 text-white font-weight-bold text-capitalize">Sistema de Reservas</h2>
-                    <a href="../../includes/login.php" class="btn btn-lg btn-outline-light mt-3 mt-md-5 py-md-3 px-md-5">Unirse ahora</a>
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0">
+        <div id="blog-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" src="img/pasa1.png" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <h3 class="text-primary text-capitalize m-0" style="font-size: 3em;">Bienvenido a iOrder</h3>
+                        <h2 class="display-2 m-0 mt-2 mt-md-4 text-white font-weight-bold text-capitalize">Sistema de Reservas</h2>
+                        <a href="../../includes/login.php" class="btn btn-lg btn-outline-light mt-3 mt-md-5 py-md-3 px-md-5">Unirse ahora</a>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" src="img/pasa2.png" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <h3 class="text-primary text-capitalize m-0" style="font-size: 3em;">Bienvenido a iOrder</h3>
+                        <h2 class="display-2 m-0 mt-2 mt-md-4 text-white font-weight-bold text-capitalize">Sistema de Pedidos</h2>
+                        <a href="../../includes/login.php" class="btn btn-lg btn-outline-light mt-3 mt-md-5 py-md-3 px-md-5">Unirse ahora</a>
+                    </div>
                 </div>
             </div>
-            <div class="carousel-item">
-                <img class="w-100" src="img/pasa2.png" alt="Image">
-                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                    <h3 class="text-primary text-capitalize m-0" style="font-size: 3em;">Bienvenido a iOrder</h3>
-                    <h2 class="display-2 m-0 mt-2 mt-md-4 text-white font-weight-bold text-capitalize">Sistema de Pedidos</h2>
-                    <a href="../../includes/login.php" class="btn btn-lg btn-outline-light mt-3 mt-md-5 py-md-3 px-md-5">Unirse ahora</a>
-                </div>
-            </div>
+            <a class="carousel-control-prev" href="#blog-carousel" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#blog-carousel" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
         </div>
-        <a class="carousel-control-prev" href="#blog-carousel" data-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </a>
-        <a class="carousel-control-next" href="#blog-carousel" data-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </a>
     </div>
-</div>
-<!-- Carousel End -->
+    <!-- Carousel End -->
 
 
     <!-- Gym Class Start -->
     <style>
         .list-unstyled li {
-            list-style-type: disc; /* Utiliza "disc" para viñetas redondas. Puedes cambiarlo a "square", "circle", etc. si prefieres otro estilo. */
+            list-style-type: disc;
+            /* Utiliza "disc" para viñetas redondas. Puedes cambiarlo a "square", "circle", etc. si prefieres otro estilo. */
         }
     </style>
-    
+
     <div class="container gym-class mb-5">
         <div class="row px-3">
             <div class="col-md-6 p-0">
@@ -153,7 +154,7 @@ if ($idResult !== false) {
             </div>
         </div>
     </div>
-   
+
     <!-- Gym Class End -->
 
 
@@ -190,12 +191,12 @@ if ($idResult !== false) {
                         </div>
                     </div>
                 </div>
-                
-                
+
+
             </div>
         </div>
     </div>
-    
+
     <!-- About End -->
 
 
@@ -228,9 +229,9 @@ if ($idResult !== false) {
             </div>
         </div>
     </div>
-    
+
     <!-- Features End -->
-       <!-- Team Start -->
+    <!-- Team Start -->
 
     <div class="container pt-5 team">
         <div class="d-flex flex-column text-center mb-5">
@@ -243,37 +244,40 @@ if ($idResult !== false) {
                 width: auto;
                 background: none;
                 border: none;
-                font-size: 1rem; /* Ajusta el tamaño de la fuente según sea necesario */
+                font-size: 1rem;
+                /* Ajusta el tamaño de la fuente según sea necesario */
             }
-        
+
             .carousel-control-prev-icon,
             .carousel-control-next-icon {
-                width: 20px; /* Ajusta el tamaño del icono según sea necesario */
-                height: 20px; /* Ajusta el tamaño del icono según sea necesario */
+                width: 20px;
+                /* Ajusta el tamaño del icono según sea necesario */
+                height: 20px;
+                /* Ajusta el tamaño del icono según sea necesario */
             }
         </style>
- <div id="card-carousel" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-        <?php
-        $contador = 0; // Inicializar el contador
-        $totalEstablecimientos = count($establecimientos);
+        <div id="card-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <?php
+                $contador = 0; // Inicializar el contador
+                $totalEstablecimientos = count($establecimientos);
 
-        foreach ($establecimientos as $establecimiento) {
-            if ($contador % 4 === 0) {
-                // Si el contador es divisible por 4, comienza una nueva diapositiva
-                echo '<div class="carousel-item';
-                echo $contador === 0 ? ' active' : ''; // Agrega la clase "active" a la primera diapositiva
-                echo '"><div class="row">';
-            }
+                foreach ($establecimientos as $establecimiento) {
+                    if ($contador % 4 === 0) {
+                        // Si el contador es divisible por 4, comienza una nueva diapositiva
+                        echo '<div class="carousel-item';
+                        echo $contador === 0 ? ' active' : ''; // Agrega la clase "active" a la primera diapositiva
+                        echo '"><div class="row">';
+                    }
 
-            // Muestra la tarjeta actual
-            echo '<div class="col-lg-3 col-md-6 mb-5">
+                    // Muestra la tarjeta actual
+                    echo '<div class="col-lg-3 col-md-6 mb-5">
             <div class="card border-0 bg-secondary text-center text-white">
                 <div style="height: 200px; overflow: hidden;">
                     <img class="card-img-top mx-auto" src="../../SuperAdmin/' . $establecimiento['logo'] . '" alt="" style="max-height: 100%; max-width: 100%; object-fit: contain;">
                 </div>
                 <div class="card-social d-flex align-items-center justify-content-center">
-                    <a class="btn btn-outline-light rounded-pill text-center mr-2 px-3" href="../../Cliente/index.php?idvisita='.$establecimiento['id'].'">Ver Menú</a>
+                    <a class="btn btn-outline-light rounded-pill text-center mr-2 px-3" href="../../Cliente/index.php?idvisita=' . $establecimiento['id'] . '">Ver Menú</a>
                 </div>
                 <div class="card-body bg-secondary">
                     <h4 class="card-title text-primary">' . $establecimiento['nombre'] . '</h4>
@@ -282,26 +286,27 @@ if ($idResult !== false) {
             </div>
           </div>';
 
-            $contador++;
+                    $contador++;
 
-            if ($contador % 4 === 0 || $contador === $totalEstablecimientos) {
-                // Si el contador es divisible por 4 o es el último elemento, cierra la fila
-                echo '</div></div>';
-            }
-        }
-        ?>
-    </div>
-    <a class="carousel-control-prev" href="#card-carousel" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    </a>
-    <a class="carousel-control-next" href="#card-carousel" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    </a>  
-</div>
-
-
+                    if ($contador % 4 === 0 || $contador === $totalEstablecimientos) {
+                        // Si el contador es divisible por 4 o es el último elemento, cierra la fila
+                        echo '</div></div>';
+                    }
+                }
+                ?>
+            </div>
+            <a class="carousel-control-prev" href="#card-carousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </a>
+            <a class="carousel-control-next" href="#card-carousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </a>
+        </div>
     </div>
     <!-- Team End -->
+    <h1 style="text-decoration: none; text-align: center;">
+        <a href="../../../iOrder/informacion/index.html">VOLVER A NOVA</a>
+    </h1>
 
     <!-- Footer Start -->
     <div class="footer container-fluid mt-5 py-5 px-sm-3 px-md-5 text-white">

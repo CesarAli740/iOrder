@@ -80,7 +80,28 @@
 
         .login-heading {
             color: black;
-            margin-bottom: 20px;
+            margin-bottom: .5rem;
+            margin: 0;
+        }
+
+        .alogin {
+            text-decoration: none;
+            background-color: #161d32;
+            border: none;
+            color: white;
+            padding: 0.2rem;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: .5rem;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            width: 90%;
+            transition: background-color 0.3s;
+        }
+
+        .alogin:hover {
+            background-color: #435a9c;
         }
     </style>
 </head>
@@ -106,8 +127,8 @@
                     $row = $result->fetch_assoc();
                     $rutaLogo = $row['logo'];
                     ?>
-                    <img src="../SuperAdmin/<?php echo $rutaLogo; ?>" alt="LOGO" style="width: 10rem;">
-                <!-- </br>
+                    <img src="../SuperAdmin/<?php echo $rutaLogo; ?>" alt="LOGO" style="width: 10rem">
+                    <!-- </br>
             <h5 class="login-heading">por:</h5>
                 <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 5rem;"> -->
                     <?php
@@ -137,11 +158,24 @@
                 <div class="form-group">
                     <a href="./registrar.php?idvisita=<?php echo $_GET['idvisita'] ?>" class="botonlogin">Regístrate</a>
                 </div>
+                <a class="botonlogin" onclick="volverPaginaAnterior()">Volver</a>
+
+                <script>
+                    function volverPaginaAnterior() {
+                        window.history.back();
+                    }
+                </script>
                 <?php
-            }
+
+            } else {
             ?>
+            <a class="botonlogin" href="../informacion/iiOrder/index.php">Volver</a>
+            <!-- <div class="form-group">
+                <a href='../informacion/iiOrder/index.php' class="alogin">Volver</a>
+            </div> -->
         </form>
         <?php
+            }
         if (isset($_GET['message'])) {
             ?>
             <div class="alert alert-primary text-center" role="alert">

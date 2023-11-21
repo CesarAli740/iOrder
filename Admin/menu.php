@@ -95,17 +95,29 @@ $color2 = isset($colores['color2']) ? $colores['color2'] : '';
     .icon2:hover {
       color: #7d1518;
     }
+    .container-report{
+      display: grid;
+      place-items: center;
+    }
+    #button-report-menu {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
   </style>
 </head>
 
 <body>
 
   <br><br><br><br><br><br><br><br>
-  <form action="menu_reporte.php" method="post">
-        <input type="submit" value="Generar Reporte del Menú">
-    </form>
+  <form class="container-report" action="menu_reporte.php" method="post">
+    <input id="button-report-menu" type="submit" value="Generar Reporte del Menú">
+  </form>
 
-  <br><br><br>
   <section class="menu-section">
     <div class="menu-container">
       <div class="menu-navbar">
@@ -189,12 +201,26 @@ $color2 = isset($colores['color2']) ? $colores['color2'] : '';
       crearProductButton.style.backgroundColor = color1;
       crearProductButton.style.color = color2;
 
+      
+      
       crearProductButton.addEventListener("mouseover", () => {
         const hoverColor = darkenColor(color1, 1); // Ajusta el valor de oscurecimiento según tu preferencia
         crearProductButton.style.backgroundColor = hoverColor;
       });
       crearProductButton.addEventListener("mouseout", () => {
         crearProductButton.style.backgroundColor = color1;
+      });
+
+      const reportMenu = document.getElementById('button-report-menu');
+      reportMenu.style.backgroundColor = color1;
+      reportMenu.style.color = color2;
+      
+      reportMenu.addEventListener("mouseover", () => {
+        const hoverColor = darkenColor(color1, 100); // Ajusta el valor de oscurecimiento según tu preferencia
+        reportMenu.style.backgroundColor = hoverColor;
+      });
+      reportMenu.addEventListener("mouseout", () => {
+        reportMenu.style.backgroundColor = color1;
       });
 
       const categoryLinks = document.querySelectorAll(".menu-navbar a");

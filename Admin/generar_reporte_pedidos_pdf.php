@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/La_Paz');
 require('./fpdf/fpdf.php');
 include '../includes/_db.php';
 
@@ -10,6 +11,9 @@ if ($conexion->connect_error) {
 
 $fecha_inicio = $_GET['fecha_inicio'];
 $fecha_fin = $_GET['fecha_fin'];
+
+// Obtener la hora de emisión
+$hora_emision = date('Y-m-d H:i:s');
 
 $sql = "SELECT pedidos.*, detalles_pedido.*, menu.nombre as nombre_producto, menu.precio as precio_producto
         FROM pedidos
@@ -33,6 +37,10 @@ if ($result->num_rows > 0) {
     $pdf->Image($logoPath, 10, 10, 30);
     $pdf->SetFont('Arial', 'B', 16);
     $pdf->Cell(0, 10, 'Reporte de Pedidos - ' . $establecimiento, 0, 1, 'C');
+
+    // Agregar la hora de emisión debajo del título
+    $pdf->SetFont('Arial', 'I', 10);
+    $pdf->Cell(0, 10, 'Hora de emision: ' . $hora_emision, 0, 1, 'C');
 
     $pdf->Ln(15);
     // Configurar la tabla
@@ -98,7 +106,6 @@ if ($result->num_rows > 0) {
             $pdf->Cell(35, 10, 'Bs. ' . number_format($total, 2), 1);
         }
     }
-
 
     // Salida del PDF
     $pdf->Output();

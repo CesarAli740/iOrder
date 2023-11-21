@@ -9,7 +9,7 @@ include '../includes/_db.php';
 if (!isset($_SESSION['carrito']) || empty($_SESSION['carrito'])) {
     echo '<div class="empty-cart-message" style="text-align: center; margin-top: 20vh; color: #333; font-size: 1.5rem; background-color: #FFF; padding: 20px; ">';
     echo '<h1 style="margin: 3rem; color: #A35E23; font-size: 2rem;">¡Oops! Tu carrito está vacío</h1>';
-    echo '<p style="margin-bottom: 20px;">¿Por qué no exploras nuestro delicioso menú?</p>';
+    echo '<p style="margin-bottom: 5rem;">¿Por qué no exploras nuestro delicioso menú?</p>';
     echo '<div class="back-to-menu" style="text-align: center; margin-top: 20px;"><a href="menu.php" style="color: #fff; text-decoration: none; font-weight: bold; background-color: #A35E23; padding: 10px 20px; border-radius: 4px; transition: background-color 0.3s;">Volver al Menú</a></div>';
     echo '</div>';
 } else {

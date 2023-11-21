@@ -2,7 +2,8 @@
 session_start();
 error_reporting(0);
 $rol = $_SESSION['rol'];
-if ($rol != '1') {
+
+if ($rol != '2') {
     session_unset();
     session_destroy();
     header("Location: ../includes/login.php");
@@ -10,7 +11,6 @@ if ($rol != '1') {
 }
 
 include '../NAVBARiorder/index.php';
-
 include('../includes/_db.php');
 ?>
 
@@ -25,8 +25,7 @@ include('../includes/_db.php');
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/es.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-    <title>Control de Establecimientos</title>
+    <title>Control de Usuarios</title>
     <style>
         body {
             background-color: transparent;
@@ -178,12 +177,10 @@ include('../includes/_db.php');
     </style>
 </head>
 
-
 <body>
-
     <div class="modal-content" style="margin-top: 8rem">
         <div class="table-header">
-            <h2 class="modal-title">Lista de Establecimientos</h2>
+            <h2 class="modal-title">Lista de Usuarios</h2>
             <button onclick="window.location.href='./index.php'" type="button" class="btn btn-secondary">Volver</button>
         </div>
 
@@ -194,15 +191,14 @@ include('../includes/_db.php');
                 <table id="table_id">
                     <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Responsable</th>
-                            <th>Inicio de suscripción</th>
+                            <th>Nombre de Usuario</th>
+                            <th>Email</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $SQL = "SELECT * FROM establecimiento";
+                        $SQL = "SELECT * FROM user"; // Cambia a la tabla correcta si es diferente
                         $result = mysqli_query($conexion, $SQL);
 
                         if ($result && mysqli_num_rows($result) > 0) {
@@ -210,21 +206,20 @@ include('../includes/_db.php');
                                 ?>
                                 <tr>
                                     <td><?php echo $row['nombre']; ?></td>
-                                    <td><?php echo $row['responsable']; ?></td>
-                                    <td><?php echo $row['fecha_creacion']; ?></td>
+                                    <td><?php echo $row['correo']; ?></td>
                                     <td>
                                         <!-- Cambiado el checkbox por un botón -->
-                                        <button class="btn btn-toggle" data-id="<?php echo $row['id']; ?>" onclick="cambiarEstado(this)">
-                                        <?php echo ($row['estado'] == 1) ? 'Activado' : 'Desactivado'; ?>
+                                        <button class="btn btn-toggle" data-id="<?php echo $row['id']; ?>" onclick="cambiarEstadoUsuario(this)">
+                                            <?php echo ($row['estado'] == 1) ? 'Activado' : 'Desactivado'; ?>
                                         </button>
                                     </td>
                                 </tr>
-                                <?php
+                            <?php
                             }
                         } else {
                             ?>
                             <tr class="text-center">
-                                <td colspan="4">No existen registros</td>
+                                <td colspan="3">No existen registros</td>
                             </tr>
                         <?php
                         }
@@ -254,11 +249,11 @@ include('../includes/_db.php');
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="../js/user.js"></script>
     <script>
-        function cambiarEstado(button) {
+        function cambiarEstadoUsuario(button) {
             var id = $(button).data('id');
 
             $.ajax({
-                url: '../includes/estado.php',
+                url: '../includes/estado2.php',
                 method: 'POST',
                 data: {
                     id: id
@@ -281,7 +276,5 @@ include('../includes/_db.php');
             });
         }
     </script>
-
 </body>
-
 </html>

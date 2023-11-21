@@ -342,7 +342,7 @@ $color2 = isset($colores['color2']) ? $colores['color2'] : '';
                     setTimeout(() => {
                         popup.style.display = "none";
                         form.submit();
-                    }, 300);
+                    }, 1500);
                 });
             });
         });

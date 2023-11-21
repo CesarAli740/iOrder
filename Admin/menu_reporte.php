@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/La_Paz');
 require('fpdf/fpdf.php');
 include '../includes/_db.php';
 
@@ -23,9 +24,10 @@ if ($rowRestaurante = mysqli_fetch_assoc($resultRestaurante)) {
 
     class PDF extends FPDF
     {
-        // Propiedades para el logo y el nombre del restaurante
+        // Propiedades para el logo, el nombre del restaurante y la hora de emisión
         public $logoPath;
         public $nombreRestaurante;
+        public $horaEmision;  // Nueva propiedad para almacenar la hora de emisión
 
         // Constructor para inicializar las propiedades
         function __construct($logoPath, $nombreRestaurante)
@@ -33,6 +35,7 @@ if ($rowRestaurante = mysqli_fetch_assoc($resultRestaurante)) {
             parent::__construct();
             $this->logoPath = $logoPath;
             $this->nombreRestaurante = $nombreRestaurante;
+            $this->horaEmision = date('Y-m-d H:i:s'); // Obtener la hora actual
         }
 
         function Header()
@@ -41,6 +44,10 @@ if ($rowRestaurante = mysqli_fetch_assoc($resultRestaurante)) {
             $this->Image($this->logoPath, 10, 10, 30);
             $this->SetFont('Arial', 'B', 16);
             $this->Cell(0, 10, 'Menu de ' . $this->nombreRestaurante, 0, 1, 'C');
+
+            // Agregar la hora de emisión debajo del título
+            $this->SetFont('Arial', 'I', 10);
+            $this->Cell(0, 10, 'Hora de emision: ' . $this->horaEmision, 0, 1, 'C');
 
             // Línea separadora después del encabezado
             $this->Line(10, 45, 200, 45);
@@ -51,7 +58,7 @@ if ($rowRestaurante = mysqli_fetch_assoc($resultRestaurante)) {
         {
             $this->SetY(-15);
             $this->SetFont('Arial', 'I', 8);
-            $this->Cell(0, 10, 'Página ' . $this->PageNo(), 0, 0, 'C');
+            $this->Cell(0, 10, 'Pagina ' . $this->PageNo(), 0, 0, 'C');
         }
     }
 
@@ -92,4 +99,3 @@ if ($rowRestaurante = mysqli_fetch_assoc($resultRestaurante)) {
 } else {
     echo "No se encontró información del restaurante.";
 }
-?>

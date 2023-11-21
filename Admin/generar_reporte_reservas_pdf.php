@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/La_Paz');
 include '../includes/_db.php';
 require('fpdf/fpdf.php');
 
@@ -56,16 +57,31 @@ class PDF extends FPDF {
         // Anchuras personalizadas
         $widths = array(30, 40, 70, 30, 50, 20);
     
+        // Calcular el ancho total de la tabla
+        $totalWidth = array_sum($widths);
+    
+        // Calcular la posición para centrar la tabla
+        $xPos = ($this->w - $totalWidth) / 2;
+    
+        // Calcular la posición para centrar el encabezado
+        $xHeaderPos = $xPos;
+    
         // Encabezado de la tabla
         for ($i = 0; $i < count($header); $i++) {
-            $this->Cell($widths[$i], 10, $header[$i], 1);
+            // Posicionar en la posición X calculada para centrar el encabezado
+            $this->SetX($xHeaderPos);
+            $this->Cell($widths[$i], 10, $header[$i], 1, 0, 'C');
+            $xHeaderPos += $widths[$i]; // Actualizar la posición X para la siguiente celda
         }
         $this->Ln();
     
         // Contenido de la tabla
         foreach ($data as $row) {
+            // Posicionar en la nueva línea y en la posición X calculada
+            $this->SetX($xPos);
+    
             for ($i = 0; $i < count($row); $i++) {
-                $this->Cell($widths[$i], 10, $row[$i], 1);
+                $this->Cell($widths[$i], 10, $row[$i], 1, 0, 'C');
             }
             $this->Ln();
         }

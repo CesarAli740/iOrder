@@ -1,7 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'];
-    $estado = $_POST['estado'];
 
     $conexion = mysqli_connect("localhost", "root", "", "iorder");
 
@@ -10,11 +9,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    $consulta = "UPDATE establecimiento SET estado = '$estado' WHERE id = '$id'";
-    if (mysqli_query($conexion, $consulta)) {
-        echo "Consulta ejecutada correctamente.";
+    // Cambiar el estado al valor opuesto
+    $consulta = "UPDATE establecimiento SET estado = NOT estado WHERE id = ?";
+    $stmt = mysqli_prepare($conexion, $consulta);
+    mysqli_stmt_bind_param($stmt, "i", $id);
+
+    if (mysqli_stmt_execute($stmt)) {
+        echo "success";
     } else {
         echo "Error al ejecutar la consulta: " . mysqli_error($conexion);
     }
+
+    mysqli_stmt_close($stmt);
     mysqli_close($conexion);
 }
+?>

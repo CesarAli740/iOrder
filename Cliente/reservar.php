@@ -128,15 +128,24 @@ if ($rol != '5') {
     .btn-reservar {
       background-color: #ea272d;
       color: white;
+      margin: 1rem;
       border-radius: 1rem;
       padding: 1rem;
       cursor: pointer;
       font-weight: bold;
       font-size: 1rem;
     }
+    .btn-reservar:hover {
+      background-color: #7d1518;
+    }
+
     .mesa.seleccionada {
-  background-color: lightblue;
-}
+      background-color: lightblue;
+    }
+
+    .footer {
+      margin: 1rem;
+    }
   </style>
 </head>
 
@@ -238,32 +247,32 @@ if ($rol != '5') {
   <!-- ... tu código JavaScript ... -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-  const mesas = document.querySelectorAll(".mesa");
+      const mesas = document.querySelectorAll(".mesa");
 
-  mesas.forEach(mesa => {
-    mesa.addEventListener("click", () => {
-      const mesaId = mesa.getAttribute("data-id");
-      const mesaSelect = document.getElementById("mesaSelect");
-      const estadoMesa = mesa.classList.contains("reservado") ? "reservado" : "disponible";
+      mesas.forEach(mesa => {
+        mesa.addEventListener("click", () => {
+          const mesaId = mesa.getAttribute("data-id");
+          const mesaSelect = document.getElementById("mesaSelect");
+          const estadoMesa = mesa.classList.contains("reservado") ? "reservado" : "disponible";
 
-      // Verificar si la mesa está disponible antes de seleccionarla
-      if (estadoMesa === "disponible") {
-        // Actualizar el valor del campo de selección
-        mesaSelect.value = mesaId;
+          // Verificar si la mesa está disponible antes de seleccionarla
+          if (estadoMesa === "disponible") {
+            // Actualizar el valor del campo de selección
+            mesaSelect.value = mesaId;
 
-        // Agregar la clase 'seleccionada' a la mesa clicada
-        mesa.classList.add("seleccionada");
+            // Agregar la clase 'seleccionada' a la mesa clicada
+            mesa.classList.add("seleccionada");
 
-        // Quitar la clase 'seleccionada' de otras mesas
-        mesas.forEach(otraMesa => {
-          if (otraMesa !== mesa) {
-            otraMesa.classList.remove("seleccionada");
+            // Quitar la clase 'seleccionada' de otras mesas
+            mesas.forEach(otraMesa => {
+              if (otraMesa !== mesa) {
+                otraMesa.classList.remove("seleccionada");
+              }
+            });
           }
         });
-      }
+      });
     });
-  });
-});
   </script>
 </body>
 

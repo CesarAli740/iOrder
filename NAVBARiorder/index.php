@@ -288,7 +288,7 @@ $establecimiento = $_SESSION['establecimiento'];
 if ($rol == '1') {
   ?>
 
-  <body style="background-image: url('../images/mesa2.svg');">
+  <body style="background-image: url('../images/mesa6.svg');">
     <header class="header">
       <a href="../SuperAdmin/index.php" class="logo">
         <img src="../informacion/images/logo2.svg" alt="LOGO" style="width: 10rem;">
@@ -341,7 +341,7 @@ if ($rol == '1') {
 if ($rol == '2') {
   ?>
 
-  <body style="background-image: url('../images/mesa3.svg');">
+  <body style="background-image: url('../images/mesa5.svg');">
     <header class="header">
       <a href="../Admin/index.php" class="logo">
         <?php $query = "SELECT logo FROM establecimiento WHERE id = $establecimiento";
@@ -378,6 +378,7 @@ if ($rol == '2') {
             <a href="../Admin/listar.php">Listar</a>
             <a href="../Admin/buscar.php">Buscar</a>
             <a href="../Admin/editar.php">Editar</a>
+            <a href="../SuperAdmin/control_user.php">Control</a>
           </div>
         </div>
         <div class="dropdown">
@@ -409,7 +410,7 @@ if ($rol == '2') {
 if ($rol == '4') {
   ?>
 
-  <body style="background-image: url('../images/mesa3.svg');">
+  <body style="background-image: url('../images/mesa5.svg');">
     <header class="header">
       <a href="../Empleado/index.php" class="logo">
         <?php $query = "SELECT logo FROM establecimiento WHERE id = $establecimiento";
@@ -453,7 +454,7 @@ if ($rol == '4') {
 if ($rol == '5') {
   ?>
 
-  <body style="background-image: url('../images/mesa4.svg');">
+  <body style="background-image: url('../images/mesa5.svg');">
     <header class="header">
       <a href="../Cliente/index.php" class="logo">
         <?php $query = "SELECT logo FROM establecimiento WHERE id = $establecimiento";
@@ -496,7 +497,7 @@ if (isset($_GET['idvisita'])){
   $visita = $_GET['idvisita'];
   ?>
 
-  <body style="background-image: url('../images/mesa4.svg');">
+  <body style="background-image: url('../images/mesa5.svg');">
     <header class="header">
       <a href="../Cliente/index.php?idvisita=<?php echo $visita ?>" class="logo">
         <?php $query = "SELECT logo FROM establecimiento WHERE id = $visita";
@@ -528,6 +529,7 @@ if (isset($_GET['idvisita'])){
           <a href="../includes/login.php?idvisita=<?php echo $visita ?>" style="--i:3;">Reservas</a>
         </div>
         <a href="../includes/login.php?idvisita=<?php echo $visita ?>" style="--i:4;">Inicia Sesión!</a>
+        <a href="../informacion/iiOrder/index.php">Salir</a>
       </nav>
     </header>
 

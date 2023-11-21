@@ -81,6 +81,7 @@ if (isset($_POST['cambiar_contraseña'])) {
         }
         
         form {
+            font-size: 1.1rem;
             margin-top: 20px;
             width: 50rem;
             padding: 3rem;
@@ -126,75 +127,93 @@ if (isset($_POST['cambiar_contraseña'])) {
             width: 100%;
         }
 
-        form button {
-            width: 20rem;
-            margin-top: 1rem;
-            margin-left: 15rem;
-            padding: 1rem;
-            background-color: red; /* Cambiado a rojo */
-            color: white;
-            border: none;
-            border-radius: 9px;
-            cursor: pointer;
-        }
+        
 
         form button:hover {
-            background-color: darkred; /* Cambiado a un tono más oscuro de rojo al pasar el mouse */
+            background-color: #7d1518; /* Cambiado a un tono más oscuro de rojo al pasar el mouse */
         }
         h1{
     
             color:white;
             font-size: 40px;
         }
+
+        .container-form{
+            display: flex;
+            width: 90%;
+        }
+        .btn-success {
+        background-color: #ea272d;
+        color: #fff;
+        padding: 8px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+    .btn-success:hover {
+        background-color: #7d1518;
+    }
+    .cambiar-password{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 3rem;
+    }
     </style>
 </head>
 <body>
     <h1>Editar Perfil</h1>
-    <form method="post">
-        <div class="form-group">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" value="<?php echo $usuario["nombre"]; ?>" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="apPAt">Apellido Paterno:</label>
-            <input type="text" id="apPAt" name="apPAt" value="<?php echo $usuario["apPAt"]; ?>" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="apMAt">Apellido Materno:</label>
-            <input type="text" id="apMAt" name="apMAt" value="<?php echo $usuario["apMAt"]; ?>" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="correo">Correo:</label>
-            <input type="email" id="correo" name="correo" value="<?php echo $usuario["correo"]; ?>" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="telefono">Teléfono:</label>
-            <input type="tel" id="telefono" name="telefono" value="<?php echo $usuario["telefono"]; ?>" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary" name="actualizar_perfil" >Actualizar Perfil</button>
-    </form>
-
-    <form method="POST">
-        <button type="submit" name="obtener_contraseña">Cambiar Contraseña *Opcional*</button>
-    </form>
-
-    <?php if (isset($current_password_hash_from_db) && !$showChangePasswordForm) { ?>
-        <div class="form-group">
-            <label for="password">Contraseña Obtenida:</label><br>
-            <input type="password" id="password_obtenida" name="password_obtenida"
-                   value="<?php echo $current_password_hash_from_db ?>" required class="form-control" disabled>
-        </div>
-    <?php } ?>
-
-    <?php if ($showChangePasswordForm) { ?>
+    <div class="container-form">
         <form method="post">
             <div class="form-group">
-                <label for="new_password">Nueva Contraseña:</label><br>
-                <input type="password" id="new_password" name="new_password" class="form-control">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="<?php echo $usuario["nombre"]; ?>" class="form-control" required>
             </div>
-            <button type="submit" name="cambiar_contraseña">Cambiar Contraseña</button>
+            <div class="form-group">
+                <label for="apPAt">Apellido Paterno:</label>
+                <input type="text" id="apPAt" name="apPAt" value="<?php echo $usuario["apPAt"]; ?>" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="apMAt">Apellido Materno:</label>
+                <input type="text" id="apMAt" name="apMAt" value="<?php echo $usuario["apMAt"]; ?>" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="correo">Correo:</label>
+                <input type="email" id="correo" name="correo" value="<?php echo $usuario["correo"]; ?>" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" value="<?php echo $usuario["telefono"]; ?>" class="form-control" required>
+            </div>
+            <button class="btn-success" type="submit" class="btn btn-primary" name="actualizar_perfil" >Actualizar Perfil</button>
         </form>
-    <?php } ?>
+        <form method="POST">
+            <div class="cambiar-password">
+                <button class="btn-success" type="submit" name="obtener_contraseña">Cambiar Contraseña *Opcional*</button>
+            </div>
+            <?php if (isset($current_password_hash_from_db) && !$showChangePasswordForm) { ?>
+                <div class="form-group">
+                    <label for="password">Contraseña Obtenida:</label><br>
+                    <input type="password" id="password_obtenida" name="password_obtenida"
+                           value="<?php echo $current_password_hash_from_db ?>" required class="form-control" disabled>
+                </div>
+            <?php } ?>
+        
+            <?php if ($showChangePasswordForm) { ?>
+                <form method="post">
+                    <div class="form-group">
+                        <label for="new_password">Nueva Contraseña:</label><br>
+                        <input type="password" id="new_password" name="new_password" class="form-control">
+                        <button class="btn-success" type="submit" name="cambiar_contraseña">Cambiar Contraseña</button>
+                    </div>
+                </form>
+            <?php } ?>
+
+        </form>
+    </div>
+        
 
 </body>
 </html>
