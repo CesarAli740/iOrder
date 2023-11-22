@@ -8,8 +8,8 @@ $establecimiento = $_SESSION['establecimiento'];
 if ($conexion->connect_error) {
     die("Conexión fallida: " . $conexion->connect_error);
 }
+date_default_timezone_set('America/La_Paz');
 
-// Obtener la fecha actual en el formato de MySQL (YYYY-MM-DD)
 $fecha_actual = date('Y-m-d');
 
 // Consulta para obtener las reservas del día actual para una mesa y establecimiento específicos
@@ -92,6 +92,7 @@ $result = $conexion->query($sql);
     </style>
 </head>
 <?php include '../NAVBARiorder/index.php'; ?>
+<br><br><br><br><br><br><br>
 <body>
     <h2>Reservas del Día</h2>
     

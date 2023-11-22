@@ -378,7 +378,7 @@ if ($rol == '2') {
             <a href="../Admin/listar.php">Listar</a>
             <a href="../Admin/buscar.php">Buscar</a>
             <a href="../Admin/editar.php">Editar</a>
-            <a href="../SuperAdmin/control_user.php">Control</a>
+            <a href="../Admin/control_user.php">Control</a>
           </div>
         </div>
         <div class="dropdown">
@@ -485,7 +485,7 @@ if ($rol == '5') {
         <div class="dropdown">
           <a href="../Cliente/reservar.php" style="--i:3;">Reservas</a>
         </div>
-        <a href="../includes/_sesion/cerrarSesion.php" style="--i:4;">Salir</a>
+        <a href="../includes/_sesion/cerrarSesion.php?idvisita=<?php echo $establecimiento ?>" style="--i:4;">Salir</a>
       </nav>
     </header>
 

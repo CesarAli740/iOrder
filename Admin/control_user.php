@@ -2,6 +2,8 @@
 session_start();
 error_reporting(0);
 $rol = $_SESSION['rol'];
+$id_establecimiento = $_SESSION['establecimiento'];
+$id_user = $_SESSION['id'];
 
 if ($rol != '2') {
     session_unset();
@@ -22,8 +24,11 @@ include('../includes/_db.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/fontawesome-all.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"
+        integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/es.css">
     <title>Control de Usuarios</title>
     <style>
@@ -198,30 +203,37 @@ include('../includes/_db.php');
                     </thead>
                     <tbody>
                         <?php
-                        $SQL = "SELECT * FROM user"; // Cambia a la tabla correcta si es diferente
+                        $SQL = "SELECT * FROM user WHERE tipo = $id_establecimiento"; // Aquí cambia a la tabla correcta si es diferente
                         $result = mysqli_query($conexion, $SQL);
 
                         if ($result && mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
-                                ?>
-                                <tr>
-                                    <td><?php echo $row['nombre']; ?></td>
-                                    <td><?php echo $row['correo']; ?></td>
-                                    <td>
-                                        <!-- Cambiado el checkbox por un botón -->
-                                        <button class="btn btn-toggle" data-id="<?php echo $row['id']; ?>" onclick="cambiarEstadoUsuario(this)">
-                                            <?php echo ($row['estado'] == 1) ? 'Activado' : 'Desactivado'; ?>
-                                        </button>
-                                    </td>
-                                </tr>
-                            <?php
+                                if ($row['id'] != $id_user) {
+                                    ?>
+                                    <tr>
+                                        <td>
+                                            <?php echo $row['nombre']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $row['correo']; ?>
+                                        </td>
+                                        <td>
+                                            <label class="switch">
+                                                <input type="checkbox" <?php echo ($row['estado'] == 1) ? 'checked' : ''; ?>
+                                                    data-id="<?php echo $row['id']; ?>" onchange="cambiarEstadoUsuario(this)">
+                                                <span class="slider"></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
                             }
                         } else {
                             ?>
                             <tr class="text-center">
                                 <td colspan="3">No existen registros</td>
                             </tr>
-                        <?php
+                            <?php
                         }
                         ?>
                     </tbody>
@@ -230,27 +242,14 @@ include('../includes/_db.php');
         </div>
     </div>
 
-    <style>
-        /* Estilo para el botón toggle */
-        .btn-toggle {
-            background-color: #ea272d;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-
-        .btn-toggle:hover {
-            background-color: #7d1518;
-        }
-    </style>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="../js/user.js"></script>
     <script>
-        function cambiarEstadoUsuario(button) {
-            var id = $(button).data('id');
+        function cambiarEstadoUsuario(checkbox) {
+            var id = $(checkbox).data('id');
+
+            console.log('ID del usuario:', id);
 
             $.ajax({
                 url: '../includes/estado2.php',
@@ -259,22 +258,23 @@ include('../includes/_db.php');
                     id: id
                 },
                 success: function (response) {
-                    console.log(response);
-                    if (response.trim() === 'success') {
-                        // Actualizar el texto del botón
-                        $(button).text(function (i, text) {
-                            return text === 'Activado' ? 'Desactivado' : 'Activado';
-                        });
-                    } else {
+                    console.log('Respuesta del servidor:', response);
+                    if (response.trim() !== 'success') {
                         alert('Hubo un problema al cambiar el estado. Respuesta: ' + response);
+                        // Revertir el cambio en la interfaz si hay un error
+                        checkbox.checked = !checkbox.checked;
                     }
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);
                     alert('Hubo un error al procesar tu solicitud. Por favor, intenta nuevamente más tarde.');
+                    // Revertir el cambio en la interfaz si hay un error
+                    checkbox.checked = !checkbox.checked;
                 }
             });
         }
+
     </script>
 </body>
+
 </html>

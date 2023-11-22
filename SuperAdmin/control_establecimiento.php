@@ -32,6 +32,7 @@ include('../includes/_db.php');
             background-color: transparent;
             margin: 0;
             font-family: Arial, sans-serif;
+           
         }
 
         .container {
@@ -43,6 +44,7 @@ include('../includes/_db.php');
             padding: 20px;
             font-family: Arial, sans-serif;
             color: white;
+            /* Cambia el color de texto a negro */
             width: 100%;
             max-width: 1400px;
             margin: 0 auto;
@@ -109,13 +111,16 @@ include('../includes/_db.php');
         table {
             border-collapse: collapse;
             margin: auto;
+
             background-color: transparent;
             border: 1px solid #ccc;
             border-radius: 10px;
             padding: 20px;
             font-family: Arial, sans-serif;
             color: white;
+            /* Cambia el color de texto a negro */
             width: 100%;
+
         }
 
         th,
@@ -139,6 +144,7 @@ include('../includes/_db.php');
             padding: 20px;
             margin: 20px auto;
             max-width: 80%;
+            /* Ajusta el ancho máximo según tu preferencia */
         }
 
         .section-title {
@@ -175,6 +181,9 @@ include('../includes/_db.php');
             vertical-align: middle;
             margin-right: 5px;
         }
+
+
+        
     </style>
 </head>
 
@@ -213,10 +222,10 @@ include('../includes/_db.php');
                                     <td><?php echo $row['responsable']; ?></td>
                                     <td><?php echo $row['fecha_creacion']; ?></td>
                                     <td>
-                                        <!-- Cambiado el checkbox por un botón -->
-                                        <button class="btn btn-toggle" data-id="<?php echo $row['id']; ?>" onclick="cambiarEstado(this)">
-                                        <?php echo ($row['estado'] == 1) ? 'Activado' : 'Desactivado'; ?>
-                                        </button>
+                                        <label class="switch">
+                                            <input type="checkbox" <?php echo ($row['estado'] == 1) ? 'checked' : ''; ?> data-id="<?php echo $row['id']; ?>" onchange="cambiarEstado(this)">
+                                            <span class="slider"></span>
+                                        </label>
                                     </td>
                                 </tr>
                                 <?php
@@ -235,27 +244,11 @@ include('../includes/_db.php');
         </div>
     </div>
 
-    <style>
-        /* Estilo para el botón toggle */
-        .btn-toggle {
-            background-color: #ea272d;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-
-        .btn-toggle:hover {
-            background-color: #7d1518;
-        }
-    </style>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="../js/user.js"></script>
     <script>
-        function cambiarEstado(button) {
-            var id = $(button).data('id');
+        function cambiarEstado(checkbox) {
+            var id = $(checkbox).data('id');
 
             $.ajax({
                 url: '../includes/estado.php',
@@ -265,23 +258,23 @@ include('../includes/_db.php');
                 },
                 success: function (response) {
                     console.log(response);
-                    if (response.trim() === 'success') {
-                        // Actualizar el texto del botón
-                        $(button).text(function (i, text) {
-                            return text === 'Activado' ? 'Desactivado' : 'Activado';
-                        });
-                    } else {
+                    if (response.trim() !== 'success') {
                         alert('Hubo un problema al cambiar el estado. Respuesta: ' + response);
+                        // Revertir el cambio en la interfaz si hay un error
+                        checkbox.checked = !checkbox.checked;
                     }
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);
                     alert('Hubo un error al procesar tu solicitud. Por favor, intenta nuevamente más tarde.');
+                    // Revertir el cambio en la interfaz si hay un error
+                    checkbox.checked = !checkbox.checked;
                 }
             });
         }
     </script>
 
 </body>
+
 
 </html>

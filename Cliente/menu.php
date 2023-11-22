@@ -338,11 +338,10 @@ $color2 = isset($colores['color2']) ? $colores['color2'] : '';
                     popup.textContent = "Se añadió al carrito ✅";
                     popup.style.display = "block";
 
-                    // Oculta el popup después de 0.5 segundos (500 milisegundos)
                     setTimeout(() => {
                         popup.style.display = "none";
                         form.submit();
-                    }, 1500);
+                    }, 500);
                 });
             });
         });
